@@ -17,4 +17,8 @@ public class UserService implements ServicesInterface{
     public ArrayList<User> listarUsuarios() {
         return (ArrayList<User>) userDao.findAll();
     }
+    @Override
+    public User buscarUsuario(Long id) {
+        return userDao.findById(id).orElse(null);
+    }
 }

@@ -6,5 +6,6 @@ import com.VirtualVision.VirtualVision.domain.User;
 
 public interface ServicesInterface {
     ArrayList<User> listarUsuarios();
+    User buscarUsuario(Long id);
     
 }
