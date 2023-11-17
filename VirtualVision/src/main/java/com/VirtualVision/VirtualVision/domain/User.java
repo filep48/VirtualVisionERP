@@ -6,9 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
 import lombok.Data;
 
 @Data
@@ -32,9 +29,6 @@ public class User {
     @Column(name = "password")
     protected String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Employee employee;
-
     public User(String email, String name, String surname, String phone, String username, String password) {
         this.email = email;
         this.name = name;
@@ -48,5 +42,4 @@ public class User {
         // Constructor vacío necesario para JPA
     }
 
-    // Getters, setters y otros métodos
 }
