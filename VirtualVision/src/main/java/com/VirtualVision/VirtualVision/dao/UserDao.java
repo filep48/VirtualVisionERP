@@ -1,6 +1,5 @@
 package com.VirtualVision.VirtualVision.dao;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,11 +12,7 @@ import com.VirtualVision.VirtualVision.domain.User;
 public interface UserDao extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
-    @Query("SELECT u FROM User u WHERE u.email LIKE '%@gmail.com'")
-    ArrayList<User> findByEmail();
-
     // find by username and password
     @Query("SELECT u FROM User u WHERE u.username = ?1 AND u.password = ?2")
     User findByUsernameAndPassword(String username, String password);
-
 }
