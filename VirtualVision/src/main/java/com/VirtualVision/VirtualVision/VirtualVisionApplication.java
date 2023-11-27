@@ -5,7 +5,9 @@ import java.security.Provider.Service;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.VirtualVision.VirtualVision.services.ServicesInterface;
+import com.VirtualVision.VirtualVision.domain.Chat;
+import com.VirtualVision.VirtualVision.services.chat.ChatService;
+import com.VirtualVision.VirtualVision.services.user.UserService;
 
 @SpringBootApplication
 public class VirtualVisionApplication {
@@ -13,15 +15,11 @@ public class VirtualVisionApplication {
 	public static void main(String[] args) {
 		var context = SpringApplication.run(VirtualVisionApplication.class, args);
 		try {
-			ServicesInterface servicesInterface = context.getBean(ServicesInterface.class);
-			System.out.println(servicesInterface.listarUsuarios());
-			int existe = 6;
-
-			String resultado = existe > 5 ? "Es mayor a 5" : "Es menor a 5";
-
-			System.out.println(resultado);
+			UserService servicesInterface = context.getBean(UserService.class);
+			ChatService chatService = context.getBean(ChatService.class);
+			System.out.println(servicesInterface.listAllUsers());
 			
-			
+			System.out.println(chatService.listAllChats());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

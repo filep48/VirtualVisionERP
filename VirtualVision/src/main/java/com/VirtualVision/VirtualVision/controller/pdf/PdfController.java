@@ -1,4 +1,4 @@
-package com.VirtualVision.VirtualVision.controller;
+package com.VirtualVision.VirtualVision.controller.pdf;
 
 import java.io.ByteArrayInputStream;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.VirtualVision.VirtualVision.domain.User;
-import com.VirtualVision.VirtualVision.services.PdfService;
-import com.VirtualVision.VirtualVision.services.UserService;
+import com.VirtualVision.VirtualVision.services.pdf.PdfService;
+import com.VirtualVision.VirtualVision.services.user.UserServiceImpl;
 
 @RestController
 @RequestMapping("/pdf")
@@ -21,7 +21,7 @@ public class PdfController {
     @Autowired
     private PdfService pdfService;
     @Autowired
-    private UserService UserService;
+    private UserServiceImpl UserService;
 
     public PdfController(PdfService pdfService) {
         this.pdfService = pdfService;

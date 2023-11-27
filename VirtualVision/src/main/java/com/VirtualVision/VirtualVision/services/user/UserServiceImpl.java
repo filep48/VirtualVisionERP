@@ -1,4 +1,4 @@
-package com.VirtualVision.VirtualVision.services;
+package com.VirtualVision.VirtualVision.services.user;
 
 import java.util.ArrayList;
 
@@ -9,12 +9,13 @@ import com.VirtualVision.VirtualVision.domain.User;
 
 
 @Service
-public class UserService implements ServicesInterface{
+public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;
     
+    
     @Override
-    public ArrayList<User> listarUsuarios() {
+    public ArrayList<User> listAllUsers() {
         return (ArrayList<User>) userDao.findAll();
     }
     @Override

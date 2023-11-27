@@ -1,4 +1,4 @@
-package com.VirtualVision.VirtualVision.services;
+package com.VirtualVision.VirtualVision.services.pdf;
 
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;

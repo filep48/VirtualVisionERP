@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat con Bootstrap</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="estilos.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="d-flex" style="height: 100vh;">
+        <!-- Lista de Chats -->
+        <div class="chat-list bg-light" id="chatList">
+            <!-- Elementos de la lista de chats -->
+            <!-- Ejemplo de chat en la lista -->
+            <a href="#" class="list-group-item list-group-item-action">Chat 1</a>
+            <a href="#" class="list-group-item list-group-item-action">Chat 2</a>
+            <!-- Más chats... -->
+        </div>
+
+        <!-- Área del Chat Actual -->
+        <div class="flex-grow-1 d-flex flex-column">
+            <!-- Chat Header -->
+            <div class="chat-header p-3 border-bottom">
+                <h5 class="m-0">Nombre del Chat</h5>
+            </div>
+
+            <!-- Mensajes del Chat -->
+            <div class="chat-messages flex-grow-1 p-3" style="overflow-y: auto;">
+                <!-- Mensajes van aquí -->
+            </div>
+
+            <!-- Área de Entrada de Mensajes -->
+            <div class="chat-input p-3 border-top">
+                <form>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Escribe un mensaje...">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.5/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
