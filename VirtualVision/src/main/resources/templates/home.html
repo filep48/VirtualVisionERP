@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Página Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 10px #ccc;
+        }
+
+        .welcome-message {
+            margin-bottom: 20px;
+        }
+
+        .logout-button {
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="welcome-message">
+            <h1>Bienvenido(a)!</h1>
+            <p>Has iniciado sesión exitosamente.</p>
+        </div>
+        <form action="/logout" method="post">
+            <input type="submit" class="logout-button" value="Cerrar Sesión">
+        </form>
+    </div>
+</body>
+
+</html>
