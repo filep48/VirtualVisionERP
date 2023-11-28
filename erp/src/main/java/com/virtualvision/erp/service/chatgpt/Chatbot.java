@@ -56,10 +56,4 @@ public class Chatbot {
         return response.substring(start, end);
 
     }
-
-    public static void main(String[] args) {
-
-        System.out.println(chatGPT("hello, how are you? Can you tell me what's a Fibonacci Number?"));
-
-    }
 }
