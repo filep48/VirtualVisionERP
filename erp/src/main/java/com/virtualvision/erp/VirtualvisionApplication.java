@@ -1,13 +1,13 @@
-package com.VirtualVision.VirtualVision;
+package com.virtualvision.erp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class VirtualVisionApplication {
+public class VirtualvisionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(VirtualVisionApplication.class, args);
+		SpringApplication.run(VirtualvisionApplication.class, args);
 	}
 
 }

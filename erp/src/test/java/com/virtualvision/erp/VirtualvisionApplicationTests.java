@@ -1,10 +1,10 @@
-package com.VirtualVision.VirtualVision;
+package com.virtualvision.erp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class VirtualVisionApplicationTests {
+class VirtualvisionApplicationTests {
 
 	@Test
 	void contextLoads() {
