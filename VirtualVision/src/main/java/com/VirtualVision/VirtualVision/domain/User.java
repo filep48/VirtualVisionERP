@@ -31,6 +31,10 @@ public abstract class User {
     @Column(nullable = false)
     private String name;
 
+    @NotBlank(message = "username is required")
+    @Column(nullable = false, unique = true)
+    private String username;
+
     @NotBlank(message = "password is required")
     @Column(nullable = false)
     @ToString.Exclude
