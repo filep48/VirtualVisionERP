@@ -27,19 +27,37 @@ public class CustomerServiceImp implements ICustomerService {
     }
 
     @Override
-    public void save(Customer customer) {
+    public void saveCustomer(Customer customer) {
         customerDao.save(customer);
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteCustomer(Long id) {
         customerDao.deleteById(id);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Customer findCustomer(Long id) {
+    public Customer findCustomerId(Long id) {
         return customerDao.findById(id).orElse(null);
     }
+
+    public void updateCustomerWithoutPassword(Customer customerData) {
+        Customer existingCustomer = customerDao.findById(customerData.getId()).orElse(null);
+        if (existingCustomer != null) {
+            existingCustomer.setName(customerData.getName());
+            existingCustomer.setSurname(customerData.getSurname());
+            existingCustomer.setUsername(customerData.getUsername());
+            existingCustomer.setDniNif(customerData.getDniNif());
+            existingCustomer.setPhone(customerData.getPhone());
+            existingCustomer.setEmail(customerData.getEmail());
+            existingCustomer.setAddress(customerData.getAddress());
+            existingCustomer.setRol(customerData.getRol());
+            
+            customerDao.save(existingCustomer);
+        }
+    }
+    
+    
     
 }

@@ -9,7 +9,11 @@ import com.virtualvision.erp.domain.Customer;
 
 public interface ICustomerService {
     List<Customer> customersList();
-    void save(Customer customer);
-    void delete(Long id);
-    Customer findCustomer(Long id);
+    void saveCustomer(Customer customer);
+    void deleteCustomer(Long id);
+    Customer findCustomerId(Long id);
+    void updateCustomerWithoutPassword(Customer customer);
+
+
+    
 }
