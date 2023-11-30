@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.ToString;
@@ -20,7 +19,6 @@ import lombok.ToString;
  * Se deja fuera del toString el password, por seguridad.
  */
 
-@MappedSuperclass
 @Data
 public abstract class User {
     @Id

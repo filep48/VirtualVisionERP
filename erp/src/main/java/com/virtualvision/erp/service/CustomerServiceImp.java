@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.virtualvision.erp.domain.Customer;
 import com.virtualvision.erp.dao.ICustomerDao;
+import com.virtualvision.erp.domain.Customer;
 
+import lombok.extern.slf4j.Slf4j;
 
-@Service
+@Service("userDetailsService")
+@Slf4j
 public class CustomerServiceImp implements ICustomerService {
 
     @Autowired
@@ -41,5 +43,10 @@ public class CustomerServiceImp implements ICustomerService {
     public Customer findCustomer(Long id) {
         return customerDao.findById(id).orElse(null);
     }
-    
+
+    @Override
+    public Customer findByUsername(String username) {
+        return customerDao.findByUsername(username);
+    }
+
 }
