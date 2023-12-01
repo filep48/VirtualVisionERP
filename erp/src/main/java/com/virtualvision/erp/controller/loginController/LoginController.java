@@ -23,7 +23,7 @@ public class LoginController {
      */
     @GetMapping("/login")
     public String showLoginForm() {
-        return "/views/customers/login";
+        return "/views/dashboard/dashboard";
     }
 
 }
