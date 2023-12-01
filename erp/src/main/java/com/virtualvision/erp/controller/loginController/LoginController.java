@@ -17,12 +17,13 @@ public class LoginController {
         this.customerService = customerService;
     }
 
-    /*
-     * @AuthenticationPrincipal retorna l'usuari autenticat actualment com un
-     * objecte User de Spring security
-     */
     @GetMapping("/login")
     public String showLoginForm() {
+        return "/views/customers/login";
+    }
+
+    @GetMapping("/dashboard")
+    public String showDashboard() {
         return "/views/dashboard/dashboard";
     }
 

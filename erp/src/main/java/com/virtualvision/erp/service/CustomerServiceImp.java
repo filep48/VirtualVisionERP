@@ -41,13 +41,13 @@ public class CustomerServiceImp implements UserDetailsService, ICustomerService 
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteCustomer(Long id) {
         customerDao.deleteById(id);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Customer findCustomer(Long id) {
+    public Customer findCustomerId(Long id) {
         return customerDao.findById(id).orElse(null);
     }
 
@@ -91,14 +91,33 @@ public class CustomerServiceImp implements UserDetailsService, ICustomerService 
     }
 
     @Override
-    public void saveCustomerLogin(String username, String name, String password, String email) {
-        Customer customer = new Customer();
-        customer.setUsername(username);
-        customer.setName(name);
-        customer.setPassword(password); // Recuerda codificar la contraseña si es necesario
-        customer.setEmail(email);
+    public void saveCustomerLogin(Customer customer) {
+
+        customer.setUsername(customer.getUsername());
+        customer.setName(customer.getName());
+        customer.setPassword(customer.getPassword());
+        customer.setEmail(customer.getEmail());
+        customer.setAddress("");
+        customer.setDniNif("");
+        customer.setPhone("");
 
         customerDao.save(customer);
+
+    }
+
+    public void updateCustomerWithoutPassword(Customer customerData) {
+        Customer existingCustomer = customerDao.findById(customerData.getId()).orElse(null);
+        if (existingCustomer != null) {
+            existingCustomer.setName(customerData.getName());
+            existingCustomer.setSurname(customerData.getSurname());
+            existingCustomer.setUsername(customerData.getUsername());
+            existingCustomer.setDniNif(customerData.getDniNif());
+            existingCustomer.setPhone(customerData.getPhone());
+            existingCustomer.setEmail(customerData.getEmail());
+            existingCustomer.setRole(customerData.getRole());
+
+            customerDao.save(existingCustomer);
+        }
     }
 
 }

@@ -30,7 +30,7 @@ public class PdfController {
     @GetMapping("/generate")
     public ResponseEntity<byte[]> generatePdf() {
         String content = "Este es el contenido del PDF";
-        Customer user = UserService.findCustomer(1L);
+        Customer user = UserService.findCustomerId(1L);
         ByteArrayInputStream bis = pdfService.generatePdf(content, user);
 
         var headers = new HttpHeaders();

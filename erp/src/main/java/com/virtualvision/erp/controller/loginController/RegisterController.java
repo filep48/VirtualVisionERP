@@ -30,8 +30,7 @@ public class RegisterController {
         // Codifica la contraseña antes de guardarla en la base de datos
         customer.setPassword(PasswordEnconder.passwordEncoder().encode(customer.getPassword()));
 
-        customerService.saveCustomerLogin(customer.getUsername(), customer.getName(), customer.getPassword(),
-                customer.getEmail());
+        customerService.saveCustomerLogin(customer);
         return "redirect:/login";
     }
 

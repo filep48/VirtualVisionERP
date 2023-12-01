@@ -9,9 +9,9 @@ public interface ICustomerService {
 
     void save(Customer customer);
 
-    void delete(Long id);
+    void deleteCustomer(Long id);
 
-    Customer findCustomer(Long id);
+    Customer findCustomerId(Long id);
 
     Customer findByUsername(String username);
 
@@ -19,6 +19,8 @@ public interface ICustomerService {
 
     List<Customer> FindAll();
 
-    void saveCustomerLogin(String username, String user, String password, String mail);
+    void saveCustomerLogin(Customer customer);
+
+    void updateCustomerWithoutPassword(Customer customer);
 
 }

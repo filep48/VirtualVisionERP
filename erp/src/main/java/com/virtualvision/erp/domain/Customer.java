@@ -13,13 +13,29 @@ import lombok.ToString;
 @Data
 public class Customer {
 
-    public Customer(Long id2, String name2, String surname2, String username2, String password2, String dniNif2,
-            String phone2, String address2, String email2, String role2) {
-        // Initialize all fields here
-        this.role = role2;
+    public Customer() {
     }
 
-    public Customer() {
+    // crea un contructor completo
+    public Customer(String name, String surname, String username, String password, String dniNif, String phone,
+            String email, String address, String role) {
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        this.password = password;
+        this.dniNif = dniNif;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.role = role;
+    }
+
+    public Customer(String name, String username, String password, String email) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+
     }
 
     @Id
@@ -52,15 +68,10 @@ public class Customer {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = true)
-    private String role;
+    @Column(nullable = false)
+    private String address;
 
-    // crea un contructor con el nombre, usuario y contraseña , correo
-    public Customer(String name, String username, String password, String email) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.email = email;
+    @Column(nullable = false)
+    private String role = "user";
 
-    }
 }
