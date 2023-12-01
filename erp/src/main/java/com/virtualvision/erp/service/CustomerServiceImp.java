@@ -1,8 +1,15 @@
 package com.virtualvision.erp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service("userDetailsService")
 @Slf4j
-public class CustomerServiceImp implements ICustomerService {
+public class CustomerServiceImp implements UserDetailsService, ICustomerService {
 
     @Autowired
     private ICustomerDao customerDao;
@@ -47,6 +54,40 @@ public class CustomerServiceImp implements ICustomerService {
     @Override
     public Customer findByUsername(String username) {
         return customerDao.findByUsername(username);
+    }
+
+    @Override
+    public void saveCustomer(Customer customer) {
+        customerDao.save(customer);
+    }
+
+    @Override
+    public ArrayList<Customer> FindAll() {
+        return (ArrayList<Customer>) customerDao.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true) // Consulta només de lectura
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Customer usuari = customerDao.findByUsername(username);
+
+        // Comprobamos que existe el usuario
+        if (usuari == null) {
+            throw new UsernameNotFoundException(username);
+        }
+
+        // Creamos una lista para almacenar los roles (en este caso, solo uno)
+        List<GrantedAuthority> rols = new ArrayList<>();
+
+        // Añadimos el rol del usuario a la lista de GrantedAuthority
+        rols.add(new SimpleGrantedAuthority("ROLE_" + usuari.getRole()));
+
+        log.info(usuari.getUsername());
+        log.info(usuari.getPassword());
+        log.info(rols.get(0).getAuthority());
+
+        // Devolvemos el nuevo usuario de tipo UserDetails
+        return new User(usuari.getUsername(), usuari.getPassword(), rols);
     }
 
 }

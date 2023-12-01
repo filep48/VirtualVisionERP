@@ -41,11 +41,15 @@ public class AuthConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/customer/**").permitAll() // URL iniciGossos accesible por veterinario o
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Permitir acceso a recursos
+                                                                                        // estáticos
+                        .requestMatchers("/customer/**").permitAll() // URL de ejemplo accesible sin autenticación
                 )
                 .formLogin((form) -> form
                         .loginPage("/login").permitAll() // Permitir a todos el acceso al formulario de login
-                )
-                .build();
+                        .defaultSuccessUrl("/home", true) // Redirigir a /home después de un inicio de sesión exitoso
+                        .permitAll())
+                .build(); // Cierra la configuración y construye el SecurityFilterChain
     }
+
 }

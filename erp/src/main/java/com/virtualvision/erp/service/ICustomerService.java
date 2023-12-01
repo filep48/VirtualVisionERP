@@ -14,4 +14,8 @@ public interface ICustomerService {
     Customer findCustomer(Long id);
 
     Customer findByUsername(String username);
+
+    void saveCustomer(Customer customer);
+
+    List<Customer> FindAll();
 }

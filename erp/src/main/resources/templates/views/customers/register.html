@@ -17,29 +17,35 @@
         </header>
 
         <section>
-            <form th:action="@{/login}" method="post">
+            <form th:action="@{/register}" method="post">
                 <fieldset>
-                    <legend>Iniciar Sesión</legend>
+                    <legend>Registrarse</legend>
                     <label for="username"></label>
                     <input type="text" id="username" name="username" placeholder="Usuario" required autofocus>
-
+                    
+                    <label for="name"></label>
+                    <input type="text" id="name" name="name" placeholder="Nombre" required>
+                    
+                    <label for="email"></label>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    
                     <label for="password"></label>
                     <input type="password" id="password" name="password" placeholder="Contraseña" required>
 
-                    <button type="submit">Iniciar Sesión</button>
+                    <button type="submit">Registrarse</button>
                 </fieldset>
             </form>
         </section>
 
         <section class="social-login">
             <div class="divider">
-                <span>o continúa con</span>
+                <span>o regístrate con</span>
             </div>
 
             <!-- Botón de inicio de sesión con Google -->
             <button type="button" class="google-btn" th:onclick="'window.location.href=\'' + @{/oauth2/authorization/google} + '\''">
                 <i class="fab fa-google"></i>
-                Inicia Sesión con Google
+                Registrate con Google
             </button>
             
         </section>
@@ -47,7 +53,7 @@
         <div class="divider2"></div>
 
         <footer>        
-            <p>¿No tienes cuenta? <a th:href="@{/register}">Regístrate</a></p>
+            <p>¿Ya tienes cuenta? <a th:href="@{/login}">Inicia sesión</a></p>
         </footer>
     </main>
 

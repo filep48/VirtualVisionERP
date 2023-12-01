@@ -2,7 +2,6 @@ package com.virtualvision.erp.controller.loginController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.virtualvision.erp.service.ICustomerService;
@@ -23,8 +22,8 @@ public class LoginController {
      * objecte User de Spring security
      */
     @GetMapping("/login")
-    public String login(Model model) {
-
+    public String showLoginForm() {
         return "/views/customers/login";
     }
+
 }

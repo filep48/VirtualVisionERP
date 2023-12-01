@@ -57,4 +57,13 @@ public class Customer {
 
     @Column(nullable = false)
     private String role;
+
+    // crea un get y set para role
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
