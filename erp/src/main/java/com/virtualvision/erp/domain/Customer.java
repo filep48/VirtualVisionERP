@@ -13,13 +13,29 @@ import lombok.ToString;
 @Data
 public class Customer {
 
-    public Customer(Long id2, String name2, String surname2, String username2, String password2, String dniNif2,
-            String phone2, String address2, String email2, String role2) {
-        // Initialize all fields here
-        this.role = role2;
+    public Customer() {
     }
 
-    public Customer() {
+    // crea un contructor completo
+    public Customer(String name, String surname, String username, String password, String dniNif, String phone,
+            String email, String address, String role) {
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        this.password = password;
+        this.dniNif = dniNif;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.role = role;
+    }
+
+    public Customer(String name, String username, String password, String email) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+
     }
 
     @Id
@@ -30,7 +46,7 @@ public class Customer {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String surname;
 
     @NotBlank(message = "username is required")
@@ -42,10 +58,10 @@ public class Customer {
     @ToString.Exclude
     private String password;
 
-    @Column(name = "dni_nif", nullable = false, unique = true)
+    @Column(name = "dni_nif", unique = true)
     private String dniNif;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String phone;
 
     @NotBlank(message = "email is required")
@@ -56,14 +72,6 @@ public class Customer {
     private String address;
 
     @Column(nullable = false)
-    private String role;
+    private String role = "user";
 
-    // crea un get y set para role
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

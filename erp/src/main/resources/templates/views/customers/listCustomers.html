@@ -1,51 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layaouts/layaout :: head">
-    <!-- Head común está insertado aquí -->
+<head th:replace="layouts/layout :: head">
+    <!-- Head común  -->
 </head>
 <body>
-    <header th:replace="layaouts/layaout :: header">
-        <!-- Header común está insertado aquí -->
+    <header th:replace="layouts/layout :: header">
+        <!-- Header común  -->
     </header>
 
     <div class="container">
-        <a class="btn btn-primary btn-sm" th:href="@{/views/customers/add}" th:text="'Crear cliente'" title="Crear cliente"></a>
-        <h1 th:text="${title}"></h1>
+        <a class="btn btn-primary btn-sm" th:href="@{/customer/add}" th:text="#{button.add}"></a>
+        
+        <h1 th:text="${pageTitle}"></h1><!-- Título dinámico está en el controlador -->
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Username</th>
-                    <th>DNI/NIF</th>
-                    <th>Teléfono</th>
-                    <th>Email</th>
-                    <th>Dirección</th>
-                    
+                    <th th:text="#{customer.name}"></th>
+                    <th th:text="#{customer.surname}"></th>
+                    <th th:text="#{customer.username}"></th>
+                    <th th:text="#{customer.dni}"></th>
+                    <th th:text="#{customer.phone}"></th>
+                    <th th:text="#{customer.email}"></th>
+                    <th th:text="#{customer.address}"></th>
+                    <th th:text="#{button.actions}"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="customer : ${customers}">
                     <td th:text="${customer.id}"></td>
                     <td th:text="${customer.name}"></td>
+                    <td th:text="${customer.surname}"></td>
                     <td th:text="${customer.username}"></td>
                     <td th:text="${customer.dniNif}"></td>
                     <td th:text="${customer.phone}"></td>
                     <td th:text="${customer.email}"></td>
                     <td th:text="${customer.address}"></td>
                     <td>
-                        <a th:href="@{'/views/customer/add' + ${customer.id}}" class="btn btn-success">Editar</a>
-                        <a th:href="@{'/views/customer/delete/' + ${customer.id}}" class="btn btn-danger"
-                            onclick="return confirm('¿Está seguro de eliminar el cliente?');">Eliminar</a> 
-                        
+                        <a th:href="@{/customer/edit/{id}(id=${customer.id})}" class="btn btn-success"th:text="#{button.edit}"></a>
+                        <a th:href="@{/customer/delete/{id}(id=${customer.id})}" class="btn btn-danger" th:text="#{button.delete}"
+                        onclick="return confirm('¿Está seguro de eliminar el cliente?');"></a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <footer th:replace="layaouts/layaout :: footer">
-        <!-- Footer común está insertado aquí -->
+    <footer th:replace="layouts/layout :: footer">
+        <!-- Footer común  -->
     </footer>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </body>
