@@ -22,13 +22,13 @@
                     <legend>Registrarse</legend>
                     <label for="username"></label>
                     <input type="text" id="username" name="username" placeholder="Usuario" required autofocus>
-                    
+
                     <label for="name"></label>
                     <input type="text" id="name" name="name" placeholder="Nombre" required>
-                    
+
                     <label for="email"></label>
                     <input type="email" id="email" name="email" placeholder="Email" required>
-                    
+
                     <label for="password"></label>
                     <input type="password" id="password" name="password" placeholder="Contraseña" required>
 
@@ -43,16 +43,17 @@
             </div>
 
             <!-- Botón de inicio de sesión con Google -->
-            <button type="button" class="google-btn" th:onclick="'window.location.href=\'' + @{/oauth2/authorization/google} + '\''">
+            <button type="button" class="google-btn"
+                th:onclick="'window.location.href=\'' + @{/oauth2/authorization/google} + '\''">
                 <i class="fab fa-google"></i>
                 Registrate con Google
             </button>
-            
+
         </section>
 
         <div class="divider2"></div>
 
-        <footer>        
+        <footer>
             <p>¿Ya tienes cuenta? <a th:href="@{/login}">Inicia sesión</a></p>
         </footer>
     </main>

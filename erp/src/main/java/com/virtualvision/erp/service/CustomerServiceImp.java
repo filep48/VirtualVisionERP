@@ -90,4 +90,15 @@ public class CustomerServiceImp implements UserDetailsService, ICustomerService 
         return new User(usuari.getUsername(), usuari.getPassword(), rols);
     }
 
+    @Override
+    public void saveCustomerLogin(String username, String name, String password, String email) {
+        Customer customer = new Customer();
+        customer.setUsername(username);
+        customer.setName(name);
+        customer.setPassword(password); // Recuerda codificar la contraseña si es necesario
+        customer.setEmail(email);
+
+        customerDao.save(customer);
+    }
+
 }

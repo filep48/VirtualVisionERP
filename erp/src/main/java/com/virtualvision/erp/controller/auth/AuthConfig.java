@@ -43,8 +43,8 @@ public class AuthConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Permitir acceso a recursos
                                                                                         // estáticos
-                        .requestMatchers("/customer/**").permitAll() // URL de ejemplo accesible sin autenticación
-                )
+                        .requestMatchers("/customer/**").permitAll()
+                        .requestMatchers("/register/**").permitAll())
                 .formLogin((form) -> form
                         .loginPage("/login").permitAll() // Permitir a todos el acceso al formulario de login
                         .defaultSuccessUrl("/home", true) // Redirigir a /home después de un inicio de sesión exitoso

@@ -30,7 +30,7 @@ public class Customer {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String surname;
 
     @NotBlank(message = "username is required")
@@ -42,28 +42,25 @@ public class Customer {
     @ToString.Exclude
     private String password;
 
-    @Column(name = "dni_nif", nullable = false, unique = true)
+    @Column(name = "dni_nif", unique = true)
     private String dniNif;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String phone;
 
     @NotBlank(message = "email is required")
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private String address;
-
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String role;
 
-    // crea un get y set para role
-    public String getRole() {
-        return role;
-    }
+    // crea un contructor con el nombre, usuario y contraseña , correo
+    public Customer(String name, String username, String password, String email) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
 
-    public void setRole(String role) {
-        this.role = role;
     }
 }

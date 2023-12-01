@@ -18,4 +18,7 @@ public interface ICustomerService {
     void saveCustomer(Customer customer);
 
     List<Customer> FindAll();
+
+    void saveCustomerLogin(String username, String user, String password, String mail);
+
 }
