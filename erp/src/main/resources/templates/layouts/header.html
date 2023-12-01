@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Layout Header</title>
+</head>
+<body>
+    <header th:fragment="header">
+        <nav>
+            <!-- Contenido del header como el logo, menú de usuario, etc. -->
+            <div id="logo">Logo de la Empresa</div>
+            <a th:href="@{/customer}" id="user-menu">Menú del Usuario</a>
+        </nav>
+    </header>
+</body>
+</html>

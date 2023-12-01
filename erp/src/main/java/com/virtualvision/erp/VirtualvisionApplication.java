@@ -3,11 +3,18 @@ package com.virtualvision.erp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.virtualvision.erp.service.CustomerServiceImp;
+
 @SpringBootApplication
 public class VirtualvisionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(VirtualvisionApplication.class, args);
+		var context = SpringApplication.run(VirtualvisionApplication.class, args);
+		try {
+			CustomerServiceImp customerService = context.getBean(CustomerServiceImp.class);
+			System.out.println(customerService.FindAll());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
-
 }

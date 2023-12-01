@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css}" />
+</head>
+
+<body>
+    <header th:fragment="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><strong>LOGO</strong></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:href="@{/}">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/customer}">Clientes</a>
+                        </li>
+                        <!-- Las siguientes rutas SON ACTULAMENTE PARA QUE SE MUESTREN FALTAN LOS ENLACES CORRECTOS -->
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/events}">Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/products}">Productos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- El contenido específico de la página se insertará aquí -->
+    </div>
+
+    <footer th:fragment="footer" class="bg-dark text-center text-white fixed-bottom">
+        <div class="container">
+            <!-- Contenido del footer aquí -->
+            <p th:text="#{layout.test}"></p>
+        </div>
+    </footer>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

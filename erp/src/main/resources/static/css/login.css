@@ -1,0 +1,234 @@
+/* Variables para colores, fuentes, etc. */
+:root {
+    --color-background: #1d1d1d;
+    --color-background-form: #1d1d1d;
+    --color-text: #fff;
+    --color-text-button: #000000;
+    --color-texto-secundary: #434343;
+    --color-button: #ffffff;
+    --color-boton-hover: #cecece;
+    --color-google-boton: #222222;
+    --color-google-boton-hover: #2b2b2b;
+    --font-principal: 'Roboto', sans-serif;
+    --font-size-basic: 16px;
+    --font-size-title: 1.8rem;
+    --font-size-subtitule: 1rem;
+    --border-radius: 8px;
+}
+
+/* Estructura base y fuentes */
+body {
+    margin: 0;
+    font-family: var(--font-principal);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: var(--font-size-basic);
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Encabezado */
+header h2 {
+    font-size: var(--font-size-title);
+    margin-bottom: .8rem;
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Formulario */
+form {
+    background: var(--color-backgroundç-form);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+}
+
+fieldset {
+    border: none;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+}
+
+legend {
+    font-size: var(--font-size-title);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: .5rem;
+    color: var(--color-texto-secundary);
+}
+
+input {
+    width: calc(100% - 40px);
+    margin-bottom: 1.0rem;
+    padding: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background: #2b2b2b;
+    color: var(--color-text);
+    height: auto;
+}
+
+button[type="submit"] {
+    width: 98%;
+    padding: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--color-button);
+    color: var(--color-text-button);
+    font-size: var(--font-size-subtitule);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--color-boton-hover);
+}
+
+/* Login Social */
+.social-login .divider {
+    margin: 2rem 0;
+    position: relative;
+}
+
+.social-login .divider span {
+    position: relative;
+    z-index: 1;
+    background: var(--color-background);
+    padding: 0 1rem;
+}
+
+.social-login .divider:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-texto-secundary);
+    z-index: 0;
+}
+
+.google-btn {
+    border-radius: var(--border-radius);
+    background-color: #222;
+    border: 1px solid #343434;
+    box-sizing: border-box;
+    width: 19.81rem;
+    height: 2.81rem;
+    font-size: var(--font-size-subtitule);
+    text-align: center;
+    /* centrar el texto verticalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--color-text);
+    transition: background-color 0.3s;
+}
+
+.google-btn i {
+    margin-right: 8px;
+}
+
+.google-btn:hover {
+    background-color: var(--color-google-boton-hover);
+}
+
+.divider2 {
+    position: relative;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+    margin-right: auto;
+}
+
+.divider2:before {
+    content: '';
+    margin-top: 8%;
+    width: 33%;
+    position: absolute;
+    left: 30%;
+    right: 0;
+    height: 1px;
+    background: var(--color-texto-secundary);
+    z-index: 0;
+}
+
+/* Pie de página */
+
+footer {
+    margin-top: 4rem;
+}
+
+footer p {
+    color: var(--color-texto-secundary);
+    font-size: .9rem;
+}
+
+footer a {
+    color: var(--color-button);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.divider {
+    color: var(--color-texto-secundary);
+
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    :root {
+        --font-size-title: 1.2rem;
+        --font-size-subtitule: .9rem;
+    }
+
+    .container {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --font-size-title: 1rem;
+        --font-size-subtitule: .8rem;
+    }
+
+    header h2 {
+        margin-bottom: 1.5rem;
+    }
+
+    form {
+        padding: 1.5rem;
+    }
+
+    .social-login .divider span {
+        padding: 0 .5rem;
+    }
+
+    footer {
+        margin-top: 2rem;
+    }
+}
