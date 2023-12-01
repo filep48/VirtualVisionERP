@@ -29,7 +29,7 @@ public class LoginController {
     // redirect from index to /views/customers/customer
     @GetMapping("/")
     public String redirectToCustomer(Model model) {
-        return "redirect:/customer";
+        return "redirect:/dashboard";
     }
 
 }

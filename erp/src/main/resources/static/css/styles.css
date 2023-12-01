@@ -1,0 +1,167 @@
+/* Definición de variables CSS */
+/* Definición de variables CSS para colores, fuentes y otros valores reutilizables */
+:root {
+    --color-primary: #333;
+    --color-secondary: #555;
+    --color-accent: #ffa500;
+    --color-bg: #1a1a1a;
+    --color-text: #fff;
+    --color-text-secondary: #ccc;
+    --color-alert: #ff0000;
+    --color-warning: #ffae00;
+    --color-success: #00ff00;
+    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --border-radius: 8px;
+}
+
+*{
+    /* quitar color de links y otros defaults */
+    color: var(--color-text);
+    text-decoration: none;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+}
+/* Estilos base para el cuerpo del documento */
+body {
+    font-family: var(--font-stack);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex;
+}
+
+/* Estilos para el encabezado, navegación y pie de página */
+header, aside, footer {
+    background-color: var(--color-primary);
+}
+
+/* Estilos para el elemento principal que contiene todas las secciones */
+main {
+    padding: 20px;
+    margin-left: 200px;
+    overflow-y: auto;
+
+}
+
+/* Estilos para las secciones del dashboard */
+#dashboard, #pedidos-recientes, #ultimas-modificaciones, #proximos-eventos, #resumen-stock {
+    margin-bottom: 20px;
+}
+
+.dashboard-item {
+    position: relative;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background-color: var(--color-secondary);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-item > * {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/* Estilos para las listas y elementos dentro de las secciones */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: var(--color-secondary);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul li img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+aside {
+    position: fixed;
+    top: 7%;
+    left: 0; 
+    width: 200px; 
+    height: 100%; 
+    background-color: var(--color-primary);
+    overflow-y: auto; 
+    z-index: 1000; 
+    padding: 20px;
+}
+
+nav{
+    margin-bottom: 20px;
+    /* poner el nav por encima del aside */
+    position: relative;
+    z-index: 1001;
+    width: 100%;
+    flex-direction: column;
+}
+
+/* Clases para los estados del stock */
+.estado-bajo {
+    color: var(--color-alert);
+}
+
+.estado-medio {
+    color: var(--color-warning);
+}
+
+.estado-alto {
+    color: var(--color-success);
+}
+article{
+    
+}
+
+/* Media queries para responsividad */
+@media only screen and (max-width: 768px) {
+    main {
+        padding: 10px;
+        margin-left: 150px;
+    }
+
+    .dashboard-item, ul li {
+        padding: 10px;
+    }
+    aside{
+        width: 150px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    header, aside, footer {
+        display: none;
+    }
+    aside {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+    main{
+        margin-left: 0;
+    }
+
+    .dashboard-item, ul li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
