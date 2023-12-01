@@ -9,7 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -21,7 +21,7 @@ public class Customer {
     // Relación uno a muchos con Evento
     // cascade = CascadeType.ALL: Especifica que las operaciones de persistencia,
     // como guardar y eliminar, deben propagarse a las entidades relacionadas.
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)/////////// repasar esta relacion y convertirla muchos a muchos??
     private List<Event> events;
 
     // Relación uno a muchos con Venta
@@ -31,18 +31,18 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
+    @NotEmpty
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
     private String surname;
 
-    @NotBlank(message = "username is required")
+    @NotEmpty
     @Column(nullable = false, unique = true)
     private String username;
 
-    @NotBlank(message = "password is required")
+    @NotEmpty
     @Column(nullable = false)
     @ToString.Exclude
     private String password;
@@ -53,7 +53,7 @@ public class Customer {
     @Column(nullable = false)
     private String phone;
 
-    @NotBlank(message = "email is required")
+    @NotEmpty
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

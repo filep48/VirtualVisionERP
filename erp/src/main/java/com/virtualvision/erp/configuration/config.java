@@ -7,12 +7,22 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 @Configuration
 public class config {
 
-    @Bean
-    public ResourceBundleMessageSource messageSource() {
-        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-        source.setBasename("messages_es_ES");
-        source.setDefaultEncoding("UTF-8");
-        source.setUseCodeAsDefaultMessage(true);
-        return source;
-    }
+// @Bean
+// public ResourceBundleMessageSource messageSource() {
+//     ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+//     source.setBasename("messages"); // Nombre base común
+//     source.setDefaultEncoding("UTF-8");
+//     source.setUseCodeAsDefaultMessage(true);
+//     return source;
+// }
+
+// @Bean
+//     public ResourceBundleMessageSource messageSource() {
+//         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+//         source.setBasename("messages_es_ES");
+//         source.setDefaultEncoding("UTF-8");
+//         source.setUseCodeAsDefaultMessage(true);
+//         return source;
+//     }
+
 }

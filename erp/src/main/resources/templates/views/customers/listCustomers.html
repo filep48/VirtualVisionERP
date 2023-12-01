@@ -9,20 +9,21 @@
     </header>
 
     <div class="container">
-        <a class="btn btn-primary btn-sm" th:href="@{/customer/add}" title="Crear cliente">Crear cliente</a>
-        <h1 th:text="${pageTitle}"></h1><!-- Título dinámico -->
+        <a class="btn btn-primary btn-sm" th:href="@{/customer/add}" th:text="#{button.add}"></a>
+        
+        <h1 th:text="${pageTitle}"></h1><!-- Título dinámico está en el controlador -->
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Username</th>
-                    <th>DNI/NIF</th>
-                    <th>Teléfono</th>
-                    <th>Email</th>
-                    <th>Dirección</th>
-                    <th>Acciones</th>
+                    <th th:text="#{customer.name}"></th>
+                    <th th:text="#{customer.surname}"></th>
+                    <th th:text="#{customer.username}"></th>
+                    <th th:text="#{customer.dni}"></th>
+                    <th th:text="#{customer.phone}"></th>
+                    <th th:text="#{customer.email}"></th>
+                    <th th:text="#{button.address}"></th>
+                    <th th:text="#{button.actions}"></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,9 +37,9 @@
                     <td th:text="${customer.email}"></td>
                     <td th:text="${customer.address}"></td>
                     <td>
-                        <a th:href="@{/customer/edit/{id}(id=${customer.id})}" class="btn btn-success">Editar</a>
-                        <a th:href="@{/customer/delete/{id}(id=${customer.id})}" class="btn btn-danger"
-                        onclick="return confirm('¿Está seguro de eliminar el cliente?');">Eliminar</a>
+                        <a th:href="@{/customer/edit/{id}(id=${customer.id})}" class="btn btn-success"th:text="#{button.edit}"></a>
+                        <a th:href="@{/customer/delete/{id}(id=${customer.id})}" class="btn btn-danger" th:text="#{button.delete}"
+                        onclick="return confirm('¿Está seguro de eliminar el cliente?');"></a>
                     </td>
                 </tr>
             </tbody>
