@@ -8,7 +8,7 @@
         <!-- Header común está insertado aquí -->
     </header>
 
-    <div class="container">
+    <main class="container">
         <a class="btn btn-primary btn-sm" th:href="@{/views/customers/add}" th:text="'Crear cliente'" title="Crear cliente"></a>
         <h1 th:text="${title}"></h1>
         <table class="table">
@@ -42,7 +42,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </main>
 
     <footer th:replace="layouts/layout :: footer">
         <!-- Footer común está insertado aquí -->
