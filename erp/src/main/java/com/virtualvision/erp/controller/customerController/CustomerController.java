@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.virtualvision.erp.domain.Customer;
 import com.virtualvision.erp.service.ICustomerService;
+import com.virtualvision.erp.service.passwordEnconder.PasswordEnconder;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class CustomerController {
@@ -28,11 +31,13 @@ public class CustomerController {
     }
 
     @GetMapping("/customer/add")
-    public String addCustomerForm(Model model) {
-        Customer customer = new Customer();
-        model.addAttribute("customer", customer);
+    public String addCustomerForm(@ModelAttribute("customer") @Valid Customer customer, BindingResult bindingResult,
+            Model model) {
         model.addAttribute("pageTitle", "Agregar Cliente");
-        return "/views/customers/addCustomer";
+        if (bindingResult.hasErrors()) {
+            return "views/customers/addCustomer";
+        }
+        return "views/customers/addCustomer";
     }
 
     /***
@@ -47,7 +52,7 @@ public class CustomerController {
     @PostMapping("/customer/save")
     public String saveCustomer(@ModelAttribute("customer") Customer customer, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            // Manejo de errores de validación
+
             return "views/customers/addCustomer";
         }
 
@@ -55,6 +60,7 @@ public class CustomerController {
             // Actualizar cliente sin cambiar la contraseña
             customerService.updateCustomerWithoutPassword(customer);
         } else {
+            customer.setPassword(PasswordEnconder.passwordEncoder().encode(customer.getPassword()));
             // Guardar o actualizar cliente (incluyendo contraseña si está presente)
             customerService.saveCustomer(customer);
         }

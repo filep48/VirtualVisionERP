@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.ToString;
 
@@ -42,18 +42,18 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
+    @NotEmpty(message = "Name is required")
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = true)
     private String surname;
 
-    @NotBlank(message = "username is required")
+    @NotEmpty
     @Column(nullable = false, unique = true)
     private String username;
 
-    @NotBlank(message = "password is required")
+    @NotEmpty
     @Column(nullable = false)
     @ToString.Exclude
     private String password;
@@ -64,7 +64,7 @@ public class Customer {
     @Column(nullable = true)
     private String phone;
 
-    @NotBlank(message = "email is required")
+    
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
