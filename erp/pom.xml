@@ -67,7 +67,7 @@
 			<scope>test</scope>
 		</dependency>
 		<!--dependencia
-		notBlank-->
+		NotEmpty-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
