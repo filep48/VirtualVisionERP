@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="layouts/layout :: head">
     <!-- Head común  -->
 </head>
+
 <body>
     <header th:replace="layouts/layout :: header">
         <!-- Header común -->
@@ -21,18 +23,23 @@
             <div class="form-group">
                 <label th:text="#{customer.surname}"></label>
                 <input type="text" th:field="*{surname}" class="form-control" id="surname" placeholder="Apellido">
-                <small class="form-text text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></small>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('surname')}"
+                    th:errors="*{surname}"></small>
             </div>
             <div class="form-group">
                 <label th:text="#{customer.username}"></label>
-                <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="Nombre de usuario">
-                <small class="form-text text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+                <input type="text" th:field="*{username}" class="form-control" id="username"
+                    placeholder="Nombre de usuario">
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('username')}"
+                    th:errors="*{username}"></small>
             </div>
             <div class="form-group">
-                <label th:text="#{customer.address}"></label>
-                <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Contraseña">
-                <small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
-                
+                <label th:text="#{customer.password}"></label>
+                <input type="password" th:field="*{password}" class="form-control" id="password"
+                    placeholder="Contraseña">
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('password')}"
+                    th:errors="*{password}"></small>
+
             </div>
             <div class="form-group">
                 <label th:text="#{customer.dni}"></label>
@@ -44,7 +51,8 @@
             </div>
             <div class="form-group">
                 <label th:text="#{customer.email}"></label>
-                <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Correo electrónico">
+                <input type="email" th:field="*{email}" class="form-control" id="email"
+                    placeholder="Correo electrónico">
                 <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
             </div>
             <div class="form-group">
@@ -60,5 +68,5 @@
     </footer>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 
+</html>

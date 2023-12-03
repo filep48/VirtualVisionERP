@@ -97,9 +97,6 @@ public class CustomerServiceImp implements UserDetailsService, ICustomerService 
         customer.setName(customer.getName());
         customer.setPassword(customer.getPassword());
         customer.setEmail(customer.getEmail());
-        customer.setAddress("");
-        customer.setDniNif("");
-        customer.setPhone("");
 
         customerDao.save(customer);
 
