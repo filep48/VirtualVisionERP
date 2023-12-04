@@ -11,7 +11,10 @@
     </header>
 
     <div class="container">
-        <h1 th:text="${pageTitle}"></h1>
+        <h1 th:text="${editMode} ? #{'pageTitle.editCustomer'} : #{'pageTitle.addCustomer'}"></h1>
+
+
+
         <form th:action="@{/customer/save}" th:object="${customer}" method="post">
             <input type="hidden" th:field="*{id}" />
 

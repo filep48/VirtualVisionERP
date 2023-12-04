@@ -58,14 +58,14 @@ public class Customer {
     @ToString.Exclude
     private String password;
 
-    @Column(name = "dni_nif", unique = true)
+    @Column(name = "dni_nif")
     private String dniNif;
 
     @Column(nullable = true)
     private String phone;
 
     
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email")
     private String email;
 
     @Column(nullable = true)
