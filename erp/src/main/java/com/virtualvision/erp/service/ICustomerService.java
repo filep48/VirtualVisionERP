@@ -19,7 +19,7 @@ public interface ICustomerService {
 
     List<Customer> FindAll();
 
-    void saveCustomerLogin(Customer customer);
+    boolean saveCustomerLogin(Customer customer);
 
     void updateCustomerWithoutPassword(Customer customer);
 
