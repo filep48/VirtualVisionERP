@@ -31,12 +31,9 @@ public class CustomerController {
     }
 
     @GetMapping("/customer/add")
-    public String addCustomerForm(@ModelAttribute("customer") @Valid Customer customer, BindingResult bindingResult,
-            Model model) {
-        model.addAttribute("pageTitle", "Agregar Cliente");
-        if (bindingResult.hasErrors()) {
-            return "views/customers/addCustomer";
-        }
+    public String addCustomerForm(Model model) {
+        model.addAttribute("customer", new Customer());
+        model.addAttribute("editMode", false);
         return "views/customers/addCustomer";
     }
 
@@ -50,9 +47,9 @@ public class CustomerController {
      * @return
      */
     @PostMapping("/customer/save")
-    public String saveCustomer(@ModelAttribute("customer") Customer customer, BindingResult bindingResult) {
+    public String saveCustomer(@ModelAttribute("customer") @Valid Customer customer, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-
+            model.addAttribute("errors", bindingResult);
             return "views/customers/addCustomer";
         }
 
@@ -78,7 +75,7 @@ public class CustomerController {
     public String editCustomerForm(@PathVariable Long id, Model model) {
         Customer customer = customerService.findCustomerId(id);
         model.addAttribute("customer", customer);
-        model.addAttribute("pageTitle", "Editar Cliente");
+        model.addAttribute("editMode", true);
         return "views/customers/addCustomer";
     }
 
