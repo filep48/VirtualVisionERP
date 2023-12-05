@@ -44,7 +44,7 @@ public class SaleController {
     @PostMapping("/sale/save")
     public String saveSale(@ModelAttribute("sale") Sale sale) {
         saleService.saveSale(sale);
-        return "redirect:/sale";
+        return "redirect:/sale/add";
     }
 
     @GetMapping("/sale/delete/{id}")
