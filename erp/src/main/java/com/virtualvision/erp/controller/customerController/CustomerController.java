@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.virtualvision.erp.domain.Customer;
 import com.virtualvision.erp.service.ICustomerService;
+import com.virtualvision.erp.service.passwordEnconder.PasswordEnconder;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class CustomerController {
@@ -29,10 +32,9 @@ public class CustomerController {
 
     @GetMapping("/customer/add")
     public String addCustomerForm(Model model) {
-        Customer customer = new Customer();
-        model.addAttribute("customer", customer);
-        model.addAttribute("pageTitle", "Agregar Cliente");
-        return "/views/customers/addCustomer";
+        model.addAttribute("customer", new Customer());
+        model.addAttribute("editMode", false);
+        return "views/customers/addCustomer";
     }
 
     /***
@@ -45,9 +47,9 @@ public class CustomerController {
      * @return
      */
     @PostMapping("/customer/save")
-    public String saveCustomer(@ModelAttribute("customer") Customer customer, BindingResult bindingResult) {
+    public String saveCustomer(@ModelAttribute("customer") @Valid Customer customer, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            // Manejo de errores de validación
+            model.addAttribute("errors", bindingResult);
             return "views/customers/addCustomer";
         }
 
@@ -55,6 +57,7 @@ public class CustomerController {
             // Actualizar cliente sin cambiar la contraseña
             customerService.updateCustomerWithoutPassword(customer);
         } else {
+            customer.setPassword(PasswordEnconder.passwordEncoder().encode(customer.getPassword()));
             // Guardar o actualizar cliente (incluyendo contraseña si está presente)
             customerService.saveCustomer(customer);
         }
@@ -72,7 +75,7 @@ public class CustomerController {
     public String editCustomerForm(@PathVariable Long id, Model model) {
         Customer customer = customerService.findCustomerId(id);
         model.addAttribute("customer", customer);
-        model.addAttribute("pageTitle", "Editar Cliente");
+        model.addAttribute("editMode", true);
         return "views/customers/addCustomer";
     }
 

@@ -91,17 +91,14 @@ public class CustomerServiceImp implements UserDetailsService, ICustomerService 
     }
 
     @Override
-    public void saveCustomerLogin(Customer customer) {
-
-        customer.setUsername(customer.getUsername());
-        customer.setName(customer.getName());
-        customer.setPassword(customer.getPassword());
-        customer.setEmail(customer.getEmail());
-        customer.setAddress("");
-        customer.setDniNif("");
-        customer.setPhone("");
-
-        customerDao.save(customer);
+    public boolean saveCustomerLogin(Customer customer) {
+        try {
+            customerDao.save(customer);
+            return true;
+        } catch (Exception e) {
+            log.error("Error al guardar el usuario: " + e.getMessage(), e);
+            return false;
+        }
 
     }
 

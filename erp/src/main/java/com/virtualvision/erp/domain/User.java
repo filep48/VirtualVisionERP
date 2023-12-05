@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.ToString;
 
@@ -25,18 +25,18 @@ public abstract class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
+    @NotEmpty(message = "Name is required")
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
     private String surname;
 
-    @NotBlank(message = "username is required")
+    @NotEmpty(message = "username is required")
     @Column(nullable = false, unique = true)
     private String username;
 
-    @NotBlank(message = "password is required")
+    @NotEmpty(message = "password is required")
     @Column(nullable = false)
     @ToString.Exclude
     private String password;
@@ -47,7 +47,7 @@ public abstract class User {
     @Column(nullable = false)
     private String phone;
 
-    @NotBlank(message = "email is required")
+    @NotEmpty(message = "email is required")
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

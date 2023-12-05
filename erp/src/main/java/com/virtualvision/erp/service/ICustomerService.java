@@ -5,6 +5,7 @@ import java.util.List;
 import com.virtualvision.erp.domain.Customer;
 
 public interface ICustomerService {
+    
     List<Customer> customersList();
 
     void save(Customer customer);
@@ -19,7 +20,7 @@ public interface ICustomerService {
 
     List<Customer> FindAll();
 
-    void saveCustomerLogin(Customer customer);
+    boolean saveCustomerLogin(Customer customer);
 
     void updateCustomerWithoutPassword(Customer customer);
 
