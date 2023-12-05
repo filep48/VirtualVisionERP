@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.ToString;
@@ -20,8 +21,12 @@ import java.util.Set;
 @Data
 public class Customer {
 
+    // relacion muchos a muchos con la entidad Sale
+    @OneToMany(mappedBy = "customer")
+    private Set<Sale> sales;
+
     // relacion muchos a muchos con la entidad Employee
-     @ManyToMany
+    @ManyToMany
     @JoinTable(
         name = "customer_employee",
         joinColumns = @JoinColumn(name = "customer_id"),

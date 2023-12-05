@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,10 +21,13 @@ import java.util.Set;
 @Entity
 @Data
 public class Employee {
-
-
-    // relacion muchos a muchos con la entidad Employee
+    //relacion muchos a muchos con la entidad Sale
     @ManyToMany(mappedBy = "employees")
+    private Set<Sale> sales;
+
+
+    // relacion muchos a muchos con la entidad Customer
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Customer> customers = new HashSet<>();
 
     
