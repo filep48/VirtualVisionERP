@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layouts/layout :: head">
+
+<head th:replace="~{layouts/layout :: head}">
     <!-- Common Head -->
 </head>
+
 <body>
-    <header th:replace="layouts/layout :: header">
+    <header th:replace="~{layouts/layout :: header}">
         <!-- Common Header -->
     </header>
 
     <div class="container">
         <a class="btn btn-primary btn-sm" th:href="@{/sale/add}" th:text="#{button.addSale}"></a>
         <h1 th:text="${pageTitle}"></h1><!-- Dynamic Title from Controller -->
-        <table class="table" th:if="${sales != null and !sales.isEmpty()}"></table> <!--controla si la tabla esta vacia-->
+        <table class="table" th:if="${sales != null and not #lists.isEmpty(sales)}"></table> <!-- Controla si la tabla está vacía -->
         <table class="table">
             <thead>
                 <tr>
@@ -32,12 +34,11 @@
                     <td th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></td>
                     <td th:if="${sale.customer != null}" th:text="${sale.customer.name}"></td>
                     <td th:utext="#{no.customer.available}" th:unless="${sale.customer != null}">
-                    
                     <td>
-                    <span th:each="employee : ${sale.employees}" th:if="${employeeStat.index == 0}" th:text="${employee.id}"></span>
+                        <span th:each="employee : ${sale.employees}" th:if="${employeeStat.index == 0}" th:text="${employee.id}"></span>
                     </td>
                     <td>
-                        <a th:href="@{/sale/detail/{id}(id=${sale.id})}"class="btn btn-success" th:text="#{button.details}"></a>
+                        <a th:href="@{/sale/detail/{id}(id=${sale.id})}" class="btn btn-success" th:text="#{button.details}"></a>
                         <a th:href="@{/sale/edit/{id}(id=${sale.id})}" class="btn btn-success" th:text="#{button.edit}"></a>
                         <a th:href="@{/sale/delete/{id}(id=${sale.id})}" class="btn btn-danger" th:text="#{button.delete}"
                             onclick="return confirm('Are you sure you want to delete the sale?');"></a> 
@@ -45,11 +46,11 @@
                 </tr>
             </tbody>
         </table>
-        <p th:unless="${sales != null and !sales.isEmpty()}" th:text="#{no.sales.available}">No Sales Available</p> 
+        <p th:unless="${sales != null and not #lists.isEmpty(sales)}" th:text="#{no.sales.available}">No Sales Available</p> 
 
     </div>
 
-    <footer th:replace="layouts/layout :: footer">
+    <footer th:replace="~{layouts/layout :: footer}">
         <!-- Common Footer -->
     </footer>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>

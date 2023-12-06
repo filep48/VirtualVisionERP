@@ -2,17 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard ERP</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
 <body>
     <!-- Header Layout Include -->
-    <header th:replace="layouts/header :: header"></header>
+    <header th:replace="~{layouts/header :: header}"></header>
 
     <!-- Sidebar Navigation Layout Include -->
-    <aside th:replace="layouts/sidebar :: sidebar"></aside>
+    <aside th:replace="~{layouts/sidebar :: sidebar}"></aside>
 
     <main>
         <!-- Panel de control Section -->
@@ -40,12 +41,11 @@
                     </li>
                 </ul>
             </article>
-
         </section>
 
         <!-- Ultimas Modificaciones Section -->
         <section id="ultimas-modificaciones">
-            <article id="ultimas-modificaciones" class="dashboard-item">
+            <article id="ultimas-modificaciones-empleados" class="dashboard-item">
                 <h2>Últimas modificaciones de Empleados</h2>
                 <ul>
                     <li th:each="empleado : ${empleados}">
@@ -54,7 +54,6 @@
                     </li>
                 </ul>
             </article>
-
         </section>
 
         <!-- Proximos Eventos Section -->
@@ -68,13 +67,11 @@
                     </li>
                 </ul>
             </article>
-
         </section>
 
         <!-- Resumen Stock Section -->
         <section id="resumen-stock">
             <article id="resumen-stock" class="dashboard-item">
-
                 <h2>Resumen Stock</h2>
                 <ul>
                     <li th:each="producto : ${productos}">

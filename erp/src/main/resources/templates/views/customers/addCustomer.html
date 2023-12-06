@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layouts/layout :: head">
+<head th:replace="~{layouts/layout :: head}">
     <!-- Head común  -->
 </head>
 
 <body>
-    <header th:replace="layouts/layout :: header">
+    <header th:replace="~{layouts/layout :: header}">
         <!-- Header común -->
     </header>
 
     <div class="container">
         <h1 th:text="${editMode} ? #{'pageTitle.editCustomer'} : #{'pageTitle.addCustomer'}"></h1>
-
-
 
         <form th:action="@{/customer/save}" th:object="${customer}" method="post">
             <input type="hidden" th:field="*{id}" />
@@ -66,7 +64,7 @@
         </form>
     </div>
 
-    <footer th:replace="layouts/layout :: footer">
+    <footer th:replace="~{layouts/layout :: footer}">
         <!-- Footer común  -->
     </footer>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>

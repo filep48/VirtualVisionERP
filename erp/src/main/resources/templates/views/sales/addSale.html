@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layouts/layout :: head">
+<head th:replace="~{layouts/layout :: head}">
     <!-- Common Head -->
 </head>
 
 <body>
-    <header th:replace="layouts/layout :: header">
+    <header th:replace="~{layouts/layout :: header}">
         <!-- Common Header -->
     </header>
 
@@ -32,10 +32,10 @@
             </div>
 
             <!-- Selector de Cliente -->
+            <!-- Este select debería llenarse con los clientes disponibles -->
             <div class="form-group">
-                <label th:text="#{sale.customer}"></label>
-                <!-- Este select debería llenarse con los clientes disponibles -->
                 <select th:field="*{customer}" class="form-control" id="customer">
+                    <option value="" th:utext="#{select.customer.placeholder}"></option>
                     <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}">
                     </option>
                 </select>
@@ -81,7 +81,7 @@
         </form>
     </div>
 
-    <footer th:replace="layouts/layout :: footer">
+    <footer th:replace="~{layouts/layout :: footer}">
         <!-- Common Footer -->
     </footer>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>

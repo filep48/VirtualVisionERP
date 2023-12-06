@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layouts/layout :: head">
-    <!-- Head común  -->
+<head th:replace="~{layouts/layout :: head}">
+    <!-- Common Head -->
 </head>
 <body>
-    <header th:replace="layouts/layout :: header">
-        <!-- Header común  -->
+    <header th:replace="~{layouts/layout :: header}">
+        <!-- Common Header -->
     </header>
 
     <div class="container">
         <a class="btn btn-primary btn-sm" th:href="@{/customer/add}" th:text="#{button.addCustomer}"></a>
-        <h1 th:text="${pageTitle}"></h1><!-- Título dinámico está en el controlador -->
+        <h1 th:text="${pageTitle}"></h1><!-- Dynamic Title from Controller -->
         <table class="table">
             <thead>
                 <tr>
@@ -36,17 +36,17 @@
                     <td th:text="${customer.email}"></td>
                     <td th:text="${customer.address}"></td>
                     <td>
-                        <a th:href="@{/customer/edit/{id}(id=${customer.id})}" class="btn btn-success"th:text="#{button.edit}"></a>
+                        <a th:href="@{/customer/edit/{id}(id=${customer.id})}" class="btn btn-success" th:text="#{button.edit}"></a>
                         <a th:href="@{/customer/delete/{id}(id=${customer.id})}" class="btn btn-danger" th:text="#{button.delete}"
-                        onclick="return confirm('¿Está seguro de eliminar el cliente?');"></a>
+                        onclick="return confirm('Are you sure you want to delete the customer?');"></a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <footer th:replace="layouts/layout :: footer">
-        <!-- Footer común  -->
+    <footer th:replace="~{layouts/layout :: footer}">
+        <!-- Common Footer -->
     </footer>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </body>
