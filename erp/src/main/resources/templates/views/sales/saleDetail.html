@@ -13,18 +13,23 @@
     <div class="container">
         <h2 th:text="#{sale.details}"></h2>
         
-        <!-- Detalles de la venta -->
-        <div>
-            <p><b th:text="#{sale.quantity}"></b>: <span th:text="${sale.quantity}"></span></p>
-            <p><b th:text="#{sale.taxValue}"></b>: <span th:text="${sale.taxValue}"></span></p>
-            <p><b th:text="#{sale.saleDate}"></b>: <span th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></span></p>
-        </div>
+        <!-- Resumen de la venta -->
+        <p><b th:text="#{sale.id}"></b>: <span th:text="${sale.id}"></span></p>
+        <p th:if="${customerName}" th:text="#{customer.name} + ': ' + ${customerName}"></p>
+        <p><b th:text="#{sale.quantity}"></b>: <span th:text="${sale.quantity}"></span></p>
+        <p><b th:text="#{sale.taxValue}"></b>: <span th:text="${sale.taxValue}"></span></p>
+        <p><b th:text="#{sale.saleDate}"></b>: <span
+                th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></span></p>
 
         <!-- Lista de empleados asociados -->
         <h3 th:text="#{sale.employees}"></h3>
         <ul>
             <li th:each="employee : ${sale.employees}" th:text="${employee.name} + ' (' + ${employee.id} + ')'"></li>
         </ul>
+
+        <!-- Muestra si es una venta online o la ID del empleado -->
+        <p th:if="${isOnlineSale}">Online</p>
+        <p th:unless="${isOnlineSale}" th:text="${sale.employeeId}"></p>
 
         <!-- Aquí puedes agregar más detalles sobre los productos vendidos -->
 
@@ -35,4 +40,5 @@
     </footer>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

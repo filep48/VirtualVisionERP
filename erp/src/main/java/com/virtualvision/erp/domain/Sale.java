@@ -7,6 +7,7 @@ import lombok.Data;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,7 +23,8 @@ public class Sale implements Serializable {
     // Relación muchos a muchos con Employee
     @ManyToMany
     @JoinTable(name = "sales_employees", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
-    private Set<Employee> employees;
+    private Set<Employee> employees = new HashSet<>();
+
 
     private static final long serialVersionUID = 1L;
 
@@ -38,5 +40,11 @@ public class Sale implements Serializable {
 
     @Column(nullable = false)
     private LocalDateTime saleDate;
+
+    @Column(name = "online_sale")
+    private boolean onlineSale;
+    
+    @Column(name = "employee_id")
+    private Long employeeId;
 
 }

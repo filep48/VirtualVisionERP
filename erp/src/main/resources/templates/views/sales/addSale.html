@@ -41,15 +41,19 @@
                 </select>
             </div>
 
-            <!-- Selector de Empleados -->
+            <!-- Campo para el ID del Empleado -->
             <div class="form-group">
-                <label th:text="#{sale.employees}"></label>
-                <!-- Este select debería llenarse con los empleados disponibles -->
-                <select th:field="*{employees}" class="form-control" id="employees" multiple="multiple">
-                    <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name}">
-                    </option>
-                </select>
+                <label for="employeeId" th:text="#{sale.employeeId}"></label>
+                <input type="text" th:field="*{employeeId}" class="form-control" id="employeeId"
+                    placeholder="ID del Empleado">
             </div>
+
+            <!-- Campo para Venta en Línea -->
+            <div class="form-group">
+                <label for="onlineSale" th:text="#{sale.onlineSale}"></label>
+                <input type="checkbox" th:field="*{onlineSale}" class="form-check-input" id="onlineSale">
+            </div>
+
             <!-- Selector de Productos -->
             <div class="form-group">
                 <label th:text="#{sale.products}"></label>
