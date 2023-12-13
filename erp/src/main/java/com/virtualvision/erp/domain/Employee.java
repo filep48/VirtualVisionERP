@@ -1,20 +1,21 @@
 package com.virtualvision.erp.domain;
 
 import java.util.HashSet;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.ToString;
-import java.util.Set;
-
-
 
 @Entity
 @Data
@@ -28,7 +29,9 @@ public class Employee {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Customer> customers = new HashSet<>();
 
-    
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Payroll> payrolls = new HashSet<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -67,5 +70,4 @@ public class Employee {
     
     private double salary;
 
-    
 }

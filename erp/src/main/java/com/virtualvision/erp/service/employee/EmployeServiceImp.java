@@ -20,12 +20,14 @@ public class EmployeServiceImp implements IEmployeeService {
     public List<Employee> employeesList() {
         return employeeDao.findAll();
 
+
     }
 
     @Override
     public void saveEmployee(Employee employee) {
         employeeDao.save(employee);
     }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -37,6 +39,17 @@ public class EmployeServiceImp implements IEmployeeService {
     public void deleteEmployee(Long id) {
         employeeDao.deleteById(id);
     }
+
+    @Override
+    public Employee findByUsername(String username) {
+        return employeeDao.findByUsername(username);
+    }
+
+    @Override
+    public Long findIdByUsername(String username) {
+        return employeeDao.findIdByUsername(username);
+    }
+
 
 
 }
