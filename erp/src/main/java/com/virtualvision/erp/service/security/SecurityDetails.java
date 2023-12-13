@@ -24,25 +24,28 @@ public class SecurityDetails implements UserDetailsService {
     private ICustomerDao customerDao;
     @Autowired
     private IEmployeeDao employeeDao;
-
     @Autowired
     private UserContext userContext;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Customer customer = customerDao.findByUsername(username);
-        String password;
-        if (customer == null) {
-            Employee employee = employeeDao.findByUsername(username);
+        Employee employee;
+
+        if (customer != null) {
+            userContext.setName(customer.getName());
+            userContext.setUserType("Customer");
+            // Aquí puedes agregar más detalles del customer a UserContext si es necesario
+            return new User(username, customer.getPassword(), Collections.emptyList());
+        } else {
+            employee = employeeDao.findByUsername(username);
             if (employee == null) {
                 throw new UsernameNotFoundException("User not found");
             }
-            password = employee.getPassword();
-        } else {
-            password = customer.getPassword();
+            userContext.setName(employee.getName());
+            userContext.setUserType("Employee");
+            // Aquí puedes agregar más detalles del employee a UserContext si es necesario
+            return new User(username, employee.getPassword(), Collections.emptyList());
         }
-        userContext.setName(customer.getName());
-        return new User(username, password, Collections.emptyList());
     }
-
 }
