@@ -3,6 +3,8 @@
 
 <head th:replace="~{layouts/layout :: head}">
     <!-- Common Head -->
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -12,14 +14,32 @@
 
     <div class="container">
         <h2 th:text="#{sale.details}"></h2>
-        
-        <!-- Resumen de la venta -->
-        <p><b th:text="#{sale.id}"></b>: <span th:text="${sale.id}"></span></p>
-        <p th:if="${customerName}" th:text="#{customer.name} + ': ' + ${customerName}"></p>
-        <p><b th:text="#{sale.quantity}"></b>: <span th:text="${sale.quantity}"></span></p>
-        <p><b th:text="#{sale.taxValue}"></b>: <span th:text="${sale.taxValue}"></span></p>
-        <p><b th:text="#{sale.saleDate}"></b>: <span
-                th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></span></p>
+
+        <!-- Resumen de la venta en una tabla -->
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th th:text="#{sale.id}"></th>
+                    <td th:text="${sale.id}"></td>
+                </tr>
+                <tr th:if="${customerName}">
+                    <th th:text="#{customer.name}"></th>
+                    <td th:text="${customerName}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{sale.quantity}"></th>
+                    <td th:text="${sale.quantity}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{sale.taxValue}"></th>
+                    <td th:text="${sale.taxValue}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{sale.saleDate}"></th>
+                    <td th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></td>
+                </tr>
+            </tbody>
+        </table>
 
         <!-- Lista de empleados asociados -->
         <h3 th:text="#{sale.employees}"></h3>
@@ -30,6 +50,13 @@
         <!-- Muestra si es una venta online o la ID del empleado -->
         <p th:if="${isOnlineSale}">Online</p>
         <p th:unless="${isOnlineSale}" th:text="${sale.employeeId}"></p>
+
+        <div class="text-end">
+            <!-- Enlace que se ve como un botón de Bootstrap -->
+            <a th:href="@{/sale/generarpdf/{id}(id=${sale.id})}" class="btn btn-primary" role="button">Generar PDF</a>
+        </div>
+
+
 
         <!-- Aquí puedes agregar más detalles sobre los productos vendidos -->
 

@@ -1,7 +1,5 @@
 package com.virtualvision.erp.controller.saleController;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 
 import com.virtualvision.erp.domain.Employee;
 import com.virtualvision.erp.domain.Sale;
@@ -42,7 +39,8 @@ public class SaleController {
     @GetMapping("/sale/add")
     public String addSaleForm(Model model) {
         Sale sale = new Sale();
-        Set<Employee> employeesSet = new HashSet<>(employeeService.employeesList()); // convierte la lista en un conjunto
+        Set<Employee> employeesSet = new HashSet<>(employeeService.employeesList()); // convierte la lista en un
+                                                                                     // conjunto
         sale.setEmployees(employeesSet); // relación con los empleados
         model.addAttribute("sale", sale);
         model.addAttribute("customers", customerService.customersList());
@@ -70,13 +68,14 @@ public class SaleController {
                 saleService.saveSale(sale);
                 return "redirect:/sale/add";
             } else {
-                // model.addAttribute("error", "Empleado con ID " + sale.getEmployeeId() + " no existe.");
-                // return "redirect:/sale/add"; 
+                // model.addAttribute("error", "Empleado con ID " + sale.getEmployeeId() + " no
+                // existe.");
+                // return "redirect:/sale/add";
             }
         } else {
-            //  no se proporciona una ID de empleado
+            // no se proporciona una ID de empleado
             // model.addAttribute("error", "Debes proporcionar una ID de empleado.");
-            // return "redirect:/sale/add"; 
+            // return "redirect:/sale/add";
         }
         return "redirect:/sale/add";
     }
@@ -106,12 +105,12 @@ public class SaleController {
         if (sale.getCustomer() != null) {
             model.addAttribute("customerName", sale.getCustomer().getName());
         } else {
-            //  variable `customerName` incluso si no hay cliente
+            // variable `customerName` incluso si no hay cliente
             model.addAttribute("customerName", "");
         }
 
         // carga la relación con los empleados
-        sale.getEmployees().size(); 
+        sale.getEmployees().size();
         model.addAttribute("sale", sale);
 
         // verifica si es una venta en online y se lo pasa a la vista

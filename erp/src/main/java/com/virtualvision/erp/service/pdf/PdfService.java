@@ -7,8 +7,6 @@ import java.io.IOException;
 import org.springframework.stereotype.Service;
 
 import com.itextpdf.io.font.constants.StandardFonts;
-import com.itextpdf.kernel.colors.Color;
-import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -18,37 +16,31 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
-import com.itextpdf.layout.property.UnitValue;
 import com.virtualvision.erp.domain.Customer;
+import com.virtualvision.erp.domain.Sale;
 
 @Service
 public class PdfService {
 
-    public ByteArrayInputStream generatePdf(String content, Customer user) {
+    public ByteArrayInputStream generatePdf(Sale sale, Customer customer) {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         PdfWriter writer = new PdfWriter(out);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
 
-        // Añadir cabecera con título "VisualVision"
-        Color orangeColor = new DeviceRgb(255, 113, 0);
-        PdfFont headerFont = null;
+        PdfFont titleFont = null;
         try {
-            headerFont = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
-            Paragraph header = new Paragraph("VisualVision")
-                    .setFont(headerFont)
-                    .setFontSize(20)
+            titleFont = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
+            Paragraph title = new Paragraph("Resumen de Venta")
+                    .setFont(titleFont)
+                    .setFontSize(16)
                     .setTextAlignment(TextAlignment.CENTER)
-                    .setFontColor(orangeColor)
                     .setBold();
-            document.add(header);
+            document.add(title);
         } catch (IOException e) {
             e.printStackTrace();
             // Considera manejar esta excepción de manera más adecuada.
         }
-
-        document.add(new Paragraph(content));
-
         // Estilo de fuente en negrita para la tabla
         PdfFont boldFont = null;
         try {
@@ -58,24 +50,28 @@ public class PdfService {
             // Considera manejar esta excepción de manera más adecuada.
         }
 
-        // Creación de la tabla
-        float[] columnWidths = { 1, 3, 2 };
-        Table table = new Table(UnitValue.createPercentArray(columnWidths))
-                .useAllAvailableWidth();
+        // Creación de la tabla para los detalles de la venta
+        Table saleTable = new Table(new float[] { 1, 3 }).useAllAvailableWidth();
 
-        // Añadir celdas de cabecera en negrita
-        table.addCell(new Cell().add(new Paragraph("Nombre").setFont(boldFont)));
-        table.addCell(new Cell().add(new Paragraph("Apellido").setFont(boldFont)));
-        table.addCell(new Cell().add(new Paragraph("Telefono").setFont(boldFont)));
+        // Añadir encabezados de la tabla
+        saleTable.addCell(new Cell().add(new Paragraph("Campo").setFont(boldFont)));
+        saleTable.addCell(new Cell().add(new Paragraph("Detalle").setFont(boldFont)));
 
-        // Añadir celdas con datos del usuario
-        table.addCell(user.getName());
-        table.addCell(user.getSurname());
-        table.addCell(user.getPhone());
+        // Añadir filas con detalles de la venta
+        saleTable.addCell("ID de Venta");
+        saleTable.addCell(sale.getId().toString());
+        saleTable.addCell("Cantidad");
+        saleTable.addCell(Integer.toString(sale.getQuantity()));
+        saleTable.addCell("Valor de Impuesto");
+        saleTable.addCell(Double.toString(sale.getTaxValue()));
+        saleTable.addCell("Fecha de Venta");
+        saleTable.addCell(sale.getSaleDate().toString());
 
-        document.add(table);
+        document.add(saleTable);
+
+        // ... [Código existente para añadir detalles del cliente] ...
+
         document.close();
-
         return new ByteArrayInputStream(out.toByteArray());
     }
 }
