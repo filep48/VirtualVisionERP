@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Layout Sidebar</title>
 </head>
+
 <body>
     <aside th:fragment="sidebar">
         <nav>
             <!-- Barra de navegación lateral -->
             <ul>
                 <li><a href="/dashboard">Panel de control</a></li>
-                <li><a href="/rrhh">RRHH</a></li>
+                <li><a href="/rrhh/employees/{employeeId}/payrolls">RRHH</a></li>
                 <li><a href="/productos">Productos</a></li>
                 <li><a href="/tienda">Tienda</a></li>
                 <li><a href="/eventos">Eventos</a></li>
@@ -19,4 +21,5 @@
         </nav>
     </aside>
 </body>
+
 </html>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.virtualvision.erp.domain.Employee;
 import com.virtualvision.erp.service.employee.IEmployeeService;
+import com.virtualvision.erp.service.passwordEnconder.PasswordEnconder;
 
 import jakarta.validation.Valid;
 
@@ -43,7 +44,7 @@ public class EmployeeController {
             model.addAttribute("errors", bindingResult);
             return "views/employees/addEmployee";
         }
-
+        employee.setPassword(PasswordEnconder.passwordEncoder().encode(employee.getPassword()));
         employeeService.saveEmployee(employee);
 
         return "redirect:/employee";
