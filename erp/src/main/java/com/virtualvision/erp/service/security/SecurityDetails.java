@@ -13,7 +13,7 @@ import com.virtualvision.erp.dao.ICustomerDao;
 import com.virtualvision.erp.dao.IEmployeeDao;
 import com.virtualvision.erp.domain.Customer;
 import com.virtualvision.erp.domain.Employee;
-import com.virtualvision.erp.service.context.UserContext;
+import com.virtualvision.erp.domain.UserContext;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,9 +33,14 @@ public class SecurityDetails implements UserDetailsService {
         Employee employee;
 
         if (customer != null) {
+
             userContext.setName(customer.getName());
+            userContext.setSurname(customer.getSurname());
+            userContext.setEmail(customer.getEmail());
+            userContext.setPhone(customer.getPhone());
+            userContext.setAddress(customer.getAddress());
             userContext.setUserType("Customer");
-            // Aquí puedes agregar más detalles del customer a UserContext si es necesario
+
             return new User(username, customer.getPassword(), Collections.emptyList());
         } else {
             employee = employeeDao.findByUsername(username);
@@ -43,9 +48,18 @@ public class SecurityDetails implements UserDetailsService {
                 throw new UsernameNotFoundException("User not found");
             }
             userContext.setName(employee.getName());
+            userContext.setSurname(employee.getSurname());
+            userContext.setEmail(employee.getEmail());
+            userContext.setPhone(employee.getPhone());
+            userContext.setAddress(employee.getAddress());
             userContext.setUserType("Employee");
-            // Aquí puedes agregar más detalles del employee a UserContext si es necesario
+
             return new User(username, employee.getPassword(), Collections.emptyList());
         }
     }
+
+    public UserContext getUserContext() {
+        return userContext;
+    }
+
 }

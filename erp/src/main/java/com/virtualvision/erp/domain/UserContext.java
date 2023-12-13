@@ -1,4 +1,4 @@
-package com.virtualvision.erp.service.context;
+package com.virtualvision.erp.domain;
 
 import org.springframework.stereotype.Component;
 
@@ -7,19 +7,21 @@ import lombok.Data;
 @Data
 @Component
 public class UserContext {
+    private Long id;
     private String username;
     private String name;
-    private String lastname;
+    private String surname;
     private String email;
     private String phone;
     private String address;
     private String userType;
 
-    public UserContext(String username, String name, String lastname, String email, String phone, String address,
+    public UserContext(Long id, String username, String name, String surname, String email, String phone,
+            String address,
             String userType) {
         this.username = username;
         this.name = name;
-        this.lastname = lastname;
+        this.surname = surname;
         this.email = email;
         this.phone = phone;
         this.address = address;

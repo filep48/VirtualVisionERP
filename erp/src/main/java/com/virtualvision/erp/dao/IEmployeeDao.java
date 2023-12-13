@@ -8,4 +8,6 @@ public interface IEmployeeDao extends JpaRepository<Employee, Long> {
 
     Employee findByUsername(String username);
 
+    Long findIdByUsername(String username);
+
 }

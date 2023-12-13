@@ -16,4 +16,6 @@ public interface IEmployeeService {
 
     Employee findByUsername(String username);
 
+    Long findIdByUsername(String username);
+
 }

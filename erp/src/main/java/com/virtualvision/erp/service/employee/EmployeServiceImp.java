@@ -43,4 +43,9 @@ public class EmployeServiceImp implements IEmployeeService {
         return employeeDao.findByUsername(username);
     }
 
+    @Override
+    public Long findIdByUsername(String username) {
+        return employeeDao.findIdByUsername(username);
+    }
+
 }
