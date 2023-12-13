@@ -8,4 +8,6 @@ public interface ICustomerDao extends JpaRepository<Customer, Long> {
 
     Customer findByUsername(String username);
 
+    Long findIdByUsername(String username);
+
 }

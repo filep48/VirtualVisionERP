@@ -10,8 +10,7 @@ import com.virtualvision.erp.dao.IEmployeeDao;
 import com.virtualvision.erp.domain.Employee;
 
 @Service
-public class EmployeServiceImp  implements IEmployeeService{
-
+public class EmployeServiceImp implements IEmployeeService {
 
     @Autowired
     private IEmployeeDao employeeDao;
@@ -20,7 +19,7 @@ public class EmployeServiceImp  implements IEmployeeService{
     @Transactional(readOnly = true)
     public List<Employee> employeesList() {
         return employeeDao.findAll();
-        
+
     }
 
     @Override
@@ -28,7 +27,6 @@ public class EmployeServiceImp  implements IEmployeeService{
         employeeDao.save(employee);
     }
 
-    
     @Override
     @Transactional(readOnly = true)
     public Employee findEmployeeId(Long id) {
@@ -39,5 +37,15 @@ public class EmployeServiceImp  implements IEmployeeService{
     public void deleteEmployee(Long id) {
         employeeDao.deleteById(id);
     }
-    
+
+    @Override
+    public Employee findByUsername(String username) {
+        return employeeDao.findByUsername(username);
+    }
+
+    @Override
+    public Long findIdByUsername(String username) {
+        return employeeDao.findIdByUsername(username);
+    }
+
 }
