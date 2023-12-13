@@ -21,7 +21,7 @@ public class RegisterController {
     public String showRegistrationForm(Model model) {
         model.addAttribute("customer", new Customer());
 
-        return "/views/customers/register"; // Asegúrate de que esta ruta sea correcta
+        return "/views/customers/register"; 
     }
 
     @PostMapping("/register")

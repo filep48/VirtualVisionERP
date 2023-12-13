@@ -8,8 +8,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
@@ -39,7 +37,7 @@ public class Employee {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = true)
+    
     private String surname;
 
     @NotEmpty
@@ -54,26 +52,19 @@ public class Employee {
     @Column(name = "dni_nif")
     private String dniNif;
 
-    @Column(nullable = true)
+    
     private String phone;
 
-    
-    @Column(name = "email")
     private String email;
 
-    @Column(nullable = true)
     private String address;
 
-    @Column(nullable = false)
     private String role = "employee";
 
-    @Column(nullable = true)
     private String position;
 
-    @Column(name = "num_ss")
     private String numSS;
-
-    @Column(nullable = true)
+    
     private double salary;
 
     

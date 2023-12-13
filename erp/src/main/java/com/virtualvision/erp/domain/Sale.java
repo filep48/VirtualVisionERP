@@ -25,6 +25,10 @@ public class Sale implements Serializable {
     @JoinTable(name = "sales_employees", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private Set<Employee> employees = new HashSet<>();
 
+    // Relación muchos a muchos con Product
+    @ManyToMany
+    @JoinTable(name = "sale_product", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Product> products = new HashSet<>();
 
     private static final long serialVersionUID = 1L;
 
@@ -32,18 +36,15 @@ public class Sale implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private Integer quantity;
 
-    @Column(nullable = false)
     private BigDecimal taxValue;
 
-    @Column(nullable = false)
     private LocalDateTime saleDate;
 
     @Column(name = "online_sale")
     private boolean onlineSale;
-    
+
     @Column(name = "employee_id")
     private Long employeeId;
 

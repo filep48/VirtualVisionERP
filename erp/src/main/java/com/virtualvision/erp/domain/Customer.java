@@ -63,11 +63,11 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Name is required")
-    @Column(nullable = false)
+    @NotEmpty(message = "Name is required")// trabaja a nivel app antes de enviar datos a la bbdd
+    @Column(nullable = false)// trabaja a nivel de bbdd
     private String name;
 
-    @Column(nullable = true)
+    
     private String surname;
 
     @NotEmpty
@@ -82,17 +82,14 @@ public class Customer {
     @Column(name = "dni_nif")
     private String dniNif;
 
-    @Column(nullable = true)
+    
     private String phone;
 
     
-    @Column(name = "email")
     private String email;
 
-    @Column(nullable = true)
     private String address;
 
-    @Column(nullable = false)
     private String role = "user";
 
 }
