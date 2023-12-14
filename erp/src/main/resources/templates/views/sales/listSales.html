@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="${session.locale}" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layouts/layout :: head}">
     <!-- Common Head -->
 </head>
@@ -14,13 +14,13 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Quantity</th>
-                    <th>Tax Value</th>
-                    <th>Sale Date</th>
-                    <th>Customer</th>
-                    <th>Employee</th>
-                    <th>Actions</th>
+                    <th th:text="#{sale.id}"></th>
+                    <th th:text="#{sale.quantity}"></th>
+                    <th th:text="#{sale.taxValue}"></th>
+                    <th th:text="#{sale.saleDate}"></th>
+                    <th th:text="#{sale.customer}"></th>
+                    <th th:text="#{sale.employee}"></th>
+                    <th th:text="#{button.actions}"></th>
                 </tr>
             </thead>
             <tbody>
