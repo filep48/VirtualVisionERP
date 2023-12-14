@@ -1,28 +1,51 @@
 package com.virtualvision.erp.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
+import lombok.Data;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "sales")
+@Data
 public class Sale implements Serializable {
 
+    // Relación con Customer
+    @ManyToOne
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private Customer customer;
+
+    // Relación muchos a muchos con Employee
+    @ManyToMany
+    @JoinTable(name = "sales_employees", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
+    private Set<Employee> employees = new HashSet<>();
+
+    // Relación muchos a muchos con Product
+    @ManyToMany
+    @JoinTable(name = "sale_product", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Product> products = new HashSet<>();
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Integer quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id") // Esta es la columna que se utilizará para la clave foránea.
-    private Customer customer;
-    
+    private BigDecimal taxValue;
+
+    private LocalDateTime saleDate;
+
+    @Column(name = "online_sale")
+    private boolean onlineSale;
+
+    @Column(name = "employee_id")
+    private Long employeeId;
+
 }

@@ -6,11 +6,9 @@
     <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="/css/login.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
 </head>
 
 <body>
-
     <main class="container">
         <header>
             <h2>Bienvenido/a a Virtual Vision</h2>
@@ -22,10 +20,8 @@
                     <legend>Iniciar Sesión</legend>
                     <label for="username"></label>
                     <input type="text" id="username" name="username" placeholder="Usuario" required autofocus>
-
                     <label for="password"></label>
                     <input type="password" id="password" name="password" placeholder="Contraseña" required>
-
                     <button type="submit">Iniciar Sesión</button>
                 </fieldset>
             </form>
@@ -37,20 +33,19 @@
             </div>
 
             <!-- Botón de inicio de sesión con Google -->
-            <button type="button" class="google-btn" th:onclick="'window.location.href=\'' + @{/oauth2/authorization/google} + '\''">
+            <a href="@{/oauth2/authorization/google}" class="google-btn">
                 <i class="fab fa-google"></i>
                 Inicia Sesión con Google
-            </button>
-            
+            </a>
+
         </section>
 
         <div class="divider2"></div>
 
-        <footer>        
+        <footer>
             <p>¿No tienes cuenta? <a th:href="@{/register}">Regístrate</a></p>
         </footer>
     </main>
-
 </body>
 
 </html>

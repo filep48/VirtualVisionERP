@@ -1,58 +1,31 @@
 package com.virtualvision.erp.domain;
 
 import java.util.HashSet;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.ToString;
-import java.util.Set;
-
 
 @Entity
 @Data
-public class Customer {
+public class Employee {
 
     // relacion muchos a muchos con la entidad Employee
-     @ManyToMany
-    @JoinTable(
-        name = "customer_employee",
-        joinColumns = @JoinColumn(name = "customer_id"),
-        inverseJoinColumns = @JoinColumn(name = "employee_id")
-    )
-    private Set<Employee> employees = new HashSet<>();
+    @ManyToMany(mappedBy = "employees")
+    private Set<Customer> customers = new HashSet<>();
 
-    public Customer() {
-    }
-
-    // crea un contructor completo
-    public Customer(String name, String surname, String username, String password, String dniNif, String phone,
-            String email, String address, String role) {
-        this.name = name;
-        this.surname = surname;
-        this.username = username;
-        this.password = password;
-        this.dniNif = dniNif;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.role = role;
-    }
-
-    public Customer(String name, String username, String password, String email) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-
-    }
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Payroll> payrolls = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,7 +53,6 @@ public class Customer {
     @Column(nullable = true)
     private String phone;
 
-    
     @Column(name = "email")
     private String email;
 
@@ -88,6 +60,15 @@ public class Customer {
     private String address;
 
     @Column(nullable = false)
-    private String role = "user";
+    private String role = "employee";
+
+    @Column(nullable = true)
+    private String position;
+
+    @Column(name = "num_ss")
+    private String numSS;
+
+    @Column(nullable = true)
+    private double salary;
 
 }

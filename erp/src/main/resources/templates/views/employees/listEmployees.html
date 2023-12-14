@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head">
+    <!-- Common Head -->
+</head>
+<body>
+    <header th:replace="layouts/layout :: header">
+        <!-- Common Header -->
+    </header>
+
+    <div class="container">
+        <a class="btn btn-primary btn-sm" th:href="@{/employee/add}" th:text="#{button.add}"></a>
+        
+        <h1 th:text="${pageTitle}"></h1><!-- Dynamic Title from Controller -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th th:text="#{employee.name}"></th>
+                    <th th:text="#{employee.surname}"></th>
+                    <th th:text="#{employee.username}"></th>
+                    <th th:text="#{employee.dni}"></th>
+                    <th th:text="#{employee.phone}"></th>
+                    <th th:text="#{employee.email}"></th>
+                    <th th:text="#{employee.address}"></th>
+                    <th th:text="#{employee.numSS}"></th> <!-- Added for numSS -->
+                    <th th:text="#{employee.position}"></th> <!-- Added for position -->
+                    <th th:text="#{employee.salary}"></th> <!-- Added for salary -->
+                    <th th:text="#{button.actions}"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="employee : ${employees}">
+                    <td th:text="${employee.id}"></td>
+                    <td th:text="${employee.name}"></td>
+                    <td th:text="${employee.surname}"></td>
+                    <td th:text="${employee.username}"></td>
+                    <td th:text="${employee.dniNif}"></td>
+                    <td th:text="${employee.phone}"></td>
+                    <td th:text="${employee.email}"></td>
+                    <td th:text="${employee.address}"></td>
+                    <td th:text="${employee.numSS}"></td> <!-- Added for numSS -->
+                    <td th:text="${employee.position}"></td> <!-- Added for position -->
+                    <td th:text="${employee.salary}"></td> <!-- Added for salary -->
+                    <td>
+                        <a th:href="@{/employee/edit/{id}(id=${employee.id})}" class="btn btn-success" th:text="#{button.edit}"></a>
+                        <a th:href="@{/employee/delete/{id}(id=${employee.id})}" class="btn btn-danger" th:text="#{button.delete}"
+                        onclick="return confirm('Are you sure you want to delete the employee?');"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer th:replace="layouts/layout :: footer">
+        <!-- Common Footer -->
+    </footer>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
