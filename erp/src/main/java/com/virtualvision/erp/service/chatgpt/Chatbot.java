@@ -7,10 +7,15 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Chatbot {
     public static String chatGPT(String prompt) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String apiKey = "YOUR API KEY HERE";
+        String apiKey = "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";
         String model = "gpt-3.5-turbo";
 
         try {
@@ -41,6 +46,8 @@ public class Chatbot {
             br.close();
 
             // calls the method to extract the message.
+            System.out.println(response);
+            System.out.println(response.toString());
             return extractMessageFromJSONResponse(response.toString());
 
         } catch (IOException e) {
@@ -49,11 +56,14 @@ public class Chatbot {
     }
 
     public static String extractMessageFromJSONResponse(String response) {
-        int start = response.indexOf("content") + 11;
-
-        int end = response.indexOf("\"", start);
-
-        return response.substring(start, end);
-
+        JSONObject jsonResponse = new JSONObject(response);
+        JSONArray choices = jsonResponse.getJSONArray("choices");
+        if (choices.length() > 0) {
+            JSONObject firstChoice = choices.getJSONObject(0);
+            JSONObject message = firstChoice.getJSONObject("message");
+            return message.getString("content");
+        } else {
+            return "No hubo respuesta del asistente";
+        }
     }
 }
