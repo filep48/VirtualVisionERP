@@ -9,7 +9,7 @@
     <header th:fragment="header">
         <nav>
             <div class="nav-container">
-                <a th:href="@{/dashboard}" class="logo"><i class="fas fa-angle-double-down"></i>  VirtualVision</a>
+                <a th:href="@{/dashboard}" class="logo"><i class="fas fa-angle-double-down"></i><p th:text="#{layout.title}"></p></a>
                 <div class="search-container">
                     <form th:action="@{/searchBar}" method="get" class="search-container">
                         <input type="text" placeholder="Buscar..." class="search-input">
@@ -21,7 +21,7 @@
                 <div id="user-menu">
                     <button class="dropbtn">Usuario <i class="fas fa-caret-down"></i></button>
                     <div id="user-menu-content">
-                        <a th:href="@{/users}">Gestión de usuarios</a>
+                        <a th:href="@{/customer}">Gestión de usuarios</a>
                         <a th:href="@{/logout}">Cerrar sesión</a>
                     </div>
                 </div>
