@@ -25,7 +25,8 @@ public class Sale implements Serializable {
     @JoinTable(name = "sales_employees", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private Set<Employee> employees = new HashSet<>();
 
-    // Relación muchos a muchos con Product
+    // Relación muchos a muchos con Product, se hace esta relacion n-n ya que si más adelante se implementa 
+    // comision individual para los empleados será más fácil escalar el código.
     @ManyToMany
     @JoinTable(name = "sale_product", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
     private Set<Product> products = new HashSet<>();

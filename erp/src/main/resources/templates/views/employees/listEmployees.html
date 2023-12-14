@@ -9,8 +9,7 @@
     </header>
 
     <div class="container">
-        <a class="btn btn-primary btn-sm" th:href="@{/employee/add}" th:text="#{button.add}"></a>
-        
+        <a class="btn btn-primary btn-sm" th:href="@{/employee/add}" th:text="#{'pageTitle.addEmployee'}"></a>        
         <h1 th:text="${pageTitle}"></h1><!-- Dynamic Title from Controller -->
         <table class="table">
             <thead>
