@@ -5,89 +5,61 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard ERP</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
     <!-- Header Layout Include -->
-    <header th:replace="layouts/header :: header"></header>
+    <header th:replace="~{layouts/header :: header}"></header>
 
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" >
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebar :: sidebar}"></aside>
+
+        <main>
+            <!-- Panel de control Section -->
+            <section id="dashboard">
+                <a th:href="@{/economia}">
+                    <article id="economia" class="dashboard-item">
+                        <h2>Economía</h2>
+                        <!-- Content goes here -->
+                    </article>
+                </a>
+                <a th:href="@{/rrhh}">
+                    <article id="rrhh" class="dashboard-item">
+                        <h2>RRHH</h2>
+                        <!-- Content goes here -->
+                    </article>
+                </a>
+                <a th:href="@{/tienda}">
+                    <article id="tienda" class="dashboard-item">
+                        <h2>Tienda</h2>
+                    </article>
+                </a>
+                <a th:href="@{/eventos}">
+                    <article id="eventos" class="dashboard-item">
+                        <h2>Eventos</h2>
+                    </article>
+                </a>
+
+            </section>
+
+
+            <!-- Productos Section -->
+            <section id="productos">
+                <a th:href="@{/productos}">
+                    <article id="productos" class="dashboard-item">
+                        <!-- icon of productos + h2 Productos -->
+                        <h2>Productos</h2>
+                    </article>
+                </a>
+
+            </section>
+        </main>
+    </div>
     <!-- Sidebar Navigation Layout Include -->
-    <aside th:replace="layouts/sidebar :: sidebar"></aside>
 
-    <main>
-        <!-- Panel de control Section -->
-        <section id="dashboard">
-            <h2>Panel de control</h2>
-            <article id="economia" class="dashboard-item">
-                <h3>Economía</h3>
-                <!-- Content goes here -->
-            </article>
-            <article id="rrhh" class="dashboard-item">
-                <h3>RRHH</h3>
-                <!-- Content goes here -->
-            </article>
-            <!-- More sections -->
-        </section>
-
-        <!-- Pedidos Recientes Section -->
-        <section id="pedidos-recientes">
-            <article id="pedidos-reciente" class="dashboard-item">
-                <h2>Pedidos Recientes</h2>
-                <ul>
-                    <li th:each="pedido : ${pedidos}">
-                        <span th:text="${pedido.nombre}">Nombre del Pedido</span>
-                        <span th:text="${pedido.monto}">Monto</span>
-                    </li>
-                </ul>
-            </article>
-
-        </section>
-
-        <!-- Ultimas Modificaciones Section -->
-        <section id="ultimas-modificaciones">
-            <article id="ultimas-modificaciones" class="dashboard-item">
-                <h2>Últimas modificaciones de Empleados</h2>
-                <ul>
-                    <li th:each="empleado : ${empleados}">
-                        <img th:src="@{${empleado.imagen}}" alt="Foto de Empleado" />
-                        <span th:text="${empleado.nombre}">Nombre del Empleado</span>
-                    </li>
-                </ul>
-            </article>
-
-        </section>
-
-        <!-- Proximos Eventos Section -->
-        <section id="proximos-eventos">
-            <article id="proximos-eventos" class="dashboard-item">
-                <h2>Próximos Eventos</h2>
-                <ul>
-                    <li th:each="evento : ${eventos}">
-                        <span th:text="${evento.nombre}">Nombre del Evento</span>
-                        <span th:text="${evento.fecha}">Fecha</span>
-                    </li>
-                </ul>
-            </article>
-
-        </section>
-
-        <!-- Resumen Stock Section -->
-        <section id="resumen-stock">
-            <article id="resumen-stock" class="dashboard-item">
-
-                <h2>Resumen Stock</h2>
-                <ul>
-                    <li th:each="producto : ${productos}">
-                        <span th:text="${producto.nombre}">Nombre del Producto</span>
-                        <span th:text="${producto.stock}">Stock</span>
-                        <!-- Estado del stock se podría representar con un icono o color -->
-                        <span th:classappend="${producto.estado == 'bajo' ? 'estado-bajo' : 
-                        producto.estado == 'medio' ? 'estado-medio' : 'estado-alto'}">Estado</span>
-                    </li>
-                </ul>
-            </article>
-        </section>
-    </main>
 
     <!-- Footer Layout Include -->
 </body>

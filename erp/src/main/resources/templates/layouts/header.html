@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Layout Header</title>
 </head>
+
 <body>
     <header th:fragment="header">
         <nav>
-            <!-- Contenido del header como el logo, menú de usuario, etc. -->
-            <div id="logo">Logo de la Empresa</div>
-            <a th:href="@{/customer}" id="user-menu">Menú del Usuario</a>
+            <div class="nav-container">
+                <a th:href="@{/dashboard}" class="logo"><i class="fas fa-angle-double-down"></i><p th:text="#{layout.title}"></p></a>
+                <div class="search-container">
+                    <form th:action="@{/searchBar}" method="get" class="search-container">
+                        <input type="text" placeholder="Buscar..." class="search-input">
+                        <button type="submit" class="search-icon" title="Buscar">
+                            <i class="fas fa-search "></i>
+                        </button>
+                    </form>
+                </div>
+                <div id="user-menu">
+                    <button class="dropbtn">Usuario <i class="fas fa-caret-down"></i></button>
+                    <div id="user-menu-content">
+                        <a th:href="@{/customer}">Gestión de usuarios</a>
+                        <a th:href="@{/logout}">Cerrar sesión</a>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
 </body>
+
 </html>
