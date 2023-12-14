@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.virtualvision.erp.domain.Product;
 
-public interface IProducService {
+public interface IProductService {
     List<Product> productList();
 
     void save(Product product);

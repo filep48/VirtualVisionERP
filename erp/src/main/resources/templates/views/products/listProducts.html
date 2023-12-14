@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/layout :: head}">
+    <!-- Head común  -->
+</head>
+<body>
+    <header th:replace="~{layouts/layout :: header}">
+        <!-- Header común  -->
+    </header>
+
+    <div class="container">
+        <a class="btn btn-primary btn-sm" th:href="@{/product/add}" th:text="#{'button.addProduct'}">Add Product</a>
+        <h1 th:text="#{product.page.title}"></h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th th:text="#{product.name}"></th>
+                    <th th:text="#{product.description}"></th>
+                    <th th:text="#{product.quantity}"></th>
+                    <th th:text="#{product.price}"></th>
+                    <th th:text="#{button.actions}"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.id}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="${product.quantity}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td>
+                        <a th:href="@{/product/edit/{id}(id=${product.id})}" class="btn btn-success"th:text="#{button.edit}">Edit</a>
+                        <a th:href="@{/product/delete/{id}(id=${product.id})}" class="btn btn-danger" th:text="#{button.delete}"
+                        onclick="return confirm('¿Está seguro de eliminar el producto?');">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer th:replace="~{layouts/layout :: footer}">
+        <!-- Footer común  -->
+    </footer>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
