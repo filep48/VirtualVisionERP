@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Chat con GPT</title>
+</head>
+
+<body>
+    <h1>Chat con GPT</h1>
+    <div id="chatBox">
+        <div th:each="line : ${conversation}">
+            <p th:text="${line}"></p>
+        </div>
+    </div>
+
+    <form th:action="@{/send}" method="post">
+        <input type="text" name="message" required>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+
+</html>
