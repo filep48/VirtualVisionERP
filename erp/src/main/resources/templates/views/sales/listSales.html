@@ -1,62 +1,66 @@
 <!DOCTYPE html>
 <html lang="${session.locale}" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layouts/layout :: head}">
+<head th:replace="~{layouts/head :: head}">
     <!-- Common Head -->
 </head>
 <body>
-    <header th:replace="~{layouts/layout :: header}">
-        <!-- Common Header -->
-    </header>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
 
-    <div class="container">
-        <a class="btn btn-primary btn-sm" th:href="@{/sale/add}" th:text="#{button.addSale}"></a>
-        <h1 th:text="${pageTitle}"></h1><!-- Dynamic Title from Controller -->
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th th:text="#{sale.id}"></th>
-                    <th th:text="#{sale.quantity}"></th>
-                    <th th:text="#{sale.taxValue}"></th>
-                    <th th:text="#{sale.saleDate}"></th>
-                    <th th:text="#{sale.customer}"></th>
-                    <th th:text="#{sale.employee}"></th>
-                    <th th:text="#{button.actions}"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="sale : ${sales}">
-                    <td th:text="${sale.id}"></td>
-                    <td th:text="${sale.quantity}"></td>
-                    <td th:text="${sale.taxValue}"></td>
-                    <td th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></td>
-                    <td>
-                        <span th:if="${sale.customer != null}" th:text="${sale.customer.name}"></span>
-                        <span th:unless="${sale.customer != null}">No Customer Available</span>
-                    </td>
-                    <td>
-                        <span th:if="${sale.onlineSale}">Online</span>
-                        <span th:unless="${sale.onlineSale}">
-                            <span th:each="employee, employeeStat : ${sale.employees}">
-                                <span th:text="${employee.id}" th:if="${employeeStat.index == 0}"></span>
-                                <span th:unless="${employeeStat.index == 0}">, <span th:text="${employee.id}"></span></span>
-                            </span>
-                        </span>
-                    </td>
-                    <td>
-                        <a th:href="@{/sale/detail/{id}(id=${sale.id})}" class="btn btn-success" th:text="#{button.details}"></a>
-                        <a th:href="@{/sale/edit/{id}(id=${sale.id})}" class="btn btn-success" th:text="#{button.edit}"></a>
-                        <a th:href="@{/sale/delete/{id}(id=${sale.id})}" class="btn btn-danger" th:text="#{button.delete}"
-                            onclick="return confirm('Are you sure you want to delete the sale?');"></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <p th:unless="${sales != null and not #lists.isEmpty(sales)}" th:text="#{no.sales.available}">No Sales Available</p>
+        <main>
+            <div class="container-main">
+                <a class="btn btn-primary btn-sm" th:href="@{/sale/add}" th:text="#{button.addSale}">Add Sale</a>
+                <h1 th:text="${pageTitle}">Page Title</h1><!-- Dynamic Title from Controller -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th th:text="#{sale.id}">ID</th>
+                            <th th:text="#{sale.quantity}">Quantity</th>
+                            <th th:text="#{sale.taxValue}">Tax Value</th>
+                            <th th:text="#{sale.saleDate}">Sale Date</th>
+                            <th th:text="#{sale.customer}">Customer</th>
+                            <th th:text="#{sale.employee}">Employee</th>
+                            <th th:text="#{button.actions}">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="sale : ${sales}">
+                            <td th:text="${sale.id}"></td>
+                            <td th:text="${sale.quantity}"></td>
+                            <td th:text="${sale.taxValue}"></td>
+                            <td th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></td>
+                            <td>
+                                <span th:if="${sale.customer != null}" th:text="${sale.customer.name}"></span>
+                                <span th:unless="${sale.customer != null}">No Customer Available</span>
+                            </td>
+                            <td>
+                                <span th:if="${sale.onlineSale}">Online</span>
+                                <span th:unless="${sale.onlineSale}">
+                                    <span th:each="employee, employeeStat : ${sale.employees}">
+                                        <span th:text="${employee.id}" th:if="${employeeStat.index == 0}"></span>
+                                        <span th:unless="${employeeStat.index == 0}">, <span th:text="${employee.id}"></span></span>
+                                    </span>
+                                </span>
+                            </td>
+                            <td>
+                                <a th:href="@{/sale/detail/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.details}">Details</a>
+                                <a th:href="@{/sale/edit/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.edit}">Edit</a>
+                                <a th:href="@{/sale/delete/{id}(id=${sale.id})}" class="btn-delete" th:text="#{button.delete}"
+                                    onclick="return confirm('Are you sure you want to delete the sale?');">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p th:unless="${sales != null and not #lists.isEmpty(sales)}" th:text="#{no.sales.available}">No Sales Available</p>
+            </div>
+        </main>
     </div>
 
-    <footer th:replace="~{layouts/layout :: footer}">
+    <footer th:replace="~{layouts/footer :: footer}">
         <!-- Common Footer -->
     </footer>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

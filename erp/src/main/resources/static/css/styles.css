@@ -125,7 +125,16 @@ footer button:hover{
     justify-content: space-between;
     width: 100%;
     height: 100%;
+}
+
+.container-main-detail{
+    display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    
+
 }
 
 /* Estilos para el elemento principal que contiene todas las secciones */
