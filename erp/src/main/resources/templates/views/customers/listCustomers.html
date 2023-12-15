@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layouts/head :: head">
+<head th:replace="~{layouts/head :: head}">
     <!-- Head común  -->
 </head>
 
 <body>
-    <header th:replace="layouts/header :: header"></header>
+    <header th:replace="~{layouts/header :: header}"></header>
     <div class="container-body">
         <input type="checkbox" id="menu-toggle" title="menu">
         <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
-        <aside th:replace="layouts/sidebar :: sidebar"></aside>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
 
         <main>
             <div class="container-main">
@@ -56,7 +56,7 @@
         </main>
     </div>
 
-        <footer th:replace="layouts/footer :: footer">
+        <footer th:replace="~{layouts/footer :: footer}">
             <!-- Footer común  -->
         </footer>
 </body>
