@@ -36,8 +36,8 @@
                             <td th:text="${product.quantity}"></td>
                             <td th:text="${product.price}"></td>
                             <td>
-                                <a th:href="@{/product/edit/{id}(id=${product.id})}" class="btn-edit" th:text="#{button.edit}">Edit</a>
-                                <a th:href="@{/product/delete/{id}(id=${product.id})}" class="btn-delete" th:text="#{button.delete}"
+                                <a th:href="@{/product/editProduct/{id}(id=${product.id})}" class="btn-edit" th:text="#{button.edit}">Edit</a>
+                                <a th:href="@{/product/deleteProduct/{id}(id=${product.id})}" class="btn-delete" th:text="#{button.delete}"
                                     onclick="return confirm('¿Está seguro de eliminar el producto?');">Delete</a>
                             </td>
                         </tr>

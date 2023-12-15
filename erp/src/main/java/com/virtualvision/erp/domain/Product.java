@@ -13,6 +13,11 @@ import lombok.Data;
 @Data
 public class Product implements Serializable {
 
+    // relacion oneToMany con supplier
+    @ManyToOne
+    @JoinColumn(name = "supplier_id") // Esta columna en la tabla de productos va a tener el ID del proveedor
+    private Supplier supplier;
+
     // relacion manyToMany con sale
     @ManyToMany(mappedBy = "products")
     private Set<Sale> sales = new HashSet<>();

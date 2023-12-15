@@ -29,10 +29,10 @@
                     <div class="form-group">
                         <input type="text" th:field="*{price}" class="form-input" id="price" th:attr="placeholder=#{product.price}" title="price">
                     </div>
-                    <button type="submit" class="btn-submit" th:text="#{product.save}">Save</button>
+                    <button type="submit" class="btn-submit" th:text="#{product.save}" title="save"></button>
                 </form>
             </div>
-        </main>
+        </form>
     </div>
 
     <footer th:replace="~{layouts/footer :: footer}">
