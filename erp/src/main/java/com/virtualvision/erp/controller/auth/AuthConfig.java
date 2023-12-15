@@ -6,25 +6,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import com.virtualvision.erp.service.security.SecurityDetails;
 
 @Configuration // Indica al sistema que és una classe de configuració
 @EnableWebSecurity // Habilita la seguretat web
 public class AuthConfig {
-    @Autowired
-    private UserDetailsService userDetailsService; // Objecte per recuperar l'usuari
-
-    // crea un contructor
-    public AuthConfig(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
-
-    @Autowired
-    public void autenticacio(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-    }
 
     /* AUTORITZACIÓ */
     /*
@@ -36,6 +25,14 @@ public class AuthConfig {
      * és el que ens permetrà cridar als mètodes per configurar les restriccions
      * d'accés a la nostra aplicació.
      */
+
+    @Autowired
+    private SecurityDetails securityDetails;
+
+    @Autowired
+    public void authentication(AuthenticationManagerBuilder builder) throws Exception {
+        builder.userDetailsService(securityDetails).passwordEncoder(new BCryptPasswordEncoder());
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -50,13 +47,21 @@ public class AuthConfig {
                         .requestMatchers("/register/**").permitAll()
                         .requestMatchers("/dashboard/**").permitAll()
                         .requestMatchers("/employee/**").permitAll()
-                        .requestMatchers("/sale/**").permitAll())
-                .formLogin((form) -> form
+                        .requestMatchers("/rrhh/**").permitAll()
+                        .requestMatchers("/sale/**").permitAll()
+                        .requestMatchers("/pdf/**").permitAll()
+                        .requestMatchers("/chat/**").permitAll()
+                        .requestMatchers("/send/**").permitAll()
+                        .requestMatchers("/product/**").permitAll()
+                        .requestMatchers("/hr/**").permitAll())
+                        .formLogin(form -> form
                         .loginPage("/login").permitAll() // Permitir a todos el acceso al formulario de login
                         .defaultSuccessUrl("/dashboard", true) // Redirigir a /home después de un inicio de sesión
                                                                // exitoso
                         .permitAll())
                 .build(); // Cierra la configuración y construye el SecurityFilterChain
     }
+
+    
 
 }

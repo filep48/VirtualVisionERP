@@ -1,13 +1,21 @@
 package com.virtualvision.erp.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-
-import lombok.Data;
-
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "sales")
@@ -22,7 +30,13 @@ public class Sale implements Serializable {
     // Relación muchos a muchos con Employee
     @ManyToMany
     @JoinTable(name = "sales_employees", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
-    private Set<Employee> employees;
+    private Set<Employee> employees = new HashSet<>();
+
+    // Relación muchos a muchos con Product, se hace esta relacion n-n ya que si más adelante se implementa 
+    // comision individual para los empleados será más fácil escalar el código.
+    @ManyToMany
+    @JoinTable(name = "sale_product", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Product> products = new HashSet<>();
 
     private static final long serialVersionUID = 1L;
 
@@ -30,13 +44,16 @@ public class Sale implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private Integer quantity;
 
-    @Column(nullable = false)
-    private BigDecimal taxValue;
+    private Double taxValue;
 
-    @Column(nullable = false)
     private LocalDateTime saleDate;
+
+    @Column(name = "online_sale")
+    private boolean onlineSale;
+
+    @Column(name = "employee_id")
+    private Long employeeId;
 
 }

@@ -117,4 +117,9 @@ public class CustomerServiceImp implements UserDetailsService, ICustomerService 
         }
     }
 
+    @Override
+    public Long findIdByUsername(String username) {
+        return customerDao.findIdByUsername(username);
+    }
+
 }

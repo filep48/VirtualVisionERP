@@ -1,36 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layouts/layout :: head">
+
+<head th:replace="~{layouts/head :: head}">
     <!-- Common Head -->
 </head>
+
 <body>
-    <header th:replace="layouts/layout :: header">
-        <!-- Common Header -->
-    </header>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
 
-    <div class="container">
-        <h2 th:text="#{sale.details}"></h2>
-        
-        <!-- Detalles de la venta -->
-        <div>
-            <p><b th:text="#{sale.quantity}"></b>: <span th:text="${sale.quantity}"></span></p>
-            <p><b th:text="#{sale.taxValue}"></b>: <span th:text="${sale.taxValue}"></span></p>
-            <p><b th:text="#{sale.saleDate}"></b>: <span th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></span></p>
-        </div>
+        <main>
+            <div class="container-main-detail">
+                <h2 th:text="#{sale.details}">Sale Details</h2>
 
-        <!-- Lista de empleados asociados -->
-        <h3 th:text="#{sale.employees}"></h3>
-        <ul>
-            <li th:each="employee : ${sale.employees}" th:text="${employee.name} + ' (' + ${employee.id} + ')'"></li>
-        </ul>
+                <!-- Sale summary in a table -->
+                <table>
+                    <tbody>
+                        <tr>
+                            <th th:text="#{sale.id}">ID</th>
+                            <td th:text="${sale.id}"></td>
+                        </tr>
+                        <tr th:if="${customerName}">
+                            <th th:text="#{customer.name}">Customer Name</th>
+                            <td th:text="${customerName}"></td>
+                        </tr>
+                        <tr>
+                            <th th:text="#{sale.quantity}">Quantity</th>
+                            <td th:text="${sale.quantity}"></td>
+                        </tr>
+                        <tr>
+                            <th th:text="#{sale.taxValue}">Tax Value</th>
+                            <td th:text="${sale.taxValue}"></td>
+                        </tr>
+                        <tr>
+                            <th th:text="#{sale.saleDate}">Sale Date</th>
+                            <td th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-        <!-- Aquí puedes agregar más detalles sobre los productos vendidos -->
+                <!-- List of associated employees -->
+                <h3 th:text="#{sale.employees}">Employees</h3>
+                <ul>
+                    <li th:each="employee : ${sale.employees}" th:text="${employee.name} + ' (' + ${employee.id} + ')'"></li>
+                </ul>
 
+                <!-- Display if it's an online sale or employee ID -->
+                <p th:if="${isOnlineSale}">Online</p>
+                <p th:unless="${isOnlineSale}" th:text="${sale.employeeId}"></p>
+                <br>
+                <div class="text-end">
+                    <!-- Link styled as a Bootstrap button -->
+                    <a th:href="@{/sale/generarpdf/{id}(id=${sale.id})}" class="btn-submit" role="button">Generar PDF</a>
+                </div>
+
+                <!-- You can add more details about sold products here -->
+
+            </div>
+        </main>
     </div>
 
-    <footer th:replace="layouts/layout :: footer">
+    <footer th:replace="~{layouts/footer :: footer}">
         <!-- Common Footer -->
     </footer>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

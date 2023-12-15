@@ -17,6 +17,10 @@
                 <li><a th:href="@{/store}" th:text="#{sidebar.store}"></a></li>
                 <li><a th:href="@{/events}" th:text="#{sidebar.events}"></a></li>
                 <li><a th:href="@{/economy}" th:text="#{sidebar.economy}"></a></li>
+                <!-- clientes, empleados y ventas -->
+                <li><a th:href="@{/customer}"><span class="sidebar-management-button" th:text="#{layout.clientes}">Clientes</span></a></li>
+                <li><a th:href="@{/employee}"><span class="sidebar-management-button" th:text="#{layout.empleados}">Empleados</span></a></li>
+                <li><a th:href="@{/sale}"><span class="sidebar-management-button" th:text="#{layout.ventas}">Ventas</span></a></li>
             </ul>
         </nav>
     </aside>

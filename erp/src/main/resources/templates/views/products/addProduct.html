@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+
+        <main>
+            <div class="container-main-customer">
+                <h1 th:text="${editMode} ? #{'product.page.editTitle'} : #{'product.page.addTitle'}">Product Form</h1>
+                <form th:action="@{/product/saveProduct}" th:object="${product}" method="post" class="form-custom">
+                    <input type="hidden" th:field="*{id}" />
+
+                    <!-- Adapted form fields with classes and structure -->
+                    <div class="form-group">
+                        <input type="text" th:field="*{name}" class="form-input" id="name" th:attr="placeholder=#{product.name}" title="name">
+                    </div>
+                    <div class="form-group">
+                        <textarea th:field="*{description}" class="form-input" id="description" th:attr="placeholder=#{product.description}" title="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" th:field="*{quantity}" class="form-input" id="quantity" th:attr="placeholder=#{product.quantity}" title="quantity">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" th:field="*{price}" class="form-input" id="price" th:attr="placeholder=#{product.price}" title="price">
+                    </div>
+                    <button type="submit" class="btn-submit" th:text="#{product.save}">Save</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!--  Footer -->
+    </footer>
+</body>
+</html>

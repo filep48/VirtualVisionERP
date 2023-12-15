@@ -14,6 +14,15 @@
     --font-size-title: 1.8rem;
     --font-size-subtitule: 1rem;
     --border-radius: 8px;
+    --color-alert: #ff3131;
+    --color-warning: #ffae00;
+    --color-success: #00ff00;
+    --text-size-XS: 0.8rem;
+    --text-size-S: 1rem;
+    --text-size-M: 1.2rem;
+    --text-size-L: 1.5rem;
+    --text-size-XL: 2rem;
+    --text-size-XXL: 3rem; 
 }
 
 /* Estructura base y fuentes */
@@ -97,6 +106,14 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: var(--color-boton-hover);
+}
+
+.error-message {
+    color: var(--color-alert);
+    font-size: var(--text-size-S);
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
 }
 
 /* Login Social */

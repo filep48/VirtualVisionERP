@@ -18,6 +18,10 @@
             <form th:action="@{/login}" method="post">
                 <fieldset>
                     <legend>Iniciar Sesión</legend>
+                    <!-- Mensaje de error -->
+                    <div th:if="${error}" class="error-message">
+                        <p>Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.</p>
+                    </div>
                     <label for="username"></label>
                     <input type="text" id="username" name="username" placeholder="Usuario" required autofocus>
                     <label for="password"></label>

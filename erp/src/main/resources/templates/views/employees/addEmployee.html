@@ -1,81 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layouts/layout :: head">
+
+<head th:replace="~{layouts/head :: head}">
     <!-- Common Head -->
 </head>
+
 <body>
-    <header th:replace="layouts/layout :: header">
-        <!-- Common Header -->
-    </header>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
 
-    <div class="container">
-        <h1 th:text="${editMode} ? #{'pageTitle.editEmployee'} : #{'pageTitle.addEmployee'}"></h1>
+        <main>
+            <div class="container-main-customer">
+                <h1 th:text="${editMode} ? #{'pageTitle.editEmployee'} : #{'pageTitle.addEmployee'}">Employee Form</h1>
+                <form th:action="@{/employee/save}" th:object="${employee}" method="post" class="form-custom">
+                    <input type="hidden" th:field="*{id}" />
 
-        <form th:action="@{/employee/save}" th:object="${employee}" method="post">
-            <input type="hidden" th:field="*{id}" />
+                    <!-- Form fields with adapted classes and structure -->
+                    <div>
+                        <div class="form-group">
+                            <input type="text" th:field="*{name}" class="form-input" id="name"
+                                th:attr="placeholder=#{employee.name}" title="name">
+                            <small class="form-text" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" th:field="*{surname}" class="form-input" id="surname"
+                                th:attr="placeholder=#{employee.surname}" title="surname">
+                            <small class="form-text" th:if="${#fields.hasErrors('surname')}"
+                                th:errors="*{surname}"></small>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" th:field="*{username}" class="form-input" id="username"
+                                th:attr="placeholder=#{employee.username}" title="username">
+                            <small class="form-text" th:if="${#fields.hasErrors('username')}"
+                                th:errors="*{username}"></small>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" th:field="*{password}" class="form-input" id="password"
+                                th:attr="placeholder=#{employee.password}" title="password">
+                            <small class="form-text" th:if="${#fields.hasErrors('password')}"
+                                th:errors="*{password}"></small>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" th:field="*{dniNif}" class="form-input" id="dniNif"
+                                th:attr="placeholder=#{employee.dni}" title="dni">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" th:field="*{phone}" class="form-input" id="phone"
+                                th:attr="placeholder=#{employee.phone}" title="phone">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" th:field="*{email}" class="form-input" id="email"
+                                th:attr="placeholder=#{employee.email}" title="email">
+                            <small class="form-text" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <input type="text" th:field="*{address}" class="form-input" id="address"
+                                th:attr="placeholder=#{employee.address}" title="address">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" th:field="*{numSS}" class="form-input" id="numSS"
+                                th:attr="placeholder=#{employee.numSS}" title="numSS">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" th:field="*{position}" class="form-input" id="position"
+                                th:attr="placeholder=#{employee.position}" title="position">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" th:field="*{salary}" class="form-input" id="salary"
+                                th:attr="placeholder=#{employee.salary}" title="salary">
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <label th:text="#{employee.name}"></label>
-                <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Nombre del empleado">
-                <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+                    <button type="submit" class="btn-submit" th:text="#{employee.save}">Guardar</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label th:text="#{employee.surname}"></label>
-                <input type="text" th:field="*{surname}" class="form-control" id="surname" placeholder="Apellido">
-                <small class="form-text text-danger" th:if="${#fields.hasErrors('surname')}"
-                    th:errors="*{surname}"></small>
-            </div>
-            <div class="form-group">
-                <label th:text="#{employee.username}"></label>
-                <input type="text" th:field="*{username}" class="form-control" id="username"
-                    placeholder="Nombre de usuario">
-                <small class="form-text text-danger" th:if="${#fields.hasErrors('username')}"
-                    th:errors="*{username}"></small>
-            </div>
-            <div class="form-group">
-                <label th:text="#{employee.password}"></label>
-                <input type="password" th:field="*{password}" class="form-control" id="password"
-                    placeholder="Contraseña">
-                <small class="form-text text-danger" th:if="${#fields.hasErrors('password')}"
-                    th:errors="*{password}"></small>
-            </div>
-            <div class="form-group">
-                <label th:text="#{employee.dni}"></label>
-                <input type="text" th:field="*{dniNif}" class="form-control" id="dniNif" placeholder="DNI/NIF">
-            </div>
-            <div class="form-group">
-                <label th:text="#{employee.phone}"></label>
-                <input type="text" th:field="*{phone}" class="form-control" id="phone" placeholder="Teléfono">
-            </div>
-            <div class="form-group">
-                <label th:text="#{employee.email}"></label>
-                <input type="email" th:field="*{email}" class="form-control" id="email"
-                    placeholder="Correo electrónico">
-                <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
-            </div>
-            <div class="form-group">
-                <label th:text="#{employee.address}"></label>
-                <input type="text" th:field="*{address}" class="form-control" id="address" placeholder="Dirección">
-            </div>
-            <div class="form-group">
-                <label th:text="#{employee.numSS}"></label>
-                <input type="text" th:field="*{numSS}" class="form-control" id="numSS" placeholder="Número de Seguridad Social">
-            </div>
-            <div class="form-group">
-                <label th:text="#{employee.position}"></label>
-                <input type="text" th:field="*{position}" class="form-control" id="position" placeholder="Cargo">
-            </div>
-            <div class="form-group">
-                <label th:text="#{employee.salary}"></label>
-                <input type="text" th:field="*{salary}" class="form-control" id="salary" placeholder="Salario">
-            </div>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-        </form>
+        </main>
     </div>
 
-    <footer th:replace="layouts/layout :: footer">
-        <!--  Footer -->
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Common Footer -->
     </footer>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
