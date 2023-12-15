@@ -306,7 +306,13 @@ aside {
     cursor: pointer;
 }
 
-
+.error-message {
+    color: var(--color-alert);
+    font-size: var(--text-size-S);
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
 
 /* Estilos para el tema oscuro y el menú desplegable */
 #user-menu {
