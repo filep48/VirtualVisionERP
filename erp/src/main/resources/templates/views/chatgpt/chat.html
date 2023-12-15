@@ -13,11 +13,11 @@
     <header th:replace="~{layouts/header :: header}"></header>
 
     <div class="container-body">
-        <input type="checkbox" id="menu-toggle">
+        <input type="checkbox" id="menu-toggle" title="Menu Toggle">
         <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
         <aside th:replace="~{layouts/sidebar :: sidebar}"></aside>
         <main class="chatbot-main">
-            <h1>Chat con GPT</h1>
+            <h1 th:text="#{chat.title}">Chat con GPT</h1>
             <div id="chatBox">
                 <div th:each="line : ${conversation}">
                     <p class="chat-line" th:text="${line}"></p>
@@ -25,7 +25,7 @@
             </div>
 
             <form th:action="@{/send}" method="post">
-                <input class="input-chatbot" type="text" name="message" required>
+                <input id="message-input" class="input-chatbot" type="text" name="message" required title="message" th:attr="placeholder=#{chat.placeholder}">
                 <button class="chat-submit" type="submit" th:text="#{chat.send}"></button>
             </form>
         </main>
