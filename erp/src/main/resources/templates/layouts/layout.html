@@ -20,7 +20,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" th:href="@{/}"><span
+                            <a class="nav-link active" aria-current="page" th:href="@{/dashboard}"><span
                                     th:text="#{layout.inicio}">Inicio</span></a>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/customer}"><span
@@ -60,7 +60,6 @@
             <a th:href="@{?lang=en}">Inglés</a>
         </div>
         <div class="container">
-            <!-- Contenido del footer aquí -->
             <p th:text="#{layout.test}"></p>
         </div>
     </footer>

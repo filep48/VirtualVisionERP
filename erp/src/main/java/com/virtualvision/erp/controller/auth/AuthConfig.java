@@ -52,13 +52,16 @@ public class AuthConfig {
                         .requestMatchers("/pdf/**").permitAll()
                         .requestMatchers("/chat/**").permitAll()
                         .requestMatchers("/send/**").permitAll()
-                        .requestMatchers("/product/**").permitAll())
-                .formLogin((form) -> form
+                        .requestMatchers("/product/**").permitAll()
+                        .requestMatchers("/hr/**").permitAll())
+                        .formLogin(form -> form
                         .loginPage("/login").permitAll() // Permitir a todos el acceso al formulario de login
                         .defaultSuccessUrl("/dashboard", true) // Redirigir a /home después de un inicio de sesión
                                                                // exitoso
                         .permitAll())
                 .build(); // Cierra la configuración y construye el SecurityFilterChain
     }
+
+    
 
 }

@@ -20,26 +20,26 @@
         <main>
             <!-- Panel de control Section -->
             <section id="dashboard">
-                <a th:href="@{/economia}">
+                <a th:href="@{/economy}">
                     <article id="economia" class="dashboard-item">
-                        <h2>Economía</h2>
+                        <h2 th:text="#{dashboard.economy}"></h2>
                         <!-- Content goes here -->
                     </article>
                 </a>
-                <a th:href="@{/rrhh}">
+                <a th:href="@{/hr}">
                     <article id="rrhh" class="dashboard-item">
-                        <h2>RRHH</h2>
+                        <h2 th:text="#{dashboard.hr}"></h2>
                         <!-- Content goes here -->
                     </article>
                 </a>
-                <a th:href="@{/tienda}">
+                <a th:href="@{/store}">
                     <article id="tienda" class="dashboard-item">
-                        <h2>Tienda</h2>
+                        <h2 th:text="#{dashboard.store}"></h2>
                     </article>
                 </a>
-                <a th:href="@{/eventos}">
+                <a th:href="@{/events}">
                     <article id="eventos" class="dashboard-item">
-                        <h2>Eventos</h2>
+                        <h2 th:text="#{dashboard.events}"></h2>
                     </article>
                 </a>
 
@@ -48,10 +48,10 @@
 
             <!-- Productos Section -->
             <section id="productos">
-                <a th:href="@{/productos}">
+                <a th:href="@{/product}">
                     <article id="productos" class="dashboard-item">
                         <!-- icon of productos + h2 Productos -->
-                        <h2>Productos</h2>
+                        <h2 th:text="#{dashboard.products}"></h2>
                     </article>
                 </a>
 
@@ -62,6 +62,7 @@
 
 
     <!-- Footer Layout Include -->
+    <footer th:replace="~{layouts/footer :: footer}"></footer>
 </body>
 
 </html>

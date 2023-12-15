@@ -10,6 +10,7 @@
         <nav>
             <div class="nav-container">
                 <a th:href="@{/dashboard}" class="logo"><i class="fas fa-angle-double-down"></i><p th:text="#{layout.title}"></p></a>
+                
                 <div class="search-container">
                     <form th:action="@{/searchBar}" method="get" class="search-container">
                         <input type="text" th:attr="placeholder=#{header.search}" class="search-input">
@@ -22,7 +23,7 @@
                     <div class="dropbtn" th:text="#{header.user}" th:attr="title=#{header.user}"> <i class="fas fa-caret-down"></i></div>
                     <div id="user-menu-content">
                         <a th:href="@{/customer}" th:text="#{header.manageUsers}"></a>
-                        <a th:href="@{/login}" th:text="#{header.logout}"></a>
+                        <a th:href="@{/logout}" th:text="#{header.logout}"></a>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,7 +24,7 @@ public class Chatbot {
             HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Authorization", "Bearer " + apiKey);
-            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
             // The request body
             String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt
@@ -35,7 +36,7 @@ public class Chatbot {
             writer.close();
 
             // Response from ChatGPT
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
             String line;
 
             StringBuffer response = new StringBuffer();

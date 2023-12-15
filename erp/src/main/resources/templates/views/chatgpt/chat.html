@@ -3,20 +3,36 @@
 
 <head>
     <title>Chat con GPT</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{css/styles.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
-    <h1>Chat con GPT</h1>
-    <div id="chatBox">
-        <div th:each="line : ${conversation}">
-            <p th:text="${line}"></p>
-        </div>
+    <header th:replace="~{layouts/header :: header}"></header>
+
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebar :: sidebar}"></aside>
+        <main class="chatbot-main">
+            <h1>Chat con GPT</h1>
+            <div id="chatBox">
+                <div th:each="line : ${conversation}">
+                    <p class="chat-line" th:text="${line}"></p>
+                </div>
+            </div>
+
+            <form th:action="@{/send}" method="post">
+                <input class="input-chatbot" type="text" name="message" required>
+                <button class="chat-submit" type="submit" th:text="#{chat.send}"></button>
+            </form>
+        </main>
     </div>
 
-    <form th:action="@{/send}" method="post">
-        <input type="text" name="message" required>
-        <button type="submit">Enviar</button>
-    </form>
+
+        <footer th:replace="layouts/footer :: footer"></footer>
 </body>
 
 </html>

@@ -19,7 +19,7 @@ public class rrhhController {
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    @GetMapping("/rrhh")
+    @GetMapping("/hr")
     public String showPayrollsForEmployee() {
         
         return "/views/RRHH/RHPanel";

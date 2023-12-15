@@ -32,7 +32,8 @@
 }
 
 html{
-    height: 94.1%;
+    display: grid;
+    height: 100%;
 }
 
 /* Estilos base para el cuerpo del documento */
@@ -43,7 +44,9 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    display: inline;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* Estilos para el encabezado, navegación y pie de página */
@@ -51,6 +54,49 @@ header,
 aside,
 footer {
     background-color: var(--color-primary);
+}
+
+footer {
+    padding: 10px;
+    text-align: center;
+    color: var(--color-text-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+.container-footer-lang {
+    order: 1;
+}
+
+.container-footer-vv {
+    order: 2;
+}
+
+.chatbot-button-container {
+    order: 3;
+}
+footer button{
+    order: 3;
+    margin-left: auto;
+    float: right;
+    align-items: center;
+    background-color: var(--color-bg);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    margin: 10px;
+    color: var(--color-text);
+    font-size: var(--text-size-S);
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    width: moz-fit-content;
+    transition: background-color 0.5s;
+}
+
+footer button:hover{
+    background-color: var(--color-accent);
+    cursor: pointer;
 }
 
 .container-body{
@@ -73,6 +119,66 @@ main section a{
     background-color: var(--color-primary);
 }
 
+.chatbot-main {
+    display: flex;
+    margin-left: 4%;
+    margin-top: 4%;
+    margin-right: 4%;
+    height: 90%;
+    width: 80%;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+}
+.chat-submit{
+    align-items: center;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    margin: 10px;
+    color: var(--color-text);
+    font-size: var(--text-size-S);
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    width: moz-fit-content;
+    transition: background-color 0.5s;
+}
+.chat-submit:hover{
+    background-color: var(--color-accent);
+    cursor: pointer;
+}
+.chat-line{
+    color: #444;
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-chatbot {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid var(--color-text-secondary);
+    border-radius: 4px;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-size: var(--text-size-S);
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    width: moz-fit-content;
+    transition: background-color 0.5s;
+}
+
 .dashboard-item,
 main section a {
     width: 100%;
@@ -82,6 +188,7 @@ main section a {
     justify-content: center;
     align-content: center;
 }
+
 .dashboard-item{
     padding: 6.25rem;
     align-items: stretch;
@@ -105,6 +212,7 @@ section#dashboard {
 section#productos a {
     height: 100%;
 }
+
 
 /* Estilos para las listas y elementos dentro de las secciones */
 ul {

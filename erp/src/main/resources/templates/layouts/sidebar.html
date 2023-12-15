@@ -11,13 +11,12 @@
         <nav>
             <!-- Barra de navegación lateral -->
             <ul>
-                <li><a th:href="@{/dashboard}">Panel de control</a></li>
-                <li><a th:href="@{/rrhh}">RRHH</a></li>
-                <li><a th:href="@{/productos}">Productos</a></li>
-                <li><a th:href="@{/tienda}">Tienda</a></li>
-                <li><a th:href="@{/eventos}">Eventos</a></li>
-                <li><a th:href="@{/economia}">Economía</a></li>
-                <!-- Más elementos del menú -->
+                <li><a th:href="@{/dashboard}" th:text="#{sidebar.dashboard}"></a></li>
+                <li><a th:href="@{/hr}" th:text="#{sidebar.hr}"></a></li>
+                <li><a th:href="@{/product}" th:text="#{sidebar.products}"></a></li>
+                <li><a th:href="@{/store}" th:text="#{sidebar.store}"></a></li>
+                <li><a th:href="@{/events}" th:text="#{sidebar.events}"></a></li>
+                <li><a th:href="@{/economy}" th:text="#{sidebar.economy}"></a></li>
             </ul>
         </nav>
     </aside>

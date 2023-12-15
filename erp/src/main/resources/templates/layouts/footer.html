@@ -5,8 +5,15 @@
 </head>
 <body>
     <footer th:fragment="footer">
-        <!-- Contenido del footer como información de contacto, derechos de autor, etc. -->
-        <p>FooterPlaceholder</p>
+        <div class="container-footer-lang">
+            <a th:href="@{?lang=es}" th:text="#{footer.spanish}"></a>
+            <a th:href="@{?lang=en}" th:text="#{footer.english}"></a>
+        </div>
+        <div class="container-footer-vv">
+            <!-- Contenido del footer aquí -->
+            <p th:text="#{layout.title}"></p>
+        </div>
+        <a th:href="@{/chat}" title="ChatbotGPT"><button class="chatbot-button-footer">ChatbotGPT</button></a>
     </footer>
 </body>
 </html>
