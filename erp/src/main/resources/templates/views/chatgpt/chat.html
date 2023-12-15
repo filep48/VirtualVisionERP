@@ -25,14 +25,15 @@
             </div>
 
             <form th:action="@{/send}" method="post">
-                <input id="message-input" class="input-chatbot" type="text" name="message" required title="message" th:attr="placeholder=#{chat.placeholder}">
+                <input id="message-input" class="input-chatbot" type="text" name="message" required title="message"
+                    th:attr="placeholder=#{chat.placeholder}">
                 <button class="chat-submit" type="submit" th:text="#{chat.send}"></button>
             </form>
         </main>
     </div>
 
 
-        <footer th:replace="~{layouts/footer :: footer}"></footer>
+    <footer th:replace="~{layouts/footer :: footer}"></footer>
 </body>
 
 </html>

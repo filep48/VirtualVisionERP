@@ -210,7 +210,7 @@ th, td {
     align-items: stretch;
     justify-content: space-between;
 }
-.chat-submit{
+.chat-submit, .btn-submit{
     align-items: center;
     background-color: var(--color-primary);
     border-radius: var(--border-radius);
@@ -224,7 +224,7 @@ th, td {
     width: moz-fit-content;
     transition: background-color 0.5s;
 }
-.chat-submit:hover{
+.chat-submit:hover, .btn-submit:hover{
     background-color: var(--color-accent);
     cursor: pointer;
 }
@@ -245,7 +245,7 @@ form{
 .form-custom{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     flex-direction: column;
     margin-top: 10px;
     margin-bottom: 10px;
