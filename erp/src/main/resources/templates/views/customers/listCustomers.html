@@ -1,53 +1,64 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layouts/layout :: head">
+
+<head th:replace="layouts/head :: head">
     <!-- Head común  -->
 </head>
-<body>
-    <header th:replace="layouts/layout :: header">
-        <!-- Header común  -->
-    </header>
 
-    <div class="container">
-        <a class="btn btn-primary btn-sm" th:href="@{/customer/add}" th:text="#{'button.addCustomer'}"></a>
-        <h1 th:text="${pageTitle}"></h1><!-- Título dinámico está en el controlador -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th th:text="#{customer.name}"></th>
-                    <th th:text="#{customer.surname}"></th>
-                    <th th:text="#{customer.username}"></th>
-                    <th th:text="#{customer.dni}"></th>
-                    <th th:text="#{customer.phone}"></th>
-                    <th th:text="#{customer.email}"></th>
-                    <th th:text="#{customer.address}"></th>
-                    <th th:text="#{button.actions}"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="customer : ${customers}">
-                    <td th:text="${customer.id}"></td>
-                    <td th:text="${customer.name}"></td>
-                    <td th:text="${customer.surname}"></td>
-                    <td th:text="${customer.username}"></td>
-                    <td th:text="${customer.dniNif}"></td>
-                    <td th:text="${customer.phone}"></td>
-                    <td th:text="${customer.email}"></td>
-                    <td th:text="${customer.address}"></td>
-                    <td>
-                        <a th:href="@{/customer/edit/{id}(id=${customer.id})}" class="btn btn-success"th:text="#{button.edit}"></a>
-                        <a th:href="@{/customer/delete/{id}(id=${customer.id})}" class="btn btn-danger" th:text="#{button.delete}"
-                        onclick="return confirm('¿Está seguro de eliminar el cliente?');"></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<body>
+    <header th:replace="layouts/header :: header"></header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="layouts/sidebar :: sidebar"></aside>
+
+        <main>
+            <div class="container-main">
+                <a class="btn btn-primary btn-sm" th:href="@{/customer/add}" th:text="#{'button.addCustomer'}">Add
+                    Customer</a>
+                <h1 th:text="${pageTitle}">Page Title</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th th:text="#{customer.name}">Name</th>
+                            <th th:text="#{customer.surname}">Surname</th>
+                            <th th:text="#{customer.username}">Username</th>
+                            <th th:text="#{customer.dni}">DNI</th>
+                            <th th:text="#{customer.phone}">Phone</th>
+                            <th th:text="#{customer.email}">Email</th>
+                            <th th:text="#{customer.address}">Address</th>
+                            <th th:text="#{button.actions}">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="customer : ${customers}">
+                            <td th:text="${customer.id}"></td>
+                            <td th:text="${customer.name}"></td>
+                            <td th:text="${customer.surname}"></td>
+                            <td th:text="${customer.username}"></td>
+                            <td th:text="${customer.dniNif}"></td>
+                            <td th:text="${customer.phone}"></td>
+                            <td th:text="${customer.email}"></td>
+                            <td th:text="${customer.address}"></td>
+                            <td>
+                                <a th:href="@{/customer/edit/{id}(id=${customer.id})}" class="btn-edit"
+                                    th:text="#{button.edit}">Edit</a>
+                                <a th:href="@{/customer/delete/{id}(id=${customer.id})}" class="btn-delete"
+                                    th:text="#{button.delete}"
+                                    onclick="return confirm('¿Está seguro de eliminar el cliente?');">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
     </div>
 
-    <footer th:replace="layouts/layout :: footer">
-        <!-- Footer común  -->
-    </footer>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+        <footer th:replace="layouts/footer :: footer">
+            <!-- Footer común  -->
+        </footer>
 </body>
+
 </html>

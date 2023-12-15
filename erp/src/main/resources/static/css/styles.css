@@ -110,6 +110,16 @@ footer button:hover{
     height: 100%;
 }
 
+.container-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    flex-direction: column-reverse;
+
+}
+
 /* Estilos para el elemento principal que contiene todas las secciones */
 main {
     display: flex;
@@ -124,6 +134,62 @@ main {
 main section a{
     background-color: var(--color-primary);
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+thead {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+}
+
+tr:nth-child(even) {
+    background-color: var(--color-bg);
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+.btn, .btn-primary, .btn-sm{
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);
+    padding: 5px;
+    color: var(--color-text);
+    font-size: var(--text-size-XS);
+    text-align: center;
+    text-decoration: none;
+    width: moz-fit-content;
+    transition: background-color 0.5s;
+    margin-bottom: 5px;
+}
+
+.btn:hover, .btn-primary:hover .btn-sm:hover{
+    background-color: var(--color-accent);
+    cursor: pointer;
+}
+
+.btn-edit, .btn-delete{
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);
+    padding: 5px;
+    color: var(--color-text);
+    font-size: var(--text-size-XS);
+    text-align: center;
+    text-decoration: none;
+    width: moz-fit-content;
+    transition: background-color 0.5s;
+    margin-bottom: 5px;
+}
+
+.btn-edit:hover, .btn-delete:hover{
+    background-color: var(--color-accent);
+    cursor: pointer;
+}
+
 
 .chatbot-main {
     display: flex;
