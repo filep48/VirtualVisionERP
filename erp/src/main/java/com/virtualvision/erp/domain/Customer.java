@@ -21,7 +21,7 @@ import java.util.Set;
 public class Customer {
 
     // relacion muchos a muchos con la entidad Employee
-     @ManyToMany
+    @ManyToMany
     @JoinTable(
         name = "customer_employee",
         joinColumns = @JoinColumn(name = "customer_id"),
