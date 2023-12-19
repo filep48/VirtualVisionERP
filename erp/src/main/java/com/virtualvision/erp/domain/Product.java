@@ -15,7 +15,7 @@ public class Product implements Serializable {
 
     // relacion oneToMany con supplier
     @ManyToOne
-    @JoinColumn(name = "supplier_id") // Esta columna en la tabla de productos va a tener el ID del proveedor
+    @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
     // relacion manyToMany con sale

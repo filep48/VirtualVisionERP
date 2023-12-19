@@ -49,6 +49,7 @@ public class SupplierController {
             model.addAttribute("editMode", true);
             return "views/suppliers/addSupplier";
         } else {
+            
             // Handle the case where the supplier with the given ID doesn't exist
             return "redirect:/supplier";
         }

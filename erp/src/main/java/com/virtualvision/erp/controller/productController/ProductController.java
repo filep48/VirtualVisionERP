@@ -5,8 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.virtualvision.erp.dao.ISupplierDao;
 import com.virtualvision.erp.domain.Product;
+import com.virtualvision.erp.domain.Supplier;
 import com.virtualvision.erp.service.product.IProductService;
+import com.virtualvision.erp.service.supplier.ISupplierService;
+
 import java.util.List;
 import org.springframework.ui.Model;
 
@@ -15,6 +21,8 @@ import org.springframework.ui.Model;
 public class ProductController {
     @Autowired
     private IProductService productService;
+    @Autowired
+    private ISupplierService supplierService;
 
     @GetMapping("/product")
     public String listProducts(Model model) {
@@ -27,6 +35,10 @@ public class ProductController {
     public String addProductForm(Model model) {
         model.addAttribute("product", new Product());
         model.addAttribute("editMode", false);
+
+        List<Supplier> suppliers = supplierService.findAllSuppliers(); 
+        model.addAttribute("suppliers", suppliers);
+
         return "views/products/addProduct";
     }
 
@@ -49,4 +61,18 @@ public class ProductController {
         model.addAttribute("editMode", true);
         return "views/products/addProduct";
     }
+
+    // para buscador
+    @GetMapping("/product/searchPage")
+    public String searchPage() {
+        return "views/products/searchProducts";
+    }
+
+    @GetMapping("/product/search")
+    public String searchProducts(@RequestParam("query") String query, Model model) {
+        List<Product> searchResults = productService.searchProducts(query);
+        model.addAttribute("products", searchResults);
+        return "views/products/searchProducts";
+    }
+
 }
