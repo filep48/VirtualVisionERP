@@ -215,6 +215,14 @@ footer a:hover {
 
 }
 
+.logout-message {
+    color: var(--color-success);
+    font-size: var(--text-size-S);
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
+
 /* Media queries para responsividad */
 @media (max-width: 768px) {
     :root {

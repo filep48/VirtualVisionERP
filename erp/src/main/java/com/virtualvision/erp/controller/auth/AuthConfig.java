@@ -53,11 +53,18 @@ public class AuthConfig {
                         .requestMatchers("/chat/**").permitAll()
                         .requestMatchers("/send/**").permitAll()
                         .requestMatchers("/product/**").permitAll()
-                        .requestMatchers("/hr/**").permitAll())
+                        .requestMatchers("/hr/**").permitAll()
+                        .requestMatchers("/logout").permitAll())
                         .formLogin(form -> form
                         .loginPage("/login").permitAll() // Permitir a todos el acceso al formulario de login
                         .defaultSuccessUrl("/dashboard", true) // Redirigir a /home después de un inicio de sesión
                                                                // exitoso
+                        ).logout(logout -> logout
+                        .logoutUrl("/logout") // Override the default logout endpoint if necessary
+                        .logoutSuccessUrl("/login") // Redirect to login page after logout
+                        .invalidateHttpSession(true) // Invalidate the session
+                        .deleteCookies("JSESSIONID") // Delete session cookies
+                        .clearAuthentication(true) // Clear the authentication
                         .permitAll())
                 .build(); // Cierra la configuración y construye el SecurityFilterChain
     }
