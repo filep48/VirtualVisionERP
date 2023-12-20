@@ -129,10 +129,10 @@
                     <div class="progress-bar">
                         <div class="progress"></div>
                     </div>
-                    <span>56/100%</span>
+                    <span th:text="${percentage}">56/100%</span>
                 </div>
             </div>
-            <button class="btn" th:text="#{button.open}">Abrir</button>
+            <a th:href="@{employee/edit}" class="btn" th:text="#{button.open}">Abrir</a>
         </div>
 
         <!-- Payrolls Card -->
