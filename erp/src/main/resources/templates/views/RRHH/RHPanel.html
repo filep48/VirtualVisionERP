@@ -142,16 +142,20 @@
                 <tr>
                     <th th:text="#{table.start}">Inicio</th>
                     <th th:text="#{table.end}">Fin de Fecha</th>
-                    <th th:text="#{table.amount}">Cantidad</th>
+                    <th th:text="#{table.grossPay}">Salario Bruto</th>
+                    <th th:text="#{table.netPay}">Salario Neto</th>
+                    <th th:text="#{table.taxAmount}">Impuestos</th>
                 </tr>
                 <!-- Iterate over the list of payrolls and display each row -->
                 <tr th:each="payroll : ${payrolls}">
                     <td th:text="${#dates.format(payroll.payPeriodStart, 'dd/MM/yyyy')}"></td>
                     <td th:text="${#dates.format(payroll.payPeriodEnd, 'dd/MM/yyyy')}"></td>
                     <td th:text="${payroll.grossPay}"></td>
+                    <td th:text="${payroll.netPay}"></td>
+                    <td th:text="${payroll.taxAmount}"></td>
                 </tr>
             </table>
-            <button class="btn" th:text="#{button.open}">Abrir</button>
+            <a th:href="@{rrhh/payroll}" class="btn" th:text="#{button.open}">Abrir</a>
         </div>
 
 
