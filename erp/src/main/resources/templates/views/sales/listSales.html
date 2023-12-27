@@ -46,10 +46,11 @@
                                 </span>
                             </td>
                             <td>
-                                <a th:href="@{/sale/detail/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.details}">Details</a>
-                                <a th:href="@{/sale/edit/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.edit}">Edit</a>
+                                <a th:href="@{/sale/detail/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.details}"></a>
+                                <a th:href="@{/saleRelationshipDetails/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.viewRelationshipDetails}"></a>
+                                <a th:href="@{/sale/edit/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.edit}"></a>
                                 <a th:href="@{/sale/delete/{id}(id=${sale.id})}" class="btn-delete" th:text="#{button.delete}"
-                                    onclick="return confirm('Are you sure you want to delete the sale?');">Delete</a>
+                                    onclick="return confirm('Are you sure you want to delete the sale?');"></a>
                             </td>
                         </tr>
                     </tbody>

@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,7 +22,7 @@ import java.util.Set;
 public class Customer {
 
     // relacion muchos a muchos con la entidad Employee
-    @ManyToMany
+   @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "customer_employee",
         joinColumns = @JoinColumn(name = "customer_id"),

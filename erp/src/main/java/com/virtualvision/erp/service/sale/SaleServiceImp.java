@@ -3,6 +3,7 @@ package com.virtualvision.erp.service.sale;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,8 @@ import com.virtualvision.erp.dao.ISaleDao;
 import com.virtualvision.erp.domain.Employee;
 import com.virtualvision.erp.domain.Sale;
 import com.virtualvision.erp.service.employee.IEmployeeService;
+
+import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +25,6 @@ public class SaleServiceImp implements ISaleService {
     @Autowired
     private IEmployeeService employeeService;
 
-
     @Transactional(readOnly = true)
     @Override
     public List<Sale> findAllSales() {
@@ -33,12 +35,18 @@ public class SaleServiceImp implements ISaleService {
     public void saveSale(Sale sale) {
         saleDao.save(sale);
     }
-
+    
+    
     @Transactional(readOnly = true)
-    @Override
-    public Sale findSaleById(Long id) {
-        return saleDao.findById(id).orElse(null);
+@Override
+public Sale findSaleById(Long id) {
+    Sale sale = saleDao.findById(id).orElse(null);
+    if (sale != null && sale.getEmployees() != null) {
+        Hibernate.initialize(sale.getEmployees());
     }
+    return sale;
+}
+
 
     @Override
     public void deleteSale(Long id) {
@@ -56,5 +64,16 @@ public class SaleServiceImp implements ISaleService {
         }
         return employees; // Devuelve la lista de empleados encontrados
     }
+    // public Sale findSaleWithDetails(Long id) {
+    //     return saleDao.findSaleWithDetails(id)
+    //                         .orElseThrow(() -> new EntityNotFoundException("Venta no encontrada con ID: " + id));
+                            
+    // }
+
+    // @Override
+    // public Sale getSaleWithDetails(Long saleId) {
+    //     throw new UnsupportedOperationException("Unimplemented method 'getSaleWithDetails'");
+    // }
+    
 
 }

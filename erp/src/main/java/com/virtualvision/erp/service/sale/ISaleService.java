@@ -16,5 +16,8 @@ public interface ISaleService {
     void deleteSale(Long id);
 
     List<Employee> findEmployeesByIds(List<Long> employeeIds);
+
+    //Sale getSaleWithDetails(Long saleId);
     
+    //Sale findSaleWithDetails (Long saleId);
 }

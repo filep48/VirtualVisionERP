@@ -94,30 +94,59 @@ public class SaleController {
     }
 
     // controlador para la vista saleDetail
-    @GetMapping("/sale/detail/{id}")
-    public String viewSaleDetail(@PathVariable Long id, Model model) {
-        Sale sale = saleService.findSaleById(id);
-        if (sale == null) {
-            // la venta no existe
-            return "redirect:/sale";
-        }
-        // Agrega el nombre del cliente si existe
-        if (sale.getCustomer() != null) {
-            model.addAttribute("customerName", sale.getCustomer().getName());
-        } else {
-            // variable `customerName` incluso si no hay cliente
-            model.addAttribute("customerName", "");
-        }
+    // @GetMapping("/sale/detail/{id}")
+    // public String viewSaleDetail(@PathVariable Long id, Model model) {
+    //     Sale sale = saleService.findSaleById(id);
+    //     if (sale == null) {
+    //         // la venta no existe
+    //         return "redirect:/sale";
+    //     }
+    //     // Agrega el nombre del cliente si existe
+    //     if (sale.getCustomer() != null) {
+    //         model.addAttribute("customerName", sale.getCustomer().getName());
+    //     } else {
+    //         // variable `customerName` incluso si no hay cliente
+    //         model.addAttribute("customerName", "");
+    //     }
 
-        // carga la relación con los empleados
-        sale.getEmployees().size();
-        model.addAttribute("sale", sale);
+    //     // carga la relación con los empleados
+    //     sale.getEmployees().size();
+    //     model.addAttribute("sale", sale);
 
-        // verifica si es una venta en online y se lo pasa a la vista
-        boolean isOnlineSale = sale.isOnlineSale();
-        model.addAttribute("isOnlineSale", isOnlineSale);
+    //     // verifica si es una venta en online y se lo pasa a la vista
+    //     boolean isOnlineSale = sale.isOnlineSale();
+    //     model.addAttribute("isOnlineSale", isOnlineSale);
+    //     return "views/sales/saleDetail";
+    // }
 
-        return "views/sales/saleDetail";
-    }
+    // @GetMapping("/relationshipDetails/{id}")
+    // public String viewSaleRelationshipDetails(@PathVariable Long id, Model model) {
+    //     Sale sale = saleService.getSaleWithDetails(id);
 
+
+        
+        // if (sale == null) {
+        //     // Redirige a la lista de ventas si la venta específica no se encuentra
+        //     return "redirect:/sales/list";
+        // }
+
+        // // Agrega la venta al modelo para acceder a ella en la vista
+        // model.addAttribute("sale", sale);
+
+        // //  detalles de los empleados relacionados con la venta
+        // if (!sale.getEmployees().isEmpty()) {
+        //     model.addAttribute("employees", sale.getEmployees());
+        // }
+
+        // //  información de los productos de la venta
+        // if (!sale.getProducts().isEmpty()) {
+        //     model.addAttribute("products", sale.getProducts());
+        // }
+
+
+        ///////////////////////////no funciona con la vista, no se porque
+
+    //     return "views/sales/saleRelationshipDetails"; 
+    // }
 }
+

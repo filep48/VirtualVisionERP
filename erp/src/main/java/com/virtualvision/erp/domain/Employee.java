@@ -21,7 +21,7 @@ import lombok.ToString;
 public class Employee {
 
     // relacion muchos a muchos con la entidad Employee
-    @ManyToMany(mappedBy = "employees")
+    @ManyToMany(mappedBy = "employees", fetch = FetchType.EAGER)
     private Set<Customer> customers = new HashSet<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
