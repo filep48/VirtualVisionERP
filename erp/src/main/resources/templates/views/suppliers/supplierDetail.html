@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+        <main>
+            <div class="container-main-customer">
+                <h1 th:text="#{'supplier.page.detailTitle'}"></h1>
+                
+                <!-- Mostrar los detalles del proveedor -->
+                <div class="supplier-detail">
+                    <p><strong th:text="#{'supplier.name'}">Name:</strong> <span th:text="${supplier.name}"></span></p>
+                    <p><strong th:text="#{'supplier.address'}">Address:</strong> <span th:text="${supplier.address}"></span></p>
+                    <p><strong th:text="#{'supplier.phone'}">Phone:</strong> <span th:text="${supplier.phone}"></span></p>
+                    <p><strong th:text="#{'supplier.email'}">Email:</strong> <span th:text="${supplier.email}"></span></p>
+                    <p><strong th:text="#{'supplier.contact'}">Contact:</strong> <span th:text="${supplier.contact}"></span></p>
+                    <p><strong th:text="#{'supplier.description'}">Description:</strong> <span th:text="${supplier.description}"></span></p>
+                    <p><strong th:text="#{'supplier.web'}">Web:</strong> <span th:text="${supplier.web}"></span></p>
+                    <p><strong th:text="#{'supplier.accountNumber'}">Account Number:</strong> <span th:text="${supplier.accountNumber}"></span></p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Footer -->
+    </footer>
+</body>
+</html>
