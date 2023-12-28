@@ -6,14 +6,10 @@
 <body>
     <header th:replace="~{layouts/header :: header}"></header>
     <div class="container-body">
-        <input type="checkbox" id="menu-toggle" title="menu">
-        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
-        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
-
         <main>
             <div class="container-main">
                 <a class="btn btn-primary btn-sm" th:href="@{/sale/add}" th:text="#{button.addSale}">Add Sale</a>
-                <h1 th:text="${pageTitle}">Page Title</h1><!-- Dynamic Title from Controller -->
+                <h1 th:text="${pageTitle}">Page Title</h1>
                 <table>
                     <thead>
                         <tr>
@@ -32,25 +28,15 @@
                             <td th:text="${sale.quantity}"></td>
                             <td th:text="${sale.taxValue}"></td>
                             <td th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></td>
-                            <td>
-                                <span th:if="${sale.customer != null}" th:text="${sale.customer.name}"></span>
-                                <span th:unless="${sale.customer != null}">No Customer Available</span>
-                            </td>
+                            <td th:text="${sale.customer != null ? sale.customer.name : 'No Customer Available'}"></td>
                             <td>
                                 <span th:if="${sale.onlineSale}">Online</span>
-                                <span th:unless="${sale.onlineSale}">
-                                    <span th:each="employee, employeeStat : ${sale.employees}">
-                                        <span th:text="${employee.id}" th:if="${employeeStat.index == 0}"></span>
-                                        <span th:unless="${employeeStat.index == 0}">, <span th:text="${employee.id}"></span></span>
-                                    </span>
-                                </span>
+                                <span th:unless="${sale.onlineSale}" th:text="${sale.employeeId != null ? sale.employeeId : 'No Employee'}"></span>
                             </td>
                             <td>
-                                <a th:href="@{/sale/detail/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.details}"></a>
-                                <a th:href="@{/saleRelationshipDetails/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.viewRelationshipDetails}"></a>
-                                <a th:href="@{/sale/edit/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.edit}"></a>
-                                <a th:href="@{/sale/delete/{id}(id=${sale.id})}" class="btn-delete" th:text="#{button.delete}"
-                                    onclick="return confirm('Are you sure you want to delete the sale?');"></a>
+                                <a th:href="@{/sale/detail/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.details}">Details</a>
+                                <a th:href="@{/sale/edit/{id}(id=${sale.id})}" class="btn-edit" th:text="#{button.edit}">Edit</a>
+                                <a th:href="@{/sale/delete/{id}(id=${sale.id})}" class="btn-delete" th:text="#{button.delete}" onclick="return confirm('Are you sure you want to delete the sale?');">Delete</a>
                             </td>
                         </tr>
                     </tbody>
@@ -59,7 +45,6 @@
             </div>
         </main>
     </div>
-
     <footer th:replace="~{layouts/footer :: footer}">
         <!-- Common Footer -->
     </footer>

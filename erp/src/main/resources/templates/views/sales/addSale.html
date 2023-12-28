@@ -17,20 +17,28 @@
                 <h1 th:text="${editMode} ? #{'pageTitle.editSale'} : #{'pageTitle.addSale'}">Sale Form</h1>
 
                 <form th:action="@{/sale/save}" th:object="${sale}" method="post" class="form-custom">
-                    <input type="hidden" th:field="*{id}" />
+                    <!-- ID de la venta (solo para edición) -->
+                    <input type="hidden" th:field="*{id}" th:if="${editMode}" />
 
-                    <!-- Adapted fields for Sale -->
+                    <!-- Campo de Cantidad -->
                     <div class="form-group">
                         <input type="number" th:field="*{quantity}" class="form-input" id="quantity" th:attr="placeholder=#{sale.quantity}" title="quantity">
-                    </div>
-                    <div class="form-group">
-                        <input type="number" th:field="*{taxValue}" class="form-input" id="taxValue" th:attr="placeholder=#{sale.taxValue}" title="taxValue">
-                    </div>
-                    <div class="form-group">
-                        <input type="datetime-local" th:field="*{saleDate}" class="form-input" id="saleDate" title="saleDate">
+                        <p class="error" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>
                     </div>
 
-                    <!-- Customer Selector -->
+                    <!-- Campo de Valor del Impuesto -->
+                    <div class="form-group">
+                        <input type="number" th:field="*{taxValue}" class="form-input" id="taxValue" th:attr="placeholder=#{sale.taxValue}" title="taxValue">
+                        <p class="error" th:if="${#fields.hasErrors('taxValue')}" th:errors="*{taxValue}"></p>
+                    </div>
+
+                    <!-- Campo de Fecha de Venta (no editable) -->
+                    <div class="form-group">
+                        <input type="datetime-local" th:field="*{saleDate}" class="form-input" id="saleDate" title="saleDate" readonly th:if="${editMode}">
+                        <input type="datetime-local" th:field="*{saleDate}" class="form-input" id="saleDate" title="saleDate" th:unless="${editMode}">
+                    </div>
+
+                    <!-- Selector de Cliente -->
                     <div class="form-group">
                         <select th:field="*{customer}" class="form-input" id="customer" title="customer-selector">
                             <option value="" th:utext="#{select.customer.placeholder}"></option>
@@ -39,18 +47,19 @@
                         </select>
                     </div>
 
-                    <!-- Employee ID Field -->
+                    <!-- Campo de ID de Empleado -->
                     <div class="form-group">
                         <input type="text" th:field="*{employeeId}" class="form-input" id="employeeId" th:attr="placeholder=#{sale.employee}" title="employeeId">
+                        <p class="error" th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></p>
                     </div>
 
-                    <!-- Online Sale Checkbox -->
+                    <!-- Checkbox para Venta Online -->
                     <div class="form-group">
                         <p th:text="#{sale.online}"> </p>
                         <input type="checkbox" th:field="*{onlineSale}" class="form-check-input" id="onlineSale" title="onlineSale">
                     </div>
 
-                    <!-- Products Selector -->
+                    <!-- Selector de Productos -->
                     <div class="form-group">
                         <select class="form-input" id="productSelect" title="products-selector">
                             <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
@@ -58,7 +67,7 @@
                         <button type="button" id="addProductBtn" class="btn-submit">Add Product</button>
                     </div>
 
-                    <!-- Selected Products Table -->
+                    <!-- Tabla de Productos Seleccionados -->
                     <table id="selectedProductsTable">
                         <thead>
                             <tr>
@@ -69,7 +78,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Rows will be dynamically added here -->
+                            <!-- Las filas se agregarán dinámicamente aquí -->
                         </tbody>
                     </table>
 

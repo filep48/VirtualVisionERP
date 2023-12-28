@@ -28,25 +28,30 @@ public class SaleServiceImp implements ISaleService {
     @Transactional(readOnly = true)
     @Override
     public List<Sale> findAllSales() {
-        return saleDao.findAll();
+        List<Sale> sales = saleDao.findAll();
+        for (Sale sale : sales) {
+            if (sale.getEmployees() != null) {
+                Hibernate.initialize(sale.getEmployees());
+            }
+            //PUEDE QUE NECESITE ESTO INICIALIZAR MAS ENTIDADES PARA LA CARGA PEREZOSA :(
+        }
+        return sales;
     }
 
     @Override
     public void saveSale(Sale sale) {
         saleDao.save(sale);
     }
-    
-    
-    @Transactional(readOnly = true)
-@Override
-public Sale findSaleById(Long id) {
-    Sale sale = saleDao.findById(id).orElse(null);
-    if (sale != null && sale.getEmployees() != null) {
-        Hibernate.initialize(sale.getEmployees());
-    }
-    return sale;
-}
 
+    @Transactional(readOnly = true)
+    @Override
+    public Sale findSaleById(Long id) {
+        Sale sale = saleDao.findById(id).orElse(null);
+        if (sale != null && sale.getEmployees() != null) {
+            Hibernate.initialize(sale.getEmployees());
+        }
+        return sale;
+    }
 
     @Override
     public void deleteSale(Long id) {
@@ -65,15 +70,16 @@ public Sale findSaleById(Long id) {
         return employees; // Devuelve la lista de empleados encontrados
     }
     // public Sale findSaleWithDetails(Long id) {
-    //     return saleDao.findSaleWithDetails(id)
-    //                         .orElseThrow(() -> new EntityNotFoundException("Venta no encontrada con ID: " + id));
-                            
+    // return saleDao.findSaleWithDetails(id)
+    // .orElseThrow(() -> new EntityNotFoundException("Venta no encontrada con ID: "
+    // + id));
+
     // }
 
     // @Override
     // public Sale getSaleWithDetails(Long saleId) {
-    //     throw new UnsupportedOperationException("Unimplemented method 'getSaleWithDetails'");
+    // throw new UnsupportedOperationException("Unimplemented method
+    // 'getSaleWithDetails'");
     // }
-    
 
 }

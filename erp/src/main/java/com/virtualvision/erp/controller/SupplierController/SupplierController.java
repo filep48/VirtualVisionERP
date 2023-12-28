@@ -14,7 +14,7 @@ import java.util.List;
 public class SupplierController {
     @Autowired
     private ISupplierService supplierService;
-    
+
     @GetMapping("/supplier")
     public String listSuppliers(Model model) {
         List<Supplier> suppliers = supplierService.findAllSuppliers();
@@ -54,11 +54,10 @@ public class SupplierController {
     }
 
     @GetMapping("/supplier/detailSupplier/{id}")
-public String showSupplierDetail(@PathVariable("id") Long id, Model model) {
-    Supplier supplier = supplierService.findSupplierById(id);
-    model.addAttribute("supplier", supplier);
-    return "views/suppliers/supplierDetail"; 
-}
+    public String showSupplierDetail(@PathVariable("id") Long id, Model model) {
+        Supplier supplier = supplierService.findSupplierById(id);
+        model.addAttribute("supplier", supplier);
+        return "views/suppliers/supplierDetail";
+    }
 
 }
-
