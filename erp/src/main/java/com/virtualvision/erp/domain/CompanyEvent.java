@@ -53,7 +53,7 @@ public class CompanyEvent implements Serializable{
 
     private String description; 
 
-    private boolean isPaid; // se paga o es gratuita?
+    private Boolean isPaid; // se paga o es gratuita?
 
     private String location; 
     private int capacity; // asistentes
