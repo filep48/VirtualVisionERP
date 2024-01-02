@@ -18,6 +18,8 @@ import com.virtualvision.erp.service.ICustomerService;
 import com.virtualvision.erp.service.employee.IEmployeeService;
 import com.virtualvision.erp.service.sale.ISaleService;
 
+import jakarta.transaction.Transactional;
+
 @Controller
 public class SaleController {
 
@@ -39,13 +41,13 @@ public class SaleController {
     @GetMapping("/sale/add")
     public String addSaleForm(Model model) {
         Sale sale = new Sale();
-        Set<Employee> employeesSet = new HashSet<>(employeeService.employeesList()); // convierte la lista en un
-                                                                                     // conjunto
+        Set<Employee> employeesSet = new HashSet<>(employeeService.employeesList()); // convierte la lista en un conjunto
         sale.setEmployees(employeesSet); // relación con los empleados
         model.addAttribute("sale", sale);
         model.addAttribute("customers", customerService.customersList());
         return "views/sales/addSale";
     }
+    
 
     @GetMapping("/sale/delete/{id}")
     public String deleteSale(@PathVariable Long id) {
@@ -93,31 +95,31 @@ public class SaleController {
     return "redirect:/sale/add";
     }
 
-    // controlador para la vista saleDetail
-    // @GetMapping("/sale/detail/{id}")
-    // public String viewSaleDetail(@PathVariable Long id, Model model) {
-    // Sale sale = saleService.findSaleById(id);
-    // if (sale == null) {
-    // // la venta no existe
-    // return "redirect:/sale";
-    // }
-    // // Agrega el nombre del cliente si existe
-    // if (sale.getCustomer() != null) {
-    // model.addAttribute("customerName", sale.getCustomer().getName());
-    // } else {
-    // // variable `customerName` incluso si no hay cliente
-    // model.addAttribute("customerName", "");
-    // }
+    //controlador para la vista saleDetail
+    @GetMapping("/sale/detail/{id}")
+    public String viewSaleDetail(@PathVariable Long id, Model model) {
+    Sale sale = saleService.findSaleById(id);
+    if (sale == null) {
+    // la venta no existe
+    return "redirect:/sale";
+    }
+    // Agrega el nombre del cliente si existe
+    if (sale.getCustomer() != null) {
+    model.addAttribute("customerName", sale.getCustomer().getName());
+    } else {
+    // variable `customerName` incluso si no hay cliente
+    model.addAttribute("customerName", "");
+    }
 
-    // // carga la relación con los empleados
-    // sale.getEmployees().size();
-    // model.addAttribute("sale", sale);
+    // carga la relación con los empleados
+    sale.getEmployees().size();
+    model.addAttribute("sale", sale);
 
-    // // verifica si es una venta en online y se lo pasa a la vista
-    // boolean isOnlineSale = sale.isOnlineSale();
-    // model.addAttribute("isOnlineSale", isOnlineSale);
-    // return "views/sales/saleDetail";
-    // }
+    // verifica si es una venta en online y se lo pasa a la vista
+    boolean isOnlineSale = sale.isOnlineSale();
+    model.addAttribute("isOnlineSale", isOnlineSale);
+    return "views/sales/saleDetail";
+    }
 
     // @GetMapping("/relationshipDetails/{id}")
     // public String viewSaleRelationshipDetails(@PathVariable Long id, Model model)
@@ -147,7 +149,7 @@ public class SaleController {
     // return "views/sales/saleRelationshipDetails";
     // }
 
-    // test pq ha dejado de funcionar la vista listSales
+    
     @GetMapping("/saleRelationshipDetails/{id}")
     public String viewSaleRelationshipDetails(@PathVariable Long id, Model model) {
         // Lógica para obtener los detalles de la venta y sus relaciones
