@@ -12,7 +12,6 @@ import com.virtualvision.erp.domain.Employee;
 import com.virtualvision.erp.domain.Sale;
 import com.virtualvision.erp.service.employee.IEmployeeService;
 
-import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.transaction.annotation.Transactional;
 

@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.virtualvision.erp.domain.CompanyEvent;
 import com.virtualvision.erp.domain.Employee;
+import com.virtualvision.erp.domain.Product;
 import com.virtualvision.erp.domain.Sale;
 import com.virtualvision.erp.service.ICustomerService;
+import com.virtualvision.erp.service.companyEvent.ICompanyEventService;
 import com.virtualvision.erp.service.employee.IEmployeeService;
+import com.virtualvision.erp.service.product.IProductService;
 import com.virtualvision.erp.service.sale.ISaleService;
 
 import jakarta.transaction.Transactional;
@@ -29,6 +33,10 @@ public class SaleController {
     private ICustomerService customerService;
     @Autowired
     private IEmployeeService employeeService;
+    @Autowired
+    private IProductService productService;
+    @Autowired
+    private ICompanyEventService companyEventService;
 
     @GetMapping("/sale")
     public String listSales(Model model) {
@@ -41,13 +49,13 @@ public class SaleController {
     @GetMapping("/sale/add")
     public String addSaleForm(Model model) {
         Sale sale = new Sale();
-        Set<Employee> employeesSet = new HashSet<>(employeeService.employeesList()); // convierte la lista en un conjunto
+        Set<Employee> employeesSet = new HashSet<>(employeeService.employeesList()); // convierte la lista en un
+                                                                                     // conjunto
         sale.setEmployees(employeesSet); // relación con los empleados
         model.addAttribute("sale", sale);
         model.addAttribute("customers", customerService.customersList());
         return "views/sales/addSale";
     }
-    
 
     @GetMapping("/sale/delete/{id}")
     public String deleteSale(@PathVariable Long id) {
@@ -64,62 +72,69 @@ public class SaleController {
 
     @PostMapping("/sale/save")
     public String saveSale(@ModelAttribute("sale") Sale sale) {
-    // Verifica si la venta es online
-    if (sale.isOnlineSale()) {
-    // La venta online no requiere un empleado id
-    sale.setEmployees(null);
-    saleService.saveSale(sale);
-    return "redirect:/sale/add";
+        // Verifica si la venta es online
+        if (sale.isOnlineSale()) {
+            // La venta online no requiere un empleado id
+            sale.setEmployees(null);
+            saleService.saveSale(sale);
+            return "redirect:/sale/add";
+        }
+
+        // La venta no es en línea, verifica si se proporciona una ID de empleado
+        if (sale.getEmployeeId() != null) {
+            Employee existingEmployee = employeeService.findEmployeeId(sale.getEmployeeId());
+            if (existingEmployee != null) {
+                // La ID de empleado existe, asigna el empleado a la venta y guarda la venta
+                Set<Employee> employees = new HashSet<>();
+                employees.add(existingEmployee);
+                sale.setEmployees(employees);
+                saleService.saveSale(sale);
+                return "redirect:/sale/add";
+            } else {
+                // model.addAttribute("error", "Empleado con ID " + sale.getEmployeeId() + "no
+                // existe.");
+                // return "redirect:/sale/add";
+            }
+        } else {
+            // no se proporciona una ID de empleado
+            // model.addAttribute("error", "Debes proporcionar una ID de empleado.");
+            // return "redirect:/sale/add";
+        }
+        return "redirect:/sale/add";
     }
 
-    // La venta no es en línea, verifica si se proporciona una ID de empleado
-    if (sale.getEmployeeId() != null) {
-    Employee existingEmployee =
-    employeeService.findEmployeeId(sale.getEmployeeId());
-    if (existingEmployee != null) {
-    // La ID de empleado existe, asigna el empleado a la venta y guarda la venta
-    Set<Employee> employees = new HashSet<>();
-    employees.add(existingEmployee);
-    sale.setEmployees(employees);
-    saleService.saveSale(sale);
-    return "redirect:/sale/add";
-    } else {
-    // model.addAttribute("error", "Empleado con ID " + sale.getEmployeeId() + "no existe.");
-    // return "redirect:/sale/add";
-    }
-    } else {
-    // no se proporciona una ID de empleado
-    // model.addAttribute("error", "Debes proporcionar una ID de empleado.");
-    // return "redirect:/sale/add";
-    }
-    return "redirect:/sale/add";
-    }
-
-    //controlador para la vista saleDetail
+    // controlador para la vista saleDetail
     @GetMapping("/sale/detail/{id}")
     public String viewSaleDetail(@PathVariable Long id, Model model) {
-    Sale sale = saleService.findSaleById(id);
-    if (sale == null) {
-    // la venta no existe
-    return "redirect:/sale";
-    }
-    // Agrega el nombre del cliente si existe
-    if (sale.getCustomer() != null) {
-    model.addAttribute("customerName", sale.getCustomer().getName());
-    } else {
-    // variable `customerName` incluso si no hay cliente
-    model.addAttribute("customerName", "");
+        Sale sale = saleService.findSaleById(id);
+        if (sale == null) {
+            // la venta no existe
+            return "redirect:/sale";
+        }
+        // Agrega el nombre del cliente si existe
+        if (sale.getCustomer() != null) {
+            model.addAttribute("customerName", sale.getCustomer().getName());
+        } else {
+            // variable `customerName` incluso si no hay cliente
+            model.addAttribute("customerName", "");
+        }
+
+        // carga la relación con los empleados
+        sale.getEmployees().size();
+        model.addAttribute("sale", sale);
+
+        // verifica si es una venta en online y se lo pasa a la vista
+        boolean isOnlineSale = sale.isOnlineSale();
+        model.addAttribute("isOnlineSale", isOnlineSale);
+        return "views/sales/saleDetail";
     }
 
-    // carga la relación con los empleados
-    sale.getEmployees().size();
-    model.addAttribute("sale", sale);
+    @GetMapping("/products/selectProductsAndEvents")
+public String showSelectProductsAndEvents() {
+    System.out.println("Accediendo a /products/selectProductsAndEvents");
+    return "views/products/selectProductsAndEvents";
+}
 
-    // verifica si es una venta en online y se lo pasa a la vista
-    boolean isOnlineSale = sale.isOnlineSale();
-    model.addAttribute("isOnlineSale", isOnlineSale);
-    return "views/sales/saleDetail";
-    }
 
     // @GetMapping("/relationshipDetails/{id}")
     // public String viewSaleRelationshipDetails(@PathVariable Long id, Model model)
@@ -149,7 +164,6 @@ public class SaleController {
     // return "views/sales/saleRelationshipDetails";
     // }
 
-    
     @GetMapping("/saleRelationshipDetails/{id}")
     public String viewSaleRelationshipDetails(@PathVariable Long id, Model model) {
         // Lógica para obtener los detalles de la venta y sus relaciones

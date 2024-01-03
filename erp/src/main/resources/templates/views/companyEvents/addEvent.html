@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{layouts/head :: head}">
     <!-- Common Head -->
 </head>
+
 <body>
     <header th:replace="~{layouts/header :: header}"></header>
     <div class="container-body">
@@ -59,6 +61,9 @@
                         <input type="checkbox" th:field="*{isPaid}" class="form-check-input" id="isPaid">
                         <label class="form-check-label" for="isPaid" th:text="#{event.isPaid}">Paid Event</label>
                     </div>
+                    <input type="text" name="price" class="form-input" id="price"
+                        th:value="${event.price != null ? event.price : ''}" th:placeholder="#{event.price}"
+                        title="price">
 
                     <button type="submit" class="btn-submit" th:text="#{event.save}" title="save"></button>
 
@@ -70,4 +75,5 @@
         <!-- Footer -->
     </footer>
 </body>
+
 </html>

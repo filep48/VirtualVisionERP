@@ -26,6 +26,7 @@
                             <th th:text="#{event.capacity}">Capacidad</th>
                             <th th:text="#{event.organizer}">Organizador</th>
                             <th th:text="#{event.isPaid}">Es de pago</th>
+                            <th th:text="#{event.price}">Precio</th>
                             <th th:text="#{button.actions}">Acciones</th>
                         </tr>
                     </thead>
@@ -38,7 +39,10 @@
                             <td th:text="${event.location}"></td>
                             <td th:text="${event.capacity}"></td>
                             <td th:text="${event.organizer}"></td>
-                            <td th:text="${event.isPaid ? 'Yes' : 'No'}"></td>
+                            <td th:text="${event.isPaid ? 'Sí' : 'No'}"></td>
+                            <td th:text="${event.price}"></td>
+
+
                             <td>
                                 <a th:href="@{/companyEvent/editEvent/{id}(id=${event.id})}" class="btn-edit" th:text="#{button.edit}">Editar</a>
                                 <a th:href="@{/companyEvent/deleteEvent/{id}(id=${event.id})}" class="btn-delete" th:text="#{button.delete}"

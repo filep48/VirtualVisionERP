@@ -55,7 +55,9 @@ public class AuthConfig {
                         .requestMatchers("/product/**").permitAll()
                         .requestMatchers("/hr/**").permitAll()
                         .requestMatchers("/companyEvent/**").permitAll()
-                        .requestMatchers("/supplier/**").permitAll())
+                        .requestMatchers("/supplier/**").permitAll()
+                        .requestMatchers("/selectProductsAndEvents/**").permitAll()
+)
                         .formLogin(form -> form
                         .loginPage("/login").permitAll() // Permitir a todos el acceso al formulario de login
                         .defaultSuccessUrl("/dashboard", true) // Redirigir a /home después de un inicio de sesión

@@ -1,8 +1,8 @@
 package com.virtualvision.erp.service.companyEvent;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,8 +36,22 @@ public class CompanyEventServiceImpl implements ICompanyEventService {
     @Transactional
     @Override
     public void saveCompanyEvent(CompanyEvent event) {
+        validateEvent(event);
         companyEventDao.save(event);
     }
+
+    private void validateEvent(CompanyEvent event) {
+        if (event.getIsPaid() != null && event.getIsPaid()) {
+            if (event.getPrice() == null || event.getPrice().compareTo(BigDecimal.ZERO) < 0) {
+                throw new IllegalArgumentException("event.paidEvent.invalidPrice");
+            }
+        } else {
+            if (event.getPrice() == null) {
+                event.setPrice(BigDecimal.ZERO);
+            }
+        }
+    }
+    
 
     @Transactional
     @Override

@@ -22,50 +22,59 @@
 
                     <!-- Campo de Cantidad -->
                     <div class="form-group">
-                        <input type="number" th:field="*{quantity}" class="form-input" id="quantity" th:attr="placeholder=#{sale.quantity}" title="quantity">
+                        <input type="number" th:field="*{quantity}" class="form-input" id="quantity"
+                            th:attr="placeholder=#{sale.quantity}" title="quantity">
                         <p class="error" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>
                     </div>
 
                     <!-- Campo de Valor del Impuesto -->
                     <div class="form-group">
-                        <input type="number" th:field="*{taxValue}" class="form-input" id="taxValue" th:attr="placeholder=#{sale.taxValue}" title="taxValue">
+                        <input type="number" th:field="*{taxValue}" class="form-input" id="taxValue"
+                            th:attr="placeholder=#{sale.taxValue}" title="taxValue">
                         <p class="error" th:if="${#fields.hasErrors('taxValue')}" th:errors="*{taxValue}"></p>
                     </div>
 
-                    <!-- Campo de Fecha de Venta (no editable) -->
+                    <!-- Campo de Fecha de Venta  -->
                     <div class="form-group">
-                        <input type="datetime-local" th:field="*{saleDate}" class="form-input" id="saleDate" title="saleDate" readonly th:if="${editMode}">
-                        <input type="datetime-local" th:field="*{saleDate}" class="form-input" id="saleDate" title="saleDate" th:unless="${editMode}">
+                        <input type="datetime-local" th:field="*{saleDate}" class="form-input" id="saleDate"
+                            title="saleDate" readonly th:if="${editMode}">
+                        <input type="datetime-local" th:field="*{saleDate}" class="form-input" id="saleDate"
+                            title="saleDate" th:unless="${editMode}">
                     </div>
 
                     <!-- Selector de Cliente -->
                     <div class="form-group">
                         <select th:field="*{customer}" class="form-input" id="customer" title="customer-selector">
                             <option value="" th:utext="#{select.customer.placeholder}"></option>
-                            <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}">
+                            <option th:each="customer : ${customers}" th:value="${customer.id}"
+                                th:text="${customer.name}">
                             </option>
                         </select>
                     </div>
 
                     <!-- Campo de ID de Empleado -->
                     <div class="form-group">
-                        <input type="text" th:field="*{employeeId}" class="form-input" id="employeeId" th:attr="placeholder=#{sale.employee}" title="employeeId">
+                        <input type="text" th:field="*{employeeId}" class="form-input" id="employeeId"
+                            th:attr="placeholder=#{sale.employee}" title="employeeId">
                         <p class="error" th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></p>
                     </div>
 
                     <!-- Checkbox para Venta Online -->
                     <div class="form-group">
                         <p th:text="#{sale.online}"> </p>
-                        <input type="checkbox" th:field="*{onlineSale}" class="form-check-input" id="onlineSale" title="onlineSale">
+                        <input type="checkbox" th:field="*{onlineSale}" class="form-check-input" id="onlineSale"
+                            title="onlineSale">
                     </div>
 
-                    <!-- Selector de Productos -->
+
+                    <!-- Selector de Productos y Eventos -->
                     <div class="form-group">
-                        <select class="form-input" id="productSelect" title="products-selector">
-                            <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
-                        </select>
+                        <a th:href="@{/products/selectProductsAndEvents}" class="btn-select">Seleccionar Productos y Eventos</a>
+
+
                         <button type="button" id="addProductBtn" class="btn-submit">Add Product</button>
                     </div>
+
 
                     <!-- Tabla de Productos Seleccionados -->
                     <table id="selectedProductsTable">

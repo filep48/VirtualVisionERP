@@ -1,5 +1,6 @@
 package com.virtualvision.erp.domain;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -54,6 +55,8 @@ public class CompanyEvent implements Serializable{
     private String description; 
 
     private Boolean isPaid; // se paga o es gratuita?
+    
+    private BigDecimal price;
 
     private String location; 
     private int capacity; // asistentes
