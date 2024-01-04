@@ -39,6 +39,14 @@ public class CompanyEvent implements Serializable{
         inverseJoinColumns = @JoinColumn(name = "customer_id")
     )
     private Set<Customer> registeredCustomers = new HashSet<>();
+
+    // Relación ManyToMany con Sale
+    @ManyToMany(mappedBy = "events")
+    private Set<Sale> sales = new HashSet<>();
+
+
+
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

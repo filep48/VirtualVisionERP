@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <main>
+            <div class="container-main-customer">
+                <h1 th:text="#{addSale.productsAndEvents.title}">Añadir Productos y Eventos a la Venta</h1>
+
+                <!-- Formulario para añadir productos -->
+                <form th:action="@{/sale/{saleId}/addProducts(saleId=${sale.id})}" method="post">
+                    <div class="form-group">
+                        <h2 th:text="#{addSale.selectProducts}">Seleccionar Productos</h2>
+                        <div th:each="product : ${availableProducts}">
+                            <input type="checkbox" th:value="${product.id}" name="selectedProducts" />
+                            <span th:text="${product.name}"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit" th:text="#{addSale.addProductsButton}">Añadir Productos</button>
+                </form>
+
+                <!-- Formulario para añadir eventos -->
+                <form th:action="@{/sale/{saleId}/addEvents(saleId=${sale.id})}" method="post">
+                    <div class="form-group">
+                        <h2 th:text="#{addSale.selectEvents}">Seleccionar Eventos</h2>
+                        <div th:each="event : ${availableEvents}">
+                            <input type="checkbox" th:value="${event.id}" name="selectedEvents" />
+                            <span th:text="${event.name}"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit" th:text="#{addSale.addEventsButton}">Añadir Eventos</button>
+                </form>
+
+                <!-- Botón para regresar a la lista de ventas -->
+                <div class="form-group">
+                    <a th:href="@{/sale}" class="btn-submit" th:text="#{addSale.returnToSalesListButton}">Guardar y Volver a Lista de Ventas</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Common Footer -->
+    </footer>
+</body>
+</html>

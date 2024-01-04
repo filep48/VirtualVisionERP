@@ -62,4 +62,11 @@ public class CompanyEventController {
         model.addAttribute("editMode", true);
         return "views/companyEvents/addEvent";
     }
+    // para selector en ventas
+    @GetMapping("/companyEvent/select")
+    public String selectEvents(Model model) {
+        List<CompanyEvent> events = companyEventService.findAllCompanyEvents(); // Uso del método existente
+        model.addAttribute("events", events);
+        return "views/companyEvents/selectEvents"; 
+    }
 }

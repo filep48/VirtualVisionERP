@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.virtualvision.erp.dao.ISupplierDao;
 import com.virtualvision.erp.domain.Product;
 import com.virtualvision.erp.domain.Supplier;
 import com.virtualvision.erp.service.product.IProductService;
@@ -36,7 +34,7 @@ public class ProductController {
         model.addAttribute("product", new Product());
         model.addAttribute("editMode", false);
 
-        List<Supplier> suppliers = supplierService.findAllSuppliers(); 
+        List<Supplier> suppliers = supplierService.findAllSuppliers();
         model.addAttribute("suppliers", suppliers);
 
         return "views/products/addProduct";
@@ -74,5 +72,11 @@ public class ProductController {
         model.addAttribute("products", searchResults);
         return "views/products/searchProducts";
     }
-
+    // para selector en ventas
+    @GetMapping("/product/select")
+    public String selectProducts(Model model) {
+        List<Product> products = productService.productList();
+        model.addAttribute("products", products);
+        return "views/products/selectProducts";
+    }
 }

@@ -40,13 +40,13 @@ public class Sale implements Serializable {
     @JoinTable(name = "sale_product", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
     private Set<Product> products = new HashSet<>();
 
-    private static final long serialVersionUID = 1L;
-
     // relacion con CompanyEvent ManyToMany
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "sale_event", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
     private Set<CompanyEvent> events = new HashSet<>();
 
+    
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

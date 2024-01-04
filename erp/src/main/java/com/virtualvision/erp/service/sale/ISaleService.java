@@ -17,6 +17,12 @@ public interface ISaleService {
 
     List<Employee> findEmployeesByIds(List<Long> employeeIds);
 
+    void addProductsToSale(Long saleId, List<Long> selectedProducts);
+
+    void addEventsToSale(Long saleId, List<Long> selectedEvents);
+
+
+
     //Sale getSaleWithDetails(Long saleId);
     
     //Sale findSaleWithDetails (Long saleId);

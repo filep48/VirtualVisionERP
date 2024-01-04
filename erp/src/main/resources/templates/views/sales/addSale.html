@@ -7,6 +7,7 @@
 
 <body>
     <header th:replace="~{layouts/header :: header}"></header>
+    
     <div class="container-body">
         <input type="checkbox" id="menu-toggle" title="menu">
         <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
@@ -34,7 +35,7 @@
                         <p class="error" th:if="${#fields.hasErrors('taxValue')}" th:errors="*{taxValue}"></p>
                     </div>
 
-                    <!-- Campo de Fecha de Venta  -->
+                    <!-- Campo de Fecha de Venta -->
                     <div class="form-group">
                         <input type="datetime-local" th:field="*{saleDate}" class="form-input" id="saleDate"
                             title="saleDate" readonly th:if="${editMode}">
@@ -66,35 +67,14 @@
                             title="onlineSale">
                     </div>
 
-
-                    <!-- Selector de Productos y Eventos -->
-                    <div class="form-group">
-                        <a th:href="@{/products/selectProductsAndEvents}" class="btn-select">Seleccionar Productos y Eventos</a>
-
-
-                        <button type="button" id="addProductBtn" class="btn-submit">Add Product</button>
-                    </div>
-
-
-                    <!-- Tabla de Productos Seleccionados -->
-                    <table id="selectedProductsTable">
-                        <thead>
-                            <tr>
-                                <th th:text="#{product.name}">Name</th>
-                                <th th:text="#{sale.quantity}">Quantity</th>
-                                <th th:text="#{sale.price}">Price</th>
-                                <th th:text="#{actions}">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Las filas se agregarán dinámicamente aquí -->
-                        </tbody>
-                    </table>
-
-                    <script th:src="@{/js/saleProductsHandler.js}"></script>
-
-                    <button type="submit" class="btn-submit">Save</button>
+                    <!-- Botón para guardar la venta -->
+                    <button type="submit" class="btn-submit">Guardar Venta</button>
                 </form>
+
+                <!-- Enlaces para añadir productos y eventos, solo si la venta ya existe -->
+                <div th:if="${sale.id != null}">
+                    <a th:href="@{/sale/addProductsAndEvents/{saleId}(saleId=${sale.id})}" class="btn-select">Añadir Productos y Eventos</a>
+                </div>
             </div>
         </main>
     </div>
