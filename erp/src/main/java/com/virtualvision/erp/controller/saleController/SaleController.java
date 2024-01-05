@@ -43,7 +43,6 @@ public class SaleController {
     @Autowired
     private ICompanyEventService companyEventService;
 
-
     @GetMapping("/sale")
     public String listSales(Model model) {
         List<Sale> sales = saleService.findAllSales();
@@ -53,22 +52,21 @@ public class SaleController {
 
     // añadir una nueva venta
     @GetMapping("/sale/add")
-public String addSaleForm(Model model) {
-    Sale sale = new Sale();
-    Set<Employee> employeesSet = new HashSet<>(employeeService.employeesList());
-    sale.setEmployees(employeesSet);
+    public String addSaleForm(Model model) {
+        Sale sale = new Sale();
+        Set<Employee> employeesSet = new HashSet<>(employeeService.employeesList());
+        sale.setEmployees(employeesSet);
 
-    // Obtener listas de productos y eventos disponibles
-    List<Product> availableProducts = productService.findAll();
-    List<CompanyEvent> availableEvents = companyEventService.findAllCompanyEvents();
+        // Obtener listas de productos y eventos disponibles
+        List<Product> availableProducts = productService.findAll();
+        List<CompanyEvent> availableEvents = companyEventService.findAllCompanyEvents();
 
-    model.addAttribute("sale", sale);
-    model.addAttribute("customers", customerService.customersList());
-    model.addAttribute("availableProducts", availableProducts);
-    model.addAttribute("availableEvents", availableEvents);
-    return "views/sales/addSale";
-}
-
+        model.addAttribute("sale", sale);
+        model.addAttribute("customers", customerService.customersList());
+        model.addAttribute("availableProducts", availableProducts);
+        model.addAttribute("availableEvents", availableEvents);
+        return "views/sales/addSale";
+    }
 
     @GetMapping("/sale/delete/{id}")
     public String deleteSale(@PathVariable Long id) {
@@ -82,39 +80,40 @@ public String addSaleForm(Model model) {
         model.addAttribute("sale", sale);
         return "views/sales/addSale";
     }
-@PostMapping("/sale/save")
-public String saveSale(@ModelAttribute("sale") Sale sale, RedirectAttributes redirectAttrs) {
-    boolean isNewSale = sale.getId() == null;
 
-    // Verifica si la venta es online
-    if (sale.isOnlineSale()) {
-        sale.setEmployees(null);
-    } else if (sale.getEmployeeId() != null) {
-        // La venta no es en línea, verifica si se proporciona una ID de empleado
-        Employee existingEmployee = employeeService.findEmployeeId(sale.getEmployeeId());
-        if (existingEmployee != null) {
-            Set<Employee> employees = new HashSet<>();
-            employees.add(existingEmployee);
-            sale.setEmployees(employees);
+    @PostMapping("/sale/save")
+    public String saveSale(@ModelAttribute("sale") Sale sale, RedirectAttributes redirectAttrs) {
+        boolean isNewSale = sale.getId() == null;
+
+        // Verifica si la venta es online
+        if (sale.isOnlineSale()) {
+            sale.setEmployees(null);
+        } else if (sale.getEmployeeId() != null) {
+            // La venta no es en línea, verifica si se proporciona una ID de empleado
+            Employee existingEmployee = employeeService.findEmployeeId(sale.getEmployeeId());
+            if (existingEmployee != null) {
+                Set<Employee> employees = new HashSet<>();
+                employees.add(existingEmployee);
+                sale.setEmployees(employees);
+            } else {
+                // Manejar error si el empleado no existe
+                redirectAttrs.addFlashAttribute("errorMessage",
+                        "Empleado con ID " + sale.getEmployeeId() + " no existe.");
+                return "redirect:/sale/add";
+            }
+        }
+
+        // Guarda la venta
+        saleService.saveSale(sale);
+
+        // Redirecciona según sea una venta nueva o una edición
+        if (isNewSale) {
+            return "redirect:/sale/addProductsAndEvents/" + sale.getId();
         } else {
-            // Manejar error si el empleado no existe
-            redirectAttrs.addFlashAttribute("errorMessage", "Empleado con ID " + sale.getEmployeeId() + " no existe.");
-            return "redirect:/sale/add";
+            redirectAttrs.addFlashAttribute("successMessage", "Venta actualizada con éxito");
+            return "redirect:/sale";
         }
     }
-
-    // Guarda la venta
-    saleService.saveSale(sale);
-
-    // Redirecciona según sea una venta nueva o una edición
-    if (isNewSale) {
-        return "redirect:/sale/addProductsAndEvents/" + sale.getId();
-    } else {
-        redirectAttrs.addFlashAttribute("successMessage", "Venta actualizada con éxito");
-        return "redirect:/sale";
-    }
-}
-
 
     // controlador para la vista saleDetail
     @GetMapping("/sale/detail/{id}")
@@ -141,39 +140,37 @@ public String saveSale(@ModelAttribute("sale") Sale sale, RedirectAttributes red
         model.addAttribute("isOnlineSale", isOnlineSale);
         return "views/sales/saleDetail";
     }
-// añadir productos a la venta
+
+    // añadir productos a la venta
     @PostMapping("/sale/{saleId}/addProducts")
-public String addProductsToSale(@PathVariable Long saleId, @RequestParam List<Long> selectedProducts) {
-    saleService.addProductsToSale(saleId, selectedProducts);
-    return "redirect:/sale/addProductsAndEvents/" + saleId;
-}
-// añadir eventos a la venta
-@PostMapping("/sale/{saleId}/addEvents")
-public String addEventsToSale(@PathVariable Long saleId, @RequestParam List<Long> selectedEvents) {
-    saleService.addEventsToSale(saleId, selectedEvents);
-    return "redirect:/sale/addProductsAndEvents/" + saleId;
-}
-
-
-
-    @GetMapping("/sale/addProductsAndEvents/{saleId}")
-public String addProductsAndEventsToSale(@PathVariable Long saleId, Model model) {
-    Sale sale = saleService.findSaleById(saleId);
-    if (sale == null) {
-        return "redirect:/sale"; // Manejar el caso de que la venta no exista
+    public String addProductsToSale(@PathVariable Long saleId, @RequestParam List<Long> selectedProducts) {
+        saleService.addProductsToSale(saleId, selectedProducts);
+        return "redirect:/sale/addProductsAndEvents/" + saleId;
     }
 
-    // Obtener listas de productos y eventos disponibles
-    List<Product> availableProducts = productService.findAll();
-    List<CompanyEvent> availableEvents = companyEventService.findAllCompanyEvents();
+    // añadir eventos a la venta
+    @PostMapping("/sale/{saleId}/addEvents")
+    public String addEventsToSale(@PathVariable Long saleId, @RequestParam List<Long> selectedEvents) {
+        saleService.addEventsToSale(saleId, selectedEvents);
+        return "redirect:/sale/addProductsAndEvents/" + saleId;
+    }
 
-    model.addAttribute("sale", sale);
-    model.addAttribute("availableProducts", availableProducts);
-    model.addAttribute("availableEvents", availableEvents);
-    return "views/sales/addProductsAndEvents";
-}
+    @GetMapping("/sale/addProductsAndEvents/{saleId}")
+    public String addProductsAndEventsToSale(@PathVariable Long saleId, Model model) {
+        Sale sale = saleService.findSaleById(saleId);
+        if (sale == null) {
+            return "redirect:/sale"; // Manejar el caso de que la venta no exista
+        }
 
+        // Obtener listas de productos y eventos disponibles
+        List<Product> availableProducts = productService.findAll();
+        List<CompanyEvent> availableEvents = companyEventService.findAllCompanyEvents();
 
+        model.addAttribute("sale", sale);
+        model.addAttribute("availableProducts", availableProducts);
+        model.addAttribute("availableEvents", availableEvents);
+        return "views/sales/addProductsAndEvents";
+    }
 
     // @GetMapping("/relationshipDetails/{id}")
     // public String viewSaleRelationshipDetails(@PathVariable Long id, Model model)
