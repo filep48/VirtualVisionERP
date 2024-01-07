@@ -41,11 +41,14 @@ public class rrhhController {
         Pageable topThree = PageRequest.of(0, 3);
         List<Payroll> lastThreePayrolls = payrollService.PayrollListById3(userContext.getId(), topThree);
         model.addAttribute("payrolls", lastThreePayrolls);
-        // Percentage of data 
+        // Percentage of data
         String Datapercentage = rrhhService.percentageData(employee);
         model.addAttribute("percentage", Datapercentage);
         // numer of hours
         Double employeeHours = employee.getHours(); // Asegúrate de que getHours() devuelve las horas
+        if (employeeHours == null) {
+            employeeHours = 0.0;
+        }
         model.addAttribute("employeeHours", employeeHours);
         String percentagehours = rrhhService.percentagehours(employeeHours);
         model.addAttribute("hoursPercentage", percentagehours);

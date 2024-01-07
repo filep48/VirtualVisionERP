@@ -76,7 +76,11 @@ public class rrhhService implements IrrhhService {
     }
 
     public String percentagehours(Double hours) {
+        if (hours == null) {
+            hours = 0.0;
+        }
         double percentage = Math.min(100, (hours / 40.0) * 100);
+        percentage = Math.round(percentage * 100.0) / 100.0;
         String percentageHours = String.valueOf(percentage);
         return percentageHours;
     }
