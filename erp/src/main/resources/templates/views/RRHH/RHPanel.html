@@ -11,12 +11,15 @@
             padding: 0;
             background-color: #333;
             color: white;
+            height: 100vh;
+            /* Asegura que el body ocupe toda la altura de la ventana */
         }
 
         .container {
             display: flex;
-            flex-wrap: wrap;
-            padding: 20px;
+            flex-direction: column;
+            /* Cambia la dirección de los items a columnas */
+            height: 100%;
         }
 
         .card {
@@ -24,20 +27,23 @@
             margin: 10px;
             padding: 20px;
             border-radius: 8px;
-            flex-basis: calc(33.333% - 20px);
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            /* Ajuste aquí */
         }
 
-        .card h2 {
-            margin-top: 0;
+        .half-height {
+            flex: 1;
+            /* Cada tarjeta ocupa la mitad del espacio disponible */
+        }
+
+        .full-height {
+            flex: 1;
+            /* La tarjeta de nóminas ocupa todo el espacio restante */
         }
 
         .profile-info,
-        .payroll-info,
         .weekly-hours {
             display: flex;
             align-items: center;
@@ -64,7 +70,6 @@
             height: 100%;
             background-color: orange;
             width: 56%;
-            /* This would be dynamic */
             border-radius: 5px;
         }
 
@@ -91,93 +96,67 @@
             border-radius: 4px;
             cursor: pointer;
             margin-top: 10px;
-            /* Asegura que el botón no esté pegado a cualquier elemento encima */
         }
 
         .btn:hover {
             background-color: #005f6b;
         }
-
-        .full-width {
-            flex-basis: 100%;
-        }
-
-        .calendar {
-            background-color: #222;
-            padding: 20px;
-            margin-top: 10px;
-        }
-
-        /* Additional styling as needed */
     </style>
-</head>
-<!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <!-- Otras etiquetas head -->
 </head>
 
 <body>
     <div class="container">
-        <!-- Profile Card -->
-        <div class="card">
-            <div class="profile-info">
-                <div class="profile-picture"></div>
-                <div>
-                    <h2 th:text="#{profile.title}">Mi Perfil</h2>
-                    <div class="progress-bar">
-                        <div class="progress"></div>
+        <!-- Sección superior que contiene Perfil y Horas Realizadas -->
+        <div class="half-height">
+            <!-- Profile Card -->
+            <div class="card">
+                <div class="profile-info">
+                    <div class="profile-picture"></div>
+                    <div>
+                        <h2 th:text="#{profile.title}">Mi Perfil</h2>
+                        <div class="progress-bar">
+                            <div class="progress"></div>
+                        </div>
+                        <span th:text="${percentage}">56/100%</span>
                     </div>
-                    <span th:text="${percentage}">56/100%</span>
                 </div>
+                <a th:href="@{employee/edit}" class="btn" th:text="#{button.open}">Abrir</a>
             </div>
-            <a th:href="@{employee/edit}" class="btn" th:text="#{button.open}">Abrir</a>
-        </div>
 
-        <!-- Payrolls Card -->
-        <div class="card">
-            <h2 th:text="#{payroll.title}">Nominas</h2>
-            <table>
-                <tr>
-                    <th th:text="#{table.start}">Inicio</th>
-                    <th th:text="#{table.end}">Fin de Fecha</th>
-                    <th th:text="#{table.grossPay}">Salario Bruto</th>
-                    <th th:text="#{table.netPay}">Salario Neto</th>
-                    <th th:text="#{table.taxAmount}">Impuestos</th>
-                </tr>
-                <!-- Iterate over the list of payrolls and display each row -->
-                <tr th:each="payroll : ${payrolls}">
-                    <td th:text="${#dates.format(payroll.payPeriodStart, 'dd/MM/yyyy')}"></td>
-                    <td th:text="${#dates.format(payroll.payPeriodEnd, 'dd/MM/yyyy')}"></td>
-                    <td th:text="${payroll.grossPay}"></td>
-                    <td th:text="${payroll.netPay}"></td>
-                    <td th:text="${payroll.taxAmount}"></td>
-                </tr>
-            </table>
-            <a th:href="@{rrhh/payroll}" class="btn" th:text="#{button.open}">Abrir</a>
-        </div>
-
-
-        <!-- Weekly Hours Card -->
-        <div class="card">
-            <h2 th:text="#{hours.title}">Horas realizadas esta semana</h2>
-            <div class="weekly-hours">
-                <span>61%</span>
-                <span>24.4 / 40H</span>
+            <!-- Weekly Hours Card -->
+            <div class="card">
+                <h2 th:text="#{hours.title}">Horas realizadas esta semana</h2>
+                <div class="weekly-hours">
+                    <span th:text="${hoursPercentage} + '%'">61%</span>
+                    <span th:text="${employeeHours} + ' / 40H'">24.4 / 40H</span>
+                </div>
+                <a th:href="@{/rrhh/workedHours}" class="btn" th:text="#{button.open}">Abrir</a>
             </div>
-            <button class="btn" th:text="#{button.open}">Abrir</button>
-        </div>
 
-        <!-- Calendar Section -->
-        <div class="card full-width">
-            <h2 th:text="#{calendar.title}">Calendario</h2>
-            <!-- Calendar would be dynamically generated here -->
-            <div class="calendar">
-                <p th:text="#{calendar.placeholder}">El calendario iría aquí.</p>
+
+            <!-- Payrolls Card -->
+            <div class="card full-height">
+                <h2 th:text="#{payroll.title}">Nominas</h2>
+                <table>
+                    <tr>
+                        <th th:text="#{table.start}">Inicio</th>
+                        <th th:text="#{table.end}">Fin de Fecha</th>
+                        <th th:text="#{table.grossPay}">Salario Bruto</th>
+                        <th th:text="#{table.netPay}">Salario Neto</th>
+                        <th th:text="#{table.taxAmount}">Impuestos</th>
+                    </tr>
+                    <!-- Iterate over the list of payrolls and display each row -->
+                    <tr th:each="payroll : ${payrolls}">
+                        <td th:text="${#dates.format(payroll.payPeriodStart, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${#dates.format(payroll.payPeriodEnd, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${payroll.grossPay}"></td>
+                        <td th:text="${payroll.netPay}"></td>
+                        <td th:text="${payroll.taxAmount}"></td>
+                    </tr>
+                </table>
+                <a th:href="@{rrhh/payroll}" class="btn" th:text="#{button.open}">Abrir</a>
             </div>
         </div>
-    </div>
 </body>
 
 </html>

@@ -71,4 +71,7 @@ public class Employee {
     @Column(nullable = true)
     private double salary;
 
+    @Column(nullable = true)
+    private Double hours;
+
 }

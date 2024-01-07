@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Horas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .hours-input {
+            margin-bottom: 10px;
+        }
+
+        .hours-display {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005f6b;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .total-hours {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ... -->
+    <div class="container">
+        <h1>Registro de Horas</h1>
+
+        <form th:action="@{workedHours/addHours}" method="post">
+            <div class="hours-input">
+                <label for="hoursToday">Horas trabajadas hoy:</label>
+                <input type="number" name="hours" id="hoursToday" min="0" step="0.1" required>
+                <button type="submit">Añadir</button>
+            </div>
+        </form>
+
+        <div class="hours-display">
+            <span>Horas totales esta semana:</span>
+            <span class="total-hours" th:text="${totalHours}">0</span>
+        </div>
+    </div>
+    <!-- ... -->
+</body>
+
+</html>
