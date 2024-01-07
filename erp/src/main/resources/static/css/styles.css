@@ -17,7 +17,7 @@
     --text-size-M: 1.2rem;
     --text-size-L: 1.5rem;
     --text-size-XL: 2rem;
-    --text-size-XXL: 3rem; 
+    --text-size-XXL: 3rem;
 }
 
 * {
@@ -31,7 +31,7 @@
     padding: 0;
 }
 
-html{
+html {
     display: grid;
     height: 100%;
 }
@@ -57,7 +57,7 @@ footer {
 }
 
 
-.header-management-button:hover{
+.header-management-button:hover {
     background-color: var(--color-accent);
     cursor: pointer;
 }
@@ -71,6 +71,7 @@ footer {
     align-items: center;
     flex-direction: row-reverse;
 }
+
 .container-footer-lang {
     order: 1;
 }
@@ -82,7 +83,8 @@ footer {
 .chatbot-button-container {
     order: 3;
 }
-footer button{
+
+footer button {
     order: 3;
     margin-left: auto;
     float: right;
@@ -100,17 +102,17 @@ footer button{
     transition: background-color 0.5s;
 }
 
-footer button:hover{
+footer button:hover {
     background-color: var(--color-accent);
     cursor: pointer;
 }
 
-.container-body{
+.container-body {
     display: flex;
     height: 100%;
 }
 
-.container-main{
+.container-main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -119,21 +121,22 @@ footer button:hover{
     flex-direction: column-reverse;
 }
 
-.container-main-customer{
+.container-main-customer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
     height: 100%;
+    flex-direction: column-reverse;
 }
 
-.container-main-detail{
+.container-main-detail {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    
+
 
 }
 
@@ -148,7 +151,7 @@ main {
     height: min-content;
 }
 
-main section a{
+main section a {
     background-color: var(--color-primary);
 }
 
@@ -166,12 +169,15 @@ tr:nth-child(even) {
     background-color: var(--color-bg);
 }
 
-th, td {
+th,
+td {
     text-align: left;
     padding: 8px;
 }
 
-.btn, .btn-primary, .btn-sm{
+.btn,
+.btn-primary,
+.btn-sm {
     background-color: var(--color-primary);
     border-radius: var(--border-radius);
     padding: 5px;
@@ -184,12 +190,14 @@ th, td {
     margin-bottom: 5px;
 }
 
-.btn:hover, .btn-primary:hover .btn-sm:hover{
+.btn:hover,
+.btn-primary:hover .btn-sm:hover {
     background-color: var(--color-accent);
     cursor: pointer;
 }
 
-.btn-edit, .btn-delete{
+.btn-edit,
+.btn-delete {
     background-color: var(--color-primary);
     border-radius: var(--border-radius);
     padding: 5px;
@@ -202,7 +210,8 @@ th, td {
     margin-bottom: 5px;
 }
 
-.btn-edit:hover, .btn-delete:hover{
+.btn-edit:hover,
+.btn-delete:hover {
     background-color: var(--color-accent);
     cursor: pointer;
 }
@@ -219,7 +228,9 @@ th, td {
     align-items: stretch;
     justify-content: space-between;
 }
-.chat-submit, .btn-submit{
+
+.chat-submit,
+.btn-submit {
     align-items: center;
     background-color: var(--color-primary);
     border-radius: var(--border-radius);
@@ -233,11 +244,14 @@ th, td {
     width: moz-fit-content;
     transition: background-color 0.5s;
 }
-.chat-submit:hover, .btn-submit:hover{
+
+.chat-submit:hover,
+.btn-submit:hover {
     background-color: var(--color-accent);
     cursor: pointer;
 }
-.chat-line{
+
+.chat-line {
     color: #444;
     background-color: var(--color-primary);
     color: var(--color-text);
@@ -245,13 +259,14 @@ th, td {
     margin-bottom: 10px;
     border-radius: 5px;
 }
-form{
+
+form {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.form-custom{
+.form-custom {
     display: flex;
     justify-content: center;
     align-items: stretch;
@@ -261,7 +276,7 @@ form{
 
 }
 
-.form-group{
+.form-group {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -270,7 +285,7 @@ form{
     margin-bottom: 10px;
 }
 
-.form-input{
+.form-input {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -314,14 +329,14 @@ main section a {
     align-content: center;
 }
 
-.dashboard-item{
+.dashboard-item {
     padding: 6.25rem;
     align-items: stretch;
-    background-color: none; 
+    background-color: none;
 
 }
 
-section a:hover{
+section a:hover {
     background-color: var(--color-accent);
     cursor: pointer;
 }
@@ -360,7 +375,7 @@ ul li img {
     height: 40px;
 }
 
-li:hover{
+li:hover {
     background-color: var(--color-accent);
     cursor: pointer;
 }
@@ -381,11 +396,12 @@ aside {
     align-items: center;
 }
 
-.logo{
+.logo {
     display: flex;
     align-items: center;
     margin-left: 2%;
 }
+
 .logo i {
     margin-top: 3px;
     margin-right: 10px;
@@ -407,7 +423,8 @@ aside {
 .search-input {
     padding: 10px;
     padding-left: 30px;
-    padding-right: 30px; /* Espacio adicional para el ícono */
+    padding-right: 30px;
+    /* Espacio adicional para el ícono */
     font-size: 16px;
     border: none;
     border-radius: 5px;
@@ -419,15 +436,15 @@ aside {
 .search-icon {
     position: absolute;
     background-color: transparent;
-    right: 10px; 
+    right: 10px;
     color: var(--color-text);
-    }
+}
 
 .search-icon:hover {
     cursor: auto;
 }
 
-.fa-search::before{
+.fa-search::before {
     cursor: pointer;
 }
 
@@ -464,9 +481,12 @@ aside {
     right: 0;
     display: flex;
     flex-direction: column;
-    opacity: 0; /* Inicialmente invisible */
-    visibility: hidden; /* Inicialmente no visible */
-    transition: opacity 0.5s, visibility 0.5s; /* Transición suave */
+    opacity: 0;
+    /* Inicialmente invisible */
+    visibility: hidden;
+    /* Inicialmente no visible */
+    transition: opacity 0.5s, visibility 0.5s;
+    /* Transición suave */
 }
 
 
@@ -484,7 +504,8 @@ aside {
 #user-menu:hover #user-menu-content {
     display: block;
     /* animacion  */
-    opacity: 1; /* Completa visibilidad al pasar el ratón */
+    opacity: 1;
+    /* Completa visibilidad al pasar el ratón */
     visibility: visible;
 
 }
@@ -523,7 +544,7 @@ aside {
         margin-top: 4%;
     }
 
-    section#dashboard{
+    section#dashboard {
         margin-right: 0px;
     }
 
@@ -536,7 +557,8 @@ aside {
     #menu-toggle {
         display: none;
     }
-    #menu-text{
+
+    #menu-text {
         display: none;
     }
 }
@@ -565,16 +587,20 @@ aside {
         flex-direction: column;
         align-items: flex-start;
     }
-    #menu-text{
+
+    #menu-text {
         display: auto;
     }
-    #menu-toggle{
+
+    #menu-toggle {
         display: none;
     }
-    #menu-toggle:not(:checked) ~ aside {
+
+    #menu-toggle:not(:checked)~aside {
         display: none;
     }
-    #menu-toggle:checked ~ aside {
+
+    #menu-toggle:checked~aside {
         position: absolute;
         z-index: 1;
     }

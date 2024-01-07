@@ -5,13 +5,22 @@
     <meta charset="UTF-8">
     <title>Dashboard Layout</title>
     <style>
+        html,
+        body {
+            height: 100%;
+            /* Asegura que html y body ocupen toda la altura de la ventana */
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #333;
             color: white;
-            height: 100vh;
+            height: 100%;
             /* Asegura que el body ocupe toda la altura de la ventana */
         }
 
@@ -20,6 +29,7 @@
             flex-direction: column;
             /* Cambia la dirección de los items a columnas */
             height: 100%;
+
         }
 
         .card {
@@ -33,13 +43,8 @@
             justify-content: space-between;
         }
 
-        .half-height {
-            flex: 1;
-            /* Cada tarjeta ocupa la mitad del espacio disponible */
-        }
-
         .full-height {
-            flex: 1;
+            height: 100%;
             /* La tarjeta de nóminas ocupa todo el espacio restante */
         }
 
@@ -78,6 +83,10 @@
             border-collapse: collapse;
         }
 
+        .half-height {
+            width: 200%;
+        }
+
         th,
         td {
             padding: 5px;
@@ -104,59 +113,82 @@
     </style>
 </head>
 
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/head :: head}">
+    <meta charset="UTF-8">
+    <title>Dashboard Layout</title>
+    <!-- Estilos y otros elementos del head aquí -->
+</head>
+
 <body>
-    <div class="container">
-        <!-- Sección superior que contiene Perfil y Horas Realizadas -->
-        <div class="half-height">
-            <!-- Profile Card -->
-            <div class="card">
-                <div class="profile-info">
-                    <div class="profile-picture"></div>
-                    <div>
-                        <h2 th:text="#{profile.title}">Mi Perfil</h2>
-                        <div class="progress-bar">
-                            <div class="progress"></div>
+    <header th:replace="~{layouts/header :: header}">
+        <!-- Header común -->
+    </header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+
+        <main>
+            <div class="container">
+                <!-- Sección superior que contiene Perfil y Horas Realizadas -->
+                <div class="half-height">
+                    <!-- Profile Card -->
+                    <div class="card">
+                        <div class="profile-info">
+                            <div class="profile-picture"></div>
+                            <div>
+                                <h2 th:text="#{profile.title}">Mi Perfil</h2>
+                                <div class="progress-bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <span th:text="${percentage}">56/100%</span>
+                            </div>
                         </div>
-                        <span th:text="${percentage}">56/100%</span>
+                        <a th:href="@{employee/edit}" class="btn" th:text="#{button.open}">Abrir</a>
+                    </div>
+
+                    <!-- Weekly Hours Card -->
+                    <div class="card">
+                        <h2 th:text="#{hours.title}">Horas realizadas esta semana</h2>
+                        <div class="weekly-hours">
+                            <span th:text="${hoursPercentage} + '%'">61%</span>
+                            <span th:text="${employeeHours} + ' / 40H'">24.4 / 40H</span>
+                        </div>
+                        <a th:href="@{/rrhh/workedHours}" class="btn" th:text="#{button.open}">Abrir</a>
+                    </div>
+
+                    <!-- Payrolls Card -->
+                    <div class="card full-height">
+                        <h2 th:text="#{payroll.title}">Nominas</h2>
+                        <table>
+                            <tr>
+                                <th th:text="#{table.start}">Inicio</th>
+                                <th th:text="#{table.end}">Fin de Fecha</th>
+                                <th th:text="#{table.grossPay}">Salario Bruto</th>
+                                <th th:text="#{table.netPay}">Salario Neto</th>
+                                <th th:text="#{table.taxAmount}">Impuestos</th>
+                            </tr>
+                            <!-- Iterate over the list of payrolls and display each row -->
+                            <tr th:each="payroll : ${payrolls}">
+                                <td th:text="${#dates.format(payroll.payPeriodStart, 'dd/MM/yyyy')}"></td>
+                                <td th:text="${#dates.format(payroll.payPeriodEnd, 'dd/MM/yyyy')}"></td>
+                                <td th:text="${payroll.grossPay}"></td>
+                                <td th:text="${payroll.netPay}"></td>
+                                <td th:text="${payroll.taxAmount}"></td>
+                            </tr>
+                        </table>
+                        <a th:href="@{rrhh/payroll}" class="btn" th:text="#{button.open}">Abrir</a>
                     </div>
                 </div>
-                <a th:href="@{employee/edit}" class="btn" th:text="#{button.open}">Abrir</a>
             </div>
+        </main>
+    </div>
 
-            <!-- Weekly Hours Card -->
-            <div class="card">
-                <h2 th:text="#{hours.title}">Horas realizadas esta semana</h2>
-                <div class="weekly-hours">
-                    <span th:text="${hoursPercentage} + '%'">61%</span>
-                    <span th:text="${employeeHours} + ' / 40H'">24.4 / 40H</span>
-                </div>
-                <a th:href="@{/rrhh/workedHours}" class="btn" th:text="#{button.open}">Abrir</a>
-            </div>
-
-
-            <!-- Payrolls Card -->
-            <div class="card full-height">
-                <h2 th:text="#{payroll.title}">Nominas</h2>
-                <table>
-                    <tr>
-                        <th th:text="#{table.start}">Inicio</th>
-                        <th th:text="#{table.end}">Fin de Fecha</th>
-                        <th th:text="#{table.grossPay}">Salario Bruto</th>
-                        <th th:text="#{table.netPay}">Salario Neto</th>
-                        <th th:text="#{table.taxAmount}">Impuestos</th>
-                    </tr>
-                    <!-- Iterate over the list of payrolls and display each row -->
-                    <tr th:each="payroll : ${payrolls}">
-                        <td th:text="${#dates.format(payroll.payPeriodStart, 'dd/MM/yyyy')}"></td>
-                        <td th:text="${#dates.format(payroll.payPeriodEnd, 'dd/MM/yyyy')}"></td>
-                        <td th:text="${payroll.grossPay}"></td>
-                        <td th:text="${payroll.netPay}"></td>
-                        <td th:text="${payroll.taxAmount}"></td>
-                    </tr>
-                </table>
-                <a th:href="@{rrhh/payroll}" class="btn" th:text="#{button.open}">Abrir</a>
-            </div>
-        </div>
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Footer común -->
+    </footer>
 </body>
 
 </html>
