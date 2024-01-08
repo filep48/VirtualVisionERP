@@ -57,6 +57,7 @@ public class AuthConfig {
                         .requestMatchers("/companyEvent/**").permitAll()
                         .requestMatchers("/supplier/**").permitAll()
                         .requestMatchers("/selectProductsAndEvents/**").permitAll()
+                        .requestMatchers("/economy/**").permitAll()
 )
                         .formLogin(form -> form
                         .loginPage("/login").permitAll() // Permitir a todos el acceso al formulario de login
