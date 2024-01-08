@@ -4,12 +4,14 @@ import java.util.HashSet;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.ToString;
@@ -21,13 +23,22 @@ import java.util.Set;
 public class Customer {
 
     // relacion muchos a muchos con la entidad Employee
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "customer_employee",
         joinColumns = @JoinColumn(name = "customer_id"),
         inverseJoinColumns = @JoinColumn(name = "employee_id")
     )
     private Set<Employee> employees = new HashSet<>();
+
+    // Relación con ventas
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    private Set<Sale> sales = new HashSet<>();
+
+    // relacion muchos a muchos con la entidad Event
+    @ManyToMany(mappedBy = "registeredCustomers", fetch = FetchType.LAZY)
+    private Set<CompanyEvent> enrolledEvents = new HashSet<>();
+
 
     public Customer() {
     }

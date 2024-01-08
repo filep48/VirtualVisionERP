@@ -26,4 +26,10 @@ public interface IProductService {
     List<Product> searchProducts(String query);
     
     List<Product> productListWithSuppliers() ;
+
+    int getTotalQuantitySoldByProduct(Long productId);
+
+    void updateProductQuantityAfterSale(Long productId, int quantitySold);
+
+    
 }

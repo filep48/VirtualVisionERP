@@ -1,6 +1,7 @@
 package com.virtualvision.erp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.virtualvision.erp.domain.Customer;
 
@@ -24,6 +25,6 @@ public interface ICustomerService {
 
     void updateCustomerWithoutPassword(Customer customer);
 
-    Long findIdByUsername(String username);
+    Optional<Long> findIdByUsername(String username);
 
 }

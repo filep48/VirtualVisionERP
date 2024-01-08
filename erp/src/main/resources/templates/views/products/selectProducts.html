@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <main>
+            <div class="container-main-customer">
+                <h1 th:text="#{select.products.title}">Select Products</h1>
+                <form th:action="@{/sale/{saleId}/addProducts(saleId=${saleId != null ? saleId : ''})}" method="post" class="form-custom">
+                    <input type="hidden" name="saleId" th:value="${saleId}" />
+                    <div class="form-group">
+                        <div th:each="product : ${products}" class="product-item">
+                            <input type="checkbox" th:value="${product.id}" name="selectedProducts" class="product-checkbox" />
+                            <span th:text="${product.name}" class="product-name">Product Name</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit" th:text="#{add.to.sale}">Add to Sale</button>
+                </form>
+                
+            </div>
+        </main>
+    </div>
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Common Footer -->
+    </footer>
+</body>
+
+</html>

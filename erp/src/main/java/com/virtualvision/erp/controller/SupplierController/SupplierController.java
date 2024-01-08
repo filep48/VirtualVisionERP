@@ -14,7 +14,7 @@ import java.util.List;
 public class SupplierController {
     @Autowired
     private ISupplierService supplierService;
-    
+
     @GetMapping("/supplier")
     public String listSuppliers(Model model) {
         List<Supplier> suppliers = supplierService.findAllSuppliers();
@@ -49,10 +49,15 @@ public class SupplierController {
             model.addAttribute("editMode", true);
             return "views/suppliers/addSupplier";
         } else {
-            
-            // Handle the case where the supplier with the given ID doesn't exist
             return "redirect:/supplier";
         }
     }
-}
 
+    @GetMapping("/supplier/detailSupplier/{id}")
+    public String showSupplierDetail(@PathVariable("id") Long id, Model model) {
+        Supplier supplier = supplierService.findSupplierById(id);
+        model.addAttribute("supplier", supplier);
+        return "views/suppliers/supplierDetail";
+    }
+
+}

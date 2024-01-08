@@ -2,6 +2,7 @@ package com.virtualvision.erp.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -118,8 +119,9 @@ public class CustomerServiceImp implements UserDetailsService, ICustomerService 
     }
 
     @Override
-    public Long findIdByUsername(String username) {
-        return customerDao.findIdByUsername(username);
+    @Transactional(readOnly = true)
+    public Optional<Long> findIdByUsername(String username) {
+        return Optional.ofNullable(customerDao.findIdByUsername(username));
     }
 
 }

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.virtualvision.erp.dao.IProductDao;
 import com.virtualvision.erp.dao.ISupplierDao;
 import com.virtualvision.erp.domain.Product;
+import com.virtualvision.erp.domain.Sale;
 import com.virtualvision.erp.domain.Supplier;
+import com.virtualvision.erp.service.sale.ISaleService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -76,7 +78,7 @@ public boolean saveProduct(Product product) {
     }
 }
 
-
+@Transactional
 @Override
 public void updateProductDetails(Product productData) {
     Product existingProduct = productDao.findById(productData.getId()).orElse(null);
@@ -123,5 +125,35 @@ public void updateProductDetails(Product productData) {
     public List<Product> productListWithSuppliers() {
         return productDao.findAllWithSuppliers();
     }
+    @Autowired
+    private ISaleService saleService; 
+
+    @Override
+    @Transactional(readOnly = true)
+    public int getTotalQuantitySoldByProduct(Long productId) {
+        Product product = findProductById(productId);
+        if (product != null) {
+            List<Sale> sales = saleService.getSalesByProduct(product);
+            int totalQuantitySold = 0;
+            for (Sale sale : sales) {
+                totalQuantitySold += sale.getQuantity();
+            }
+            return totalQuantitySold;
+        }
+        return 0;
+    }
+
+    public void updateProductQuantityAfterSale(Long productId, int quantitySold) {
+        Product product = findProductById(productId);
+        if (product != null && product.getQuantity() >= quantitySold) {
+            int newQuantity = product.getQuantity() - quantitySold;
+            product.setQuantity(newQuantity);
+            save(product);
+        } else {
+            log.error("La cantidad vendida excede la cantidad disponible para el producto con ID: " + productId);
+        }
+    }
+    
+
 
 }
