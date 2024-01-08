@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.virtualvision.erp.domain.Product;
+import com.virtualvision.erp.domain.Sale;
 import com.virtualvision.erp.domain.Supplier;
 import com.virtualvision.erp.service.product.IProductService;
+import com.virtualvision.erp.service.sale.ISaleService;
 import com.virtualvision.erp.service.supplier.ISupplierService;
 
 import java.util.List;
@@ -22,12 +24,31 @@ public class ProductController {
     @Autowired
     private ISupplierService supplierService;
 
+    @Autowired
+    private ISaleService saleService;
+
+    // @GetMapping("/product")
+    // public String listProducts(Model model) {
+    //     List<Product> products = productService.productList();
+    //     model.addAttribute("products", products);
+    //     return "/views/products/listProducts";
+    // }
+
     @GetMapping("/product")
     public String listProducts(Model model) {
         List<Product> products = productService.productList();
+        
+        // Recorre la lista de productos y calcula la cantidad total vendida para cada uno
+        for (Product product : products) {
+            List<Sale> sales = saleService.getSalesByProduct(product);
+            int totalQuantitySold = saleService.calculateTotalQuantitySold(sales);
+            product.setStockAvailable(product.getQuantity() - totalQuantitySold); // Asumiendo que tienes un atributo 'stockAvailable' en la entidad Product
+        }
+        
         model.addAttribute("products", products);
         return "/views/products/listProducts";
     }
+    
 
     @GetMapping("/product/addProduct")
     public String addProductForm(Model model) {

@@ -49,9 +49,15 @@ public class SaleServiceImp implements ISaleService {
     }
 
     @Override
-    public void saveSale(Sale sale) {
-        saleDao.save(sale);
+public void saveSale(Sale sale) {
+    saleDao.save(sale);
+
+    // Actualiza la cantidad de cada producto vendido
+    for (Product product : sale.getProducts()) {
+        int quantitySold = sale.getQuantity();
+        productService.updateProductQuantityAfterSale(product.getId(), quantitySold);
     }
+}
 
     @Transactional(readOnly = true)
     @Override
@@ -79,7 +85,7 @@ public class SaleServiceImp implements ISaleService {
         }
         return employees; // Devuelve la lista de empleados encontrados
     }
-
+    @Transactional
     public void addProductsToSale(Long saleId, List<Long> productIds) {
         Sale sale = findSaleById(saleId);
         if (sale != null) {
@@ -110,6 +116,26 @@ public class SaleServiceImp implements ISaleService {
         }
     }
 
+    @Override
+    public List<Sale> getSalesByProduct(Product product) {
+        List<Sale> sales = new ArrayList<>();
+        for (Sale sale : findAllSales()) {
+            if (sale.getProducts().contains(product)) {
+                sales.add(sale);
+            }
+        }
+        return sales;
+    }
+    @Override
+    public int calculateTotalQuantitySold(List<Sale> sales) {
+        int totalQuantitySold = 0;
+        for (Sale sale : sales) {
+            totalQuantitySold += sale.getQuantity();
+        }
+        return totalQuantitySold;
+    }
+
+    
     // public Sale findSaleWithDetails(Long id) {
     // return saleDao.findSaleWithDetails(id)
     // .orElseThrow(() -> new EntityNotFoundException("Venta no encontrada con ID: "
