@@ -116,30 +116,63 @@ public class SaleController {
     }
 
     // controlador para la vista saleDetail
+    // @GetMapping("/sale/detail/{id}")
+    // public String viewSaleDetail(@PathVariable Long id, Model model) {
+    //     Sale sale = saleService.findSaleById(id);
+    //     if (sale == null) {
+    //         // la venta no existe
+    //         return "redirect:/sale";
+    //     }
+    //     // Agrega el nombre del cliente si existe
+    //     if (sale.getCustomer() != null) {
+    //         model.addAttribute("customerName", sale.getCustomer().getName());
+    //     } else {
+    //         // variable `customerName` incluso si no hay cliente
+    //         model.addAttribute("customerName", "");
+    //     }
+
+    //     // carga la relación con los empleados
+    //     sale.getEmployees().size();
+    //     model.addAttribute("sale", sale);
+
+    //     // verifica si es una venta en online y se lo pasa a la vista
+    //     boolean isOnlineSale = sale.isOnlineSale();
+    //     model.addAttribute("isOnlineSale", isOnlineSale);
+    //     return "views/sales/saleDetail";
+    // }
+
     @GetMapping("/sale/detail/{id}")
-    public String viewSaleDetail(@PathVariable Long id, Model model) {
-        Sale sale = saleService.findSaleById(id);
-        if (sale == null) {
-            // la venta no existe
-            return "redirect:/sale";
-        }
-        // Agrega el nombre del cliente si existe
-        if (sale.getCustomer() != null) {
-            model.addAttribute("customerName", sale.getCustomer().getName());
-        } else {
-            // variable `customerName` incluso si no hay cliente
-            model.addAttribute("customerName", "");
-        }
-
-        // carga la relación con los empleados
-        sale.getEmployees().size();
-        model.addAttribute("sale", sale);
-
-        // verifica si es una venta en online y se lo pasa a la vista
-        boolean isOnlineSale = sale.isOnlineSale();
-        model.addAttribute("isOnlineSale", isOnlineSale);
-        return "views/sales/saleDetail";
+public String viewSaleDetail(@PathVariable Long id, Model model) {
+    Sale sale = saleService.findSaleById(id);
+    if (sale == null) {
+        // la venta no existe
+        return "redirect:/sale";
     }
+
+    // Agrega el nombre del cliente si existe
+    if (sale.getCustomer() != null) {
+        model.addAttribute("customerName", sale.getCustomer().getName());
+    } else {
+        // variable `customerName` incluso si no hay cliente
+        model.addAttribute("customerName", "");
+    }
+
+    // carga la relación con los empleados
+    sale.getEmployees().size();
+
+    // Agrega productos y eventos a la vista
+    model.addAttribute("products", sale.getProducts());
+    model.addAttribute("events", sale.getEvents());
+
+    // verifica si es una venta en online y se lo pasa a la vista
+    boolean isOnlineSale = sale.isOnlineSale();
+    model.addAttribute("isOnlineSale", isOnlineSale);
+
+    model.addAttribute("sale", sale);
+
+    return "views/sales/saleDetail";
+}
+
 
     // añadir productos a la venta
     @PostMapping("/sale/{saleId}/addProducts")
