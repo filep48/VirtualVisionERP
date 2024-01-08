@@ -23,9 +23,9 @@
                             <td th:text="${supplier.id}"></td>
                             <td th:text="${supplier.name}"></td>
                             <td>
-                                <a th:href="@{/supplier/detailSupplier/{id}(id=${supplier.id})}" th:text="#{'button.detail'}"></a>
-                                <a th:href="@{/supplier/editSupplier/{id}(id=${supplier.id})}" th:text="#{'button.edit'}"></a>
-                                <a th:href="@{/supplier/deleteSupplier/{id}(id=${supplier.id})}" onclick="return confirm('¿Está seguro de eliminar este proveedor?');" th:text="#{'button.delete'}">Eliminar</a>
+                                <a class="btn" th:href="@{/supplier/detailSupplier/{id}(id=${supplier.id})}" th:text="#{'button.detail'}"></a>
+                                <a class="btn" th:href="@{/supplier/editSupplier/{id}(id=${supplier.id})}" th:text="#{'button.edit'}"></a>
+                                <a class="btn" th:href="@{/supplier/deleteSupplier/{id}(id=${supplier.id})}" onclick="return confirm('¿Está seguro de eliminar este proveedor?');" th:text="#{'button.delete'}">Eliminar</a>
                             </td>
                         </tr>
                     </tbody>
