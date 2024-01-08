@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head th:replace="~{layouts/head :: head}">
     <!-- Common Head -->
 </head>
-
 <body>
     <header th:replace="~{layouts/header :: header}"></header>
     <div class="container-body">
@@ -17,46 +15,67 @@
                 <h2 th:text="#{sale.details}">Sale Details</h2>
 
                 <!-- Sale summary in a table -->
-                <table>
-                    <tbody>
-                        <tr>
-                            <th th:text="#{sale.id}">ID</th>
-                            <td th:text="${sale.id}"></td>
-                        </tr>
-                        <tr th:if="${customerName}">
-                            <th th:text="#{customer.name}">Customer Name</th>
-                            <td th:text="${customerName}"></td>
-                        </tr>
-                        <tr>
-                            <th th:text="#{sale.quantity}">Quantity</th>
-                            <td th:text="${sale.quantity}"></td>
-                        </tr>
-                        <tr>
-                            <th th:text="#{sale.taxValue}">Tax Value</th>
-                            <td th:text="${sale.taxValue}"></td>
-                        </tr>
-                        <tr>
-                            <th th:text="#{sale.saleDate}">Sale Date</th>
-                            <td th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!-- List of associated employees -->
-                <h3 th:text="#{sale.employees}">Employees</h3>
-                <ul>
-                    <li th:each="employee : ${sale.employees}" th:text="${employee.name} + ' (' + ${employee.id} + ')'"></li>
-                </ul>
-
-                <!-- Display if it's an online sale or employee ID -->
-                <p th:if="${isOnlineSale}">Online</p>
-                <p th:unless="${isOnlineSale}" th:text="${sale.employeeId}"></p>
-                <br>
-                <div class="text-end">
-                    <!-- Link styled as a Bootstrap button -->
-                    <a th:href="@{/sale/generarpdf/{id}(id=${sale.id})}" class="btn-submit" role="button">Generar PDF</a>
+                <div class="sale-summary">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th th:text="#{sale.id}">ID</th>
+                                <td th:text="${sale.id}"></td>
+                            </tr>
+                            <tr th:if="${customerName}">
+                                <th th:text="#{customer.name}">Customer Name</th>
+                                <td th:text="${customerName}"></td>
+                            </tr>
+                            <tr>
+                                <th th:text="#{sale.quantity}">Quantity</th>
+                                <td th:text="${sale.quantity}"></td>
+                            </tr>
+                            <tr>
+                                <th th:text="#{sale.taxValue}">Tax Value</th>
+                                <td th:text="${sale.taxValue}"></td>
+                            </tr>
+                            <tr>
+                                <th th:text="#{sale.saleDate}">Sale Date</th>
+                                <td th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
+                <!-- List of associated employees -->
+                <div class="associated-employees">
+                    <h3 th:text="#{sale.employees}">Employees</h3>
+                    <ul>
+                        <li th:each="employee : ${sale.employees}" th:text="${employee.name} + ' (' + ${employee.id} + ')'"></li>
+                    </ul>
+                </div>
+
+                <!-- Display if it's an online sale or employee ID -->
+                <div class="sale-type">
+                    <p th:if="${isOnlineSale}">Online</p>
+                    <p th:unless="${isOnlineSale}" th:text="${sale.employeeId}"></p>
+                </div>
+
+                <!-- List of associated products -->
+                <div class="associated-products">
+                    <h3 th:text="#{sale.products}">Products</h3>
+                    <ul>
+                        <li th:each="product : ${products}" th:text="${product.name} + ' - Qty: ' + ${product.quantity} + ' - Price: ' + ${product.price}"></li>
+                    </ul>
+                </div>
+
+                <!-- List of associated events -->
+                <div class="associated-events">
+                    <h3 th:text="#{sale.events}">Events</h3>
+                    <ul>
+                        <li th:each="event : ${events}" th:text="${event.name} + ' - From: ' + ${#temporals.format(event.startTime, 'yyyy-MM-dd HH:mm')} + ' To: ' + ${#temporals.format(event.endTime, 'yyyy-MM-dd HH:mm')}"></li>
+                    </ul>
+                </div>
+                <br>
+                <!-- Generar PDF Button -->
+                <div class="pdf-generation text-end">
+                    <a th:href="@{/sale/generarpdf/{id}(id=${sale.id})}" class="btn-submit" role="button">Generar PDF</a>
+                </div>
             </div>
         </main>
     </div>
@@ -65,5 +84,4 @@
         <!-- Common Footer -->
     </footer>
 </body>
-
 </html>

@@ -42,7 +42,7 @@ public class ProductController {
         for (Product product : products) {
             List<Sale> sales = saleService.getSalesByProduct(product);
             int totalQuantitySold = saleService.calculateTotalQuantitySold(sales);
-            product.setStockAvailable(product.getQuantity() - totalQuantitySold); // Asumiendo que tienes un atributo 'stockAvailable' en la entidad Product
+            product.setStockAvailable(product.getQuantity() - totalQuantitySold);
         }
         
         model.addAttribute("products", products);
