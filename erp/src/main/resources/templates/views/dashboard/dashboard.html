@@ -12,7 +12,7 @@
     <div class="container-body">
         <input type="checkbox" id="menu-toggle" title="menu">
         <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
-        <aside th:replace="~{layouts/sidebar :: sidebar}"></aside>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
 
         <main>
             <!-- Panel de control Section -->
@@ -34,7 +34,7 @@
                         <h2 th:text="#{dashboard.store}"></h2>
                     </article>
                 </a>
-                <a th:href="@{/events}">
+                <a th:href="@{/companyEvent}">
                     <article id="eventos" class="dashboard-item">
                         <h2 th:text="#{dashboard.events}"></h2>
                     </article>

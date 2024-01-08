@@ -127,7 +127,6 @@ footer button:hover {
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    flex-direction: column-reverse;
 }
 
 .container-main-detail {
@@ -216,6 +215,44 @@ td {
     cursor: pointer;
 }
 
+.checkbox-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+.checkbox-div input[type="checkbox"] {
+    display: none; /* Oculta el checkbox */
+}
+.select-events-products{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+.checkbox-div input[type="checkbox"]:checked + label {
+    /* Estilos para el estado marcado */
+    background-color: var(--color-accent);
+    color: black;
+}
+
+input[type="checkbox"] + label {
+    /* Estilos para el estado no marcado */
+    background-color: #343434;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    color: var(--color-text);
+}
 
 .chatbot-main {
     display: flex;
