@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+        <main>
+            <div class="container-main-customer">
+                <!-- Título de la página de eventos -->
+                <h1 th:text="#{event.page.title}">Event Page</h1>
+                
+                <!-- Tabla de eventos -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th th:text="#{event.name}">Nombre del evento</th>
+                            <th th:text="#{event.startTime}">Hora de inicio</th>
+                            <th th:text="#{event.endTime}">Hora de fin</th>
+                            <th th:text="#{event.location}">Ubicación</th>
+                            <th th:text="#{event.capacity}">Capacidad</th>
+                            <th th:text="#{event.organizer}">Organizador</th>
+                            <th th:text="#{event.isPaid}">Es de pago</th>
+                            <th th:text="#{event.price}">Precio</th>
+                            <th th:text="#{button.actions}">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="event : ${events}">
+                            <td th:text="${event.id}"></td>
+                            <td th:text="${event.name}"></td>
+                            <td th:text="${#temporals.format(event.startTime, 'yyyy-MM-dd HH:mm')}"></td>
+                            <td th:text="${#temporals.format(event.endTime, 'yyyy-MM-dd HH:mm')}"></td>
+                            <td th:text="${event.location}"></td>
+                            <td th:text="${event.capacity}"></td>
+                            <td th:text="${event.organizer}"></td>
+                            <td th:text="${event.isPaid ? 'Sí' : 'No'}"></td>
+                            <td th:text="${event.price}"></td>
+
+
+                            <td>
+                                <a th:href="@{/companyEvent/editEvent/{id}(id=${event.id})}" class="btn-edit" th:text="#{button.edit}">Editar</a>
+                                <a th:href="@{/companyEvent/deleteEvent/{id}(id=${event.id})}" class="btn-delete" th:text="#{button.delete}"
+                                    onclick="return confirm('¿Está seguro de que desea eliminar este evento?');">Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container-main-customer">
+                <a class="btn btn-primary btn-sm" th:href="@{/companyEvent/addEvent}" th:text="#{button.addEvent}">Añadir evento</a>
+            </div>
+        </main>
+    </div>
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Footer común -->
+    </footer>
+</body>
+</html>

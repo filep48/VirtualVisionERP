@@ -20,12 +20,21 @@ import lombok.ToString;
 @Data
 public class Employee {
 
-    // relacion muchos a muchos con la entidad Employee
-    @ManyToMany(mappedBy = "employees")
+    // relacion muchos a muchos con la entidad customer
+    @ManyToMany(mappedBy = "employees", fetch = FetchType.EAGER)
     private Set<Customer> customers = new HashSet<>();
 
+    // relacion muchos a muchos con la entidad event
+    @ManyToMany(mappedBy = "attendingEmployees", fetch = FetchType.LAZY)
+    private Set<CompanyEvent> assignedEvents = new HashSet<>();
+
+    // relacion uno a muchos con la entidad payroll
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Payroll> payrolls = new HashSet<>();
+
+    // relacion muchos a muchos con la entidad sale
+    @ManyToMany(mappedBy = "employees", fetch = FetchType.LAZY)
+    private Set<Sale> sales = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <main>
+            <div class="container-main-customer">
+                <h1 th:text="#{select.events.title}">Select Events</h1>
+                <form th:action="@{/sale/{saleId}/addEvents(saleId=${saleId})}" method="post" class="form-custom">
+                    <input type="hidden" name="saleId" th:value="${saleId}" />
+                    <div class="form-group">
+                        <div th:each="event : ${events}">
+                            <input type="checkbox" th:value="${event.id}" name="selectedEvents"/>
+                            <span th:text="${event.name}">Event Name</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit" th:text="#{add.to.sale}">Add to Sale</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Common Footer -->
+    </footer>
+</body>
+</html>

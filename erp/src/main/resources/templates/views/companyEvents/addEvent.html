@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+        <main>
+            <div class="container-main-customer">
+                <h1 th:text="${editMode} ? #{'event.edit.title'} : #{'event.add.title'}">Add/Edit Event</h1>
+                <form th:action="@{/companyEvent/saveEvent}" th:object="${event}" method="post" class="form-custom">
+                    <input type="hidden" th:field="*{id}" />
+
+                    <div class="form-group">
+                        <label for="name">Event Name</label>
+                        <input type="text" th:field="*{name}" class="form-input" id="name"
+                            th:attr="placeholder=#{event.name}" title="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="startTime">Start Time</label>
+                        <input type="datetime-local" th:field="*{startTime}" class="form-input" id="startTime">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endTime">End Time</label>
+                        <input type="datetime-local" th:field="*{endTime}" class="form-input" id="endTime">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea th:field="*{description}" class="form-input" id="description" rows="3"
+                            th:attr="placeholder=#{event.description}" title="description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" th:field="*{location}" class="form-input" id="location"
+                            th:attr="placeholder=#{event.location}" title="location">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="capacity">Capacity</label>
+                        <input type="number" th:field="*{capacity}" class="form-input" id="capacity"
+                            th:attr="placeholder=#{event.capacity}" title="capacity">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="organizer">Organizer</label>
+                        <input type="text" th:field="*{organizer}" class="form-input" id="organizer"
+                            th:attr="placeholder=#{event.organizer}" title="organizer">
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input type="checkbox" th:field="*{isPaid}" class="form-check-input" id="isPaid">
+                        <label class="form-check-label" for="isPaid" th:text="#{event.isPaid}">Paid Event</label>
+                    </div>
+                    <input type="text" name="price" class="form-input" id="price"
+                        th:value="${event.price != null ? event.price : ''}" th:placeholder="#{event.price}"
+                        title="price">
+
+                    <button type="submit" class="btn-submit" th:text="#{event.save}" title="save"></button>
+
+                </form>
+            </div>
+        </main>
+    </div>
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Footer -->
+    </footer>
+</body>
+
+</html>

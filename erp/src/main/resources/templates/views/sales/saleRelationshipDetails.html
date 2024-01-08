@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+
+        <main>
+            <div class="container-main-detail">
+                <h2 th:text="#{sale.relationship.details}">Sale Relationship Details</h2>
+
+                <!-- Aquí podrías mostrar detalles específicos de la venta, el cliente, el/los empleado(s) y los productos -->
+                <!-- Por ejemplo, información del cliente, lista de productos, y detalles de los empleados -->
+
+            </div>
+        </main>
+    </div>
+
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Common Footer -->
+    </footer>
+</body>
+</html>
