@@ -1,6 +1,7 @@
 package com.virtualvision.erp.service.sale;
 
 import java.util.List;
+import java.util.Map;
 
 import com.virtualvision.erp.domain.Employee;
 import com.virtualvision.erp.domain.Product;
@@ -25,6 +26,10 @@ public interface ISaleService {
     List<Sale> getSalesByProduct(Product product);
 
     int calculateTotalQuantitySold(List<Sale> sales);
+
+    // double calculateAverageSaleAmount();
+
+    // Map<String, Integer> calculateSalesByProduct();
 
 
 

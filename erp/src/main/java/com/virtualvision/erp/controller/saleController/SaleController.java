@@ -2,6 +2,7 @@ package com.virtualvision.erp.controller.saleController;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.virtualvision.erp.dao.ICompanyEventDao;
-import com.virtualvision.erp.dao.IProductDao;
-import com.virtualvision.erp.dao.ISaleDao;
+
 import com.virtualvision.erp.domain.CompanyEvent;
 import com.virtualvision.erp.domain.Employee;
 import com.virtualvision.erp.domain.Product;
@@ -205,6 +204,17 @@ public String viewSaleDetail(@PathVariable Long id, Model model) {
         return "views/sales/addProductsAndEvents";
     }
 
+
+    // @GetMapping("/sale/statistics")
+    // public String salesStatistics(Model model) {
+    //     double averageSaleAmount = saleService.calculateAverageSaleAmount();
+    //     Map<String, Integer> productSaleCount = saleService.calculateSalesByProduct();
+    
+    //     model.addAttribute("averageSaleAmount", averageSaleAmount);
+    //     model.addAttribute("productSaleCount", productSaleCount);
+    
+    //     return "views/sales/statistics"; 
+    // }
     // @GetMapping("/relationshipDetails/{id}")
     // public String viewSaleRelationshipDetails(@PathVariable Long id, Model model)
     // {
