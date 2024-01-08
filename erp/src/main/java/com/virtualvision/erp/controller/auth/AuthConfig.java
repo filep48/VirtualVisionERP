@@ -56,17 +56,17 @@ public class AuthConfig {
                         .requestMatchers("/hr/**").permitAll()
                         .requestMatchers("/companyEvent/**").permitAll()
                         .requestMatchers("/supplier/**").permitAll()
+                        .requestMatchers("/payroll/**").permitAll()
+                        .requestMatchers("/RRHH/**").permitAll()
                         .requestMatchers("/selectProductsAndEvents/**").permitAll()
                         .requestMatchers("/economy/**").permitAll()
 )
-                        .formLogin(form -> form
+                .formLogin(form -> form
                         .loginPage("/login").permitAll() // Permitir a todos el acceso al formulario de login
                         .defaultSuccessUrl("/dashboard", true) // Redirigir a /home después de un inicio de sesión
                                                                // exitoso
                         .permitAll())
                 .build(); // Cierra la configuración y construye el SecurityFilterChain
     }
-
-    
 
 }

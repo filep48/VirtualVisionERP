@@ -2,6 +2,8 @@ package com.virtualvision.erp.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,9 +26,11 @@ public class Payroll {
     @JoinColumn(name = "employee_id", nullable = false) // Columna de clave foránea
     private Employee employee;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     private Date payPeriodStart; // Inicio del período de pago
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     private Date payPeriodEnd; // Fin del período de pago
 

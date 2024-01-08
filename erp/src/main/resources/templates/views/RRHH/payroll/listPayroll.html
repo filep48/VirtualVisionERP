@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/head :: head">
+    <!-- Common Head -->
+</head>
+
+<body>
+    <header th:replace="layouts/header :: header"></header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="layouts/sidebarUsers :: sidebar"></aside>
+
+        <main>
+            <div class="container-main">
+                <a class="btn btn-primary btn-sm" th:href="@{payroll/add}" th:text="#{'pageTitle.addPayroll'}">Add
+                    Payroll</a>
+                <h1 th:text="${pageTitle}">Page Title</h1> <!-- Dynamic Title from Controller -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th th:text="#{payroll.payPeriodStart}">Pay Period Start</th>
+                            <th th:text="#{payroll.payPeriodEnd}">Pay Period End</th>
+                            <th th:text="#{payroll.grossPay}">Gross Pay</th>
+                            <th th:text="#{payroll.netPay}">Net Pay</th>
+                            <th th:text="#{payroll.taxAmount}">Tax Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="payroll : ${payrolls}">
+                            <td th:text="${payroll.id}"></td>
+                            <td th:text="${payroll.payPeriodStart}"></td>
+                            <td th:text="${payroll.payPeriodEnd}"></td>
+                            <td th:text="${payroll.grossPay}"></td>
+                            <td th:text="${payroll.netPay}"></td>
+                            <td th:text="${payroll.taxAmount}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <footer th:replace="layouts/footer :: footer">
+        <!-- Common Footer -->
+    </footer>
+</body>
+
+</html>

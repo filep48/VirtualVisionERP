@@ -33,7 +33,7 @@ public class SecurityDetails implements UserDetailsService {
         Employee employee;
 
         if (customer != null) {
-
+            userContext.setId(customer.getId());
             userContext.setName(customer.getName());
             userContext.setSurname(customer.getSurname());
             userContext.setEmail(customer.getEmail());
@@ -47,6 +47,7 @@ public class SecurityDetails implements UserDetailsService {
             if (employee == null) {
                 throw new UsernameNotFoundException("User not found");
             }
+            userContext.setId(employee.getId());
             userContext.setName(employee.getName());
             userContext.setSurname(employee.getSurname());
             userContext.setEmail(employee.getEmail());

@@ -4,7 +4,16 @@ import java.util.List;
 
 import com.virtualvision.erp.domain.Payroll;
 
+
 public interface IrrhhService {
     List<Payroll> PayrollListById(Long id);
+
+    Payroll createPayroll(Payroll payroll);
+    
+    void deletePayroll(Long id);
+
+
+
+    
 
 }

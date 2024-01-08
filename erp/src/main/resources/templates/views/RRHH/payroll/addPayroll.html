@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+
+        <main>
+            <div class="container-main-customer">
+                <h1 th:text="#{pageTitle.addPayroll}">Add Payroll</h1>
+                <form th:action="@{/rrhh/payroll/save}" th:object="${payroll}" method="post" class="form-custom">
+                    <!-- Selector de empleados -->
+                    <div class="form-group">
+                        <label for="employee" th:text="#{label.employee}">Employee</label>
+                        <select th:field="*{employee}" class="form-input" id="employee">
+                            <option value="" th:text="#{select.employee}">Select Employee</option>
+                            <option th:each="employee : ${employees}" th:value="${employee.id}"
+                                th:text="${employee.name}"></option>
+                        </select>
+                    </div>
+                    <!-- Campo para la fecha de inicio del periodo de pago -->
+                    <div class="form-group">
+                        <label for="payPeriodStart" th:text="#{label.payPeriodStart}">Pay Period Start</label>
+                        <input type="date" th:field="*{payPeriodStart}" class="form-input" id="payPeriodStart">
+                    </div>
+                    <!-- Campo para la fecha de fin del periodo de pago -->
+                    <div class="form-group">
+                        <label for="payPeriodEnd" th:text="#{label.payPeriodEnd}">Pay Period End</label>
+                        <input type="date" th:field="*{payPeriodEnd}" class="form-input" id="payPeriodEnd">
+                    </div>
+                    <!-- Campo para el salario bruto -->
+                    <div class="form-group">
+                        <label for="grossPay" th:text="#{label.grossPay}">Gross Pay</label>
+                        <input type="number" th:field="*{grossPay}" class="form-input" id="grossPay">
+                    </div>
+                    <!-- Campo para el salario neto -->
+                    <div class="form-group">
+                        <label for="netPay" th:text="#{label.netPay}">Net Pay</label>
+                        <input type="number" th:field="*{netPay}" class="form-input" id="netPay">
+                    </div>
+                    <!-- Campo para la cantidad de impuestos -->
+                    <div class="form-group">
+                        <label for="taxAmount" th:text="#{label.taxAmount}">Tax Amount</label>
+                        <input type="number" th:field="*{taxAmount}" class="form-input" id="taxAmount">
+                    </div>
+                    <!-- Botón para enviar el formulario -->
+                    <button type="submit" class="btn-submit" th:text="#{button.save}">Save</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Common Footer -->
+    </footer>
+</body>
+
+</html>
