@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{layouts/head :: head}">
@@ -24,7 +25,9 @@
                 <div class="product-container">
                     <!-- Iterar sobre cada producto -->
                     <div class="product-card" th:each="product : ${products}">
-                        <img src="" th:alt="${product.name}" class="product-image">
+
+                        <img th:src="${product.image}" th:alt="${product.name}" class="product-image" width="400"
+                            height="300">
                         <h3 th:text="${product.name}">Nombre del Producto</h3>
                         <p th:text="${product.description}">Descripción del producto</p>
                         <p class="product-price" th:text="${product.price} + '€'">Precio</p>
