@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/head :: head}">
+    <!-- Head común  -->
+</head>
+
+<body>
+    <header th:replace="~{layouts/header :: header}">
+        <!-- Header común  -->
+    </header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+
+        <main>
+            <div class="container-main">
+                <!-- Aquí comienza el contenido específico de la tienda VisualVision -->
+                <div class="shop-header">
+                    VisualVision Shop
+                </div>
+
+                <div class="product-container">
+                    <!-- Iterar sobre cada producto -->
+                    <div class="product-card" th:each="product : ${products}">
+                        <img src="" th:alt="${product.name}" class="product-image">
+                        <h3 th:text="${product.name}">Nombre del Producto</h3>
+                        <p th:text="${product.description}">Descripción del producto</p>
+                        <p class="product-price" th:text="${product.price} + '€'">Precio</p>
+                        <!-- Agrega más detalles según tu modelo de producto -->
+                    </div>
+                </div>
+                <!-- Aquí termina el contenido específico de la tienda VisualVision -->
+            </div>
+        </main>
+    </div>
+
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Footer común  -->
+    </footer>
+</body>
+
+</html>
