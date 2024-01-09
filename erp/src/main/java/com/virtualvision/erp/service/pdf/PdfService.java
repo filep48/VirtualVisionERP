@@ -39,7 +39,7 @@ public class PdfService {
             document.add(title);
         } catch (IOException e) {
             e.printStackTrace();
-            // Considera manejar esta excepción de manera más adecuada.
+            
         }
         // Estilo de fuente en negrita para la tabla
         PdfFont boldFont = null;
@@ -47,7 +47,7 @@ public class PdfService {
             boldFont = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
         } catch (IOException e) {
             e.printStackTrace();
-            // Considera manejar esta excepción de manera más adecuada.
+        
         }
 
         // Creación de la tabla para los detalles de la venta
