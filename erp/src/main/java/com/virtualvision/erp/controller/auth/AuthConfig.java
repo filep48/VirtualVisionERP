@@ -54,6 +54,7 @@ public class AuthConfig {
                         .requestMatchers("/send/**").permitAll()
                         .requestMatchers("/product/**").permitAll()
                         .requestMatchers("/hr/**").permitAll()
+                        .requestMatchers("/searchbar/**").permitAll()
                         .requestMatchers("/companyEvent/**").permitAll()
                         .requestMatchers("/supplier/**").permitAll()
                         .requestMatchers("/payroll/**").permitAll()

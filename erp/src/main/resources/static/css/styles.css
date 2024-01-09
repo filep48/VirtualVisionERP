@@ -373,6 +373,13 @@ main section a {
 
 }
 
+.dashboard-item i {
+    font-size: 50px; /* Tamaño de los íconos */
+    display: block; /* Para que el ícono esté en su propia línea */
+    margin: 0 auto 15px; /* Margen para separar del texto */
+    text-align: center; /* Alinear el ícono al centro */
+}
+
 section a:hover {
     background-color: var(--color-accent);
     cursor: pointer;
@@ -390,6 +397,59 @@ section#productos a {
     height: 100%;
 }
 
+
+/* chatbot */
+
+div#chatBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-line-bot i, .chat-line-user i {
+    margin: 0 5px;
+}
+
+.chat-line-bot, .chat-line-user {
+    margin: 10px;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    
+
+}
+
+.chat-line-bot {
+    display: flex;
+    align-items: center;
+}
+
+.chat-line-user {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+.chat-line-user p {
+    order: -1; /* Coloca el texto antes del ícono */
+}
+
+/* comingSoon */
+.coming-soon {
+    text-align: center;
+    padding: 50px;
+    margin-top: 100px;
+}
+
+.coming-soon h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.searchbar-notice {
+    font-size: 1.5em;
+    color: #888;
+}
 
 /* Estilos para las listas y elementos dentro de las secciones */
 ul {

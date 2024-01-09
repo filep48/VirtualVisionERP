@@ -15,12 +15,15 @@
     <div class="container-body">
         <input type="checkbox" id="menu-toggle" title="Menu Toggle">
         <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
-        <aside th:replace="~{layouts/sidebar :: sidebar}"></aside>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
         <main class="chatbot-main">
             <h1 th:text="#{chat.title}">Chat con GPT</h1>
             <div id="chatBox">
-                <div th:each="line : ${conversation}">
-                    <p class="chat-line" th:text="${line}"></p>
+                <div th:each="line, stat : ${conversation}">
+                    <div th:class="${stat.even ? 'chat-line-bot' : 'chat-line-user'}">
+                        <i th:class="${stat.even ? 'fas fa-robot' : 'fas fa-user'}"></i>
+                        <p th:text="${line}"></p>
+                    </div>
                 </div>
             </div>
 
@@ -31,7 +34,6 @@
             </form>
         </main>
     </div>
-
 
     <footer th:replace="~{layouts/footer :: footer}"></footer>
 </body>
