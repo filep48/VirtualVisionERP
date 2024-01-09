@@ -235,8 +235,7 @@ public String viewSaleDetail(@PathVariable Long id, Model model) {
 
     @GetMapping("/saleRelationshipDetails/{id}")
     public String viewSaleRelationshipDetails(@PathVariable Long id, Model model) {
-        // Lógica para obtener los detalles de la venta y sus relaciones
-        // Agrega los datos necesarios al modelo
+        
         return "views/sales/saleRelationshipDetails";
     }
 

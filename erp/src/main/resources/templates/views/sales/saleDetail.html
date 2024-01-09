@@ -71,7 +71,7 @@
                         <li th:each="event : ${events}" th:text="${event.name} + ' - From: ' + ${#temporals.format(event.startTime, 'yyyy-MM-dd HH:mm')} + ' To: ' + ${#temporals.format(event.endTime, 'yyyy-MM-dd HH:mm')}"></li>
                     </ul>
                 </div>
- <!-- Contenedores para mostrar los totales -->
+<!-- Contenedores para mostrar los totales -->
 <div class="total-with-vat">
     <p id="totalWithoutVAT">Total without VAT: </p>
     <p id="totalVAT">Total VAT (21%): </p>
@@ -100,7 +100,7 @@
         var totalEvents = 0;
         if (events.length > 0) {
             events.forEach(function(event) {
-                totalEvents += event.price; // Asumiendo que cada evento tiene un atributo 'price'
+                totalEvents += event.price; 
             });
         }
 
