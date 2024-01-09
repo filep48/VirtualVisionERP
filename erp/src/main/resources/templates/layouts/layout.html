@@ -36,9 +36,12 @@
                         
                         <!-- Las siguientes rutas SON ACTUALMENTE PARA QUE SE MUESTREN FALTAN LOS ENLACES CORRECTOS -->
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/events}"><span
-                                    th:text="#{layout.eventos}">Eventos</span></a>
+                            <a class="nav-link" th:href="@{/companyEvent}"><span th:text="#{layout.eventos}">Eventos</span></a>
                         </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/supplier}"><span
+                                    th:text="#{layout.proveedores}">Proveedores</span></a>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/product}"><span
                                     th:text="#{layout.productos}"></span></a>
@@ -46,6 +49,9 @@
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/sale}"><span th:text="#{layout.ventas}">Productos</span></a>
                         </li>
+                        
+                        
+
 
                     </ul>
                 </div>

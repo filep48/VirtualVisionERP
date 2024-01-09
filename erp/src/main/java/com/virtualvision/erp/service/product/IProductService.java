@@ -15,14 +15,21 @@ public interface IProductService {
 
     Product findByName(String name);
 
-    void saveProduct(Product product);
-
     List<Product> findAll();
 
-    boolean saveProductDetails(Product product);
+    boolean saveProduct(Product product);
 
     void updateProductDetails(Product product);
 
     Long findIdByName(String name);
 
+    List<Product> searchProducts(String query);
+    
+    List<Product> productListWithSuppliers() ;
+
+    int getTotalQuantitySoldByProduct(Long productId);
+
+    void updateProductQuantityAfterSale(Long productId, int quantitySold);
+
+    List<Product> productListwithOut0Stock();
 }

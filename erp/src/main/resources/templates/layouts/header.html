@@ -11,7 +11,7 @@
             <div class="nav-container">
                 <a th:href="@{/dashboard}" class="logo"><i class="fas fa-angle-double-down"></i><p th:text="#{layout.title}"></p></a>
                 <div class="search-container">
-                    <form th:action="@{/searchBar}" method="get" class="search-container">
+                    <form th:action="@{/searchbar}" method="get" class="search-container">
                         <input type="text" title="search" th:attr="placeholder=#{header.search}" class="search-input">
                         <button type="submit" class="search-icon" th:attr="title=#{header.search}">
                             <i class="fas fa-search "></i>

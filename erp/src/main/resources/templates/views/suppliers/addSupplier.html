@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+
+        <main>
+            <div class="container-main-customer">
+                <h1 th:text="${editMode} ? #{'supplier.page.editTitle'} : #{'supplier.page.addTitle'}"></h1>
+                <form th:action="@{/supplier/saveSupplier}" th:object="${supplier}" method="post" class="form-custom">
+                    <input type="hidden" th:field="*{id}" />
+
+                    <!-- Campo Nombre con Placeholder -->
+                    <div class="form-group">
+                        <input type="text" th:field="*{name}" class="form-input" id="name"
+                            th:attr="placeholder=#{'supplier.name'}" />
+                    </div>
+
+                    <!-- Continúa con los demás campos de forma similar -->
+                    <div class="form-group">
+                        <input type="text" th:field="*{address}" class="form-input" id="address"
+                            th:attr="placeholder=#{'supplier.address'}" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" th:field="*{phone}" class="form-input" id="phone"
+                            th:attr="placeholder=#{'supplier.phone'}" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" th:field="*{email}" class="form-input" id="email"
+                            th:attr="placeholder=#{'supplier.email'}" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" th:field="*{contact}" class="form-input" id="contact"
+                            th:attr="placeholder=#{'supplier.contact'}" />
+                    </div>
+
+                    <div class="form-group">
+                        <textarea th:field="*{description}" class="form-input" id="description"
+                            th:attr="placeholder=#{'supplier.description'}"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" th:field="*{web}" class="form-input" id="web"
+                            th:attr="placeholder=#{'supplier.web'}" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" th:field="*{accountNumber}" class="form-input" id="accountNumber"
+                            th:attr="placeholder=#{'supplier.accountNumber'}" />
+                    </div>
+
+                    <button type="submit" class="btn-submit" th:text="#{'supplier.save'}"></button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Footer -->
+    </footer>
+</body>
+
+</html>

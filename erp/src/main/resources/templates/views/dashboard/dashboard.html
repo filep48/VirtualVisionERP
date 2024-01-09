@@ -12,52 +12,48 @@
     <div class="container-body">
         <input type="checkbox" id="menu-toggle" title="menu">
         <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
-        <aside th:replace="~{layouts/sidebar :: sidebar}"></aside>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
 
         <main>
             <!-- Panel de control Section -->
             <section id="dashboard">
                 <a th:href="@{/economy}">
                     <article id="economia" class="dashboard-item">
+                        <i class="fas fa-chart-line"></i> <!-- Ícono de economía -->
                         <h2 th:text="#{dashboard.economy}"></h2>
-                        <!-- Content goes here -->
                     </article>
                 </a>
                 <a th:href="@{/hr}">
                     <article id="rrhh" class="dashboard-item">
+                        <i class="fas fa-users"></i> <!-- Ícono de RRHH -->
                         <h2 th:text="#{dashboard.hr}"></h2>
-                        <!-- Content goes here -->
                     </article>
                 </a>
                 <a th:href="@{/store}">
                     <article id="tienda" class="dashboard-item">
+                        <i class="fas fa-store"></i> <!-- Ícono de tienda -->
                         <h2 th:text="#{dashboard.store}"></h2>
                     </article>
                 </a>
-                <a th:href="@{/events}">
+                <a th:href="@{/companyEvent}">
                     <article id="eventos" class="dashboard-item">
+                        <i class="fas fa-calendar-alt"></i> <!-- Ícono de eventos -->
                         <h2 th:text="#{dashboard.events}"></h2>
                     </article>
                 </a>
-
             </section>
-
 
             <!-- Productos Section -->
             <section id="productos">
                 <a th:href="@{/product}">
                     <article id="productos" class="dashboard-item">
-                        <!-- icon of productos + h2 Productos -->
+                        <i class="fas fa-boxes"></i> <!-- Ícono de productos -->
                         <h2 th:text="#{dashboard.products}"></h2>
                     </article>
                 </a>
-
             </section>
         </main>
     </div>
-    <!-- Sidebar Navigation Layout Include -->
-
-
     <!-- Footer Layout Include -->
     <footer th:replace="~{layouts/footer :: footer}"></footer>
 </body>

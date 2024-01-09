@@ -60,8 +60,10 @@ public class EmployeeController {
     public String editEmployeeForm(@PathVariable Long id, Model model) {
         Employee employee = employeeService.findEmployeeId(id);
         model.addAttribute("employee", employee);
-        model.addAttribute("editMode", true); // Agregamos "editMode" para el título dinámico
+        model.addAttribute("editMode", true);
         return "views/employees/addEmployee";
     }
+
+    
 
 }

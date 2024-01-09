@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/head :: head}">
+    <!-- Head común  -->
+</head>
+
+<body>
+    <header th:replace="~{layouts/header :: header}">
+        <!-- Header común  -->
+    </header>
+
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+
+        <main>
+            <div class="container-main">
+                <!-- Aquí comienza el contenido específico de la tienda VisualVision -->
+                <div class="shop-header">
+                    <!-- Contenido del encabezado de la tienda -->
+                </div>
+
+                <div>
+                    <div class="shop-head">
+                        <h2 class="virtual-vision-shop">VisualVision Shop</h2>
+                        <form th:action="@{/store/cart}" method="get">
+                            <button type="submit" class="btn-cesta">🛒 Cesta</button>
+                        </form>
+                    </div>
+
+                    <div class="product-container">
+                        <!-- Iterar sobre cada producto -->
+                        <div class="product-card" th:each="product : ${products}">
+                            <img th:src="${product.image}" th:alt="${product.name}" class="product-image" width="400"
+                                height="300">
+                            <h3 th:text="${product.name}">Nombre del Producto</h3>
+                            <p th:text="${product.description}">Descripción del producto</p>
+                            <p class="product-price" th:text="${product.price} + '€'">Precio</p>
+                            <!-- Formulario para añadir al carrito -->
+                            <form th:action="@{/store/addToCart}" method="post">
+                                <input type="hidden" name="productId" th:value="${product.id}">
+                                <input type="number" name="quantity" min="1" value="1" class="quantity-input">
+                                <button type="submit" class="btn">Añadir al Carrito</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

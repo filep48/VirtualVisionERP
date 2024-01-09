@@ -3,24 +3,32 @@
 
 <head>
     <title>Layout Sidebar</title>
+    <!-- Añadir Font Awesome CDN aquí -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Estilos adicionales para los íconos, si es necesario */
+        .sidebar-icon {
+            margin-right: 8px; /* Espacio entre el ícono y el texto */
+        }
+    </style>
 </head>
 
 <body>
-
     <aside th:fragment="sidebar">
         <nav>
             <!-- Barra de navegación lateral -->
             <ul>
-                <li><a th:href="@{/dashboard}" th:text="#{sidebar.dashboard}"></a></li>
-                <li><a th:href="@{/hr}" th:text="#{sidebar.hr}"></a></li>
-                <li><a th:href="@{/product}" th:text="#{sidebar.products}"></a></li>
-                <li><a th:href="@{/store}" th:text="#{sidebar.store}"></a></li>
-                <li><a th:href="@{/events}" th:text="#{sidebar.events}"></a></li>
-                <li><a th:href="@{/economy}" th:text="#{sidebar.economy}"></a></li>
+                <li><a th:href="@{/dashboard}"><i class="fas fa-tachometer-alt sidebar-icon"></i> <span th:text="#{sidebar.dashboard}"></span></a></li>
+                <li><a th:href="@{/hr}"><i class="fas fa-users sidebar-icon"></i> <span th:text="#{sidebar.hr}"></span></a></li>
+                <li><a th:href="@{/product}"><i class="fas fa-boxes sidebar-icon"></i> <span th:text="#{sidebar.products}"></span></a></li>
+                <li><a th:href="@{/store}"><i class="fas fa-store sidebar-icon"></i> <span th:text="#{sidebar.store}"></span></a></li>
+                <li><a th:href="@{/companyEvent}"><i class="fas fa-calendar-alt sidebar-icon"></i> <span th:text="#{sidebar.events}"></span></a></li>
+                <li><a th:href="@{/economy}"><i class="fas fa-chart-line sidebar-icon"></i> <span th:text="#{sidebar.economy}"></span></a></li>
                 <!-- clientes, empleados y ventas -->
-                <li><a th:href="@{/customer}"><span class="sidebar-management-button" th:text="#{layout.clientes}">Clientes</span></a></li>
-                <li><a th:href="@{/employee}"><span class="sidebar-management-button" th:text="#{layout.empleados}">Empleados</span></a></li>
-                <li><a th:href="@{/sale}"><span class="sidebar-management-button" th:text="#{layout.ventas}">Ventas</span></a></li>
+                <li><a th:href="@{/customer}"><i class="fas fa-user-friends sidebar-icon"></i> <span class="sidebar-management-button" th:text="#{layout.clientes}">Clientes</span></a></li>
+                <li><a th:href="@{/employee}"><i class="fas fa-user-tie sidebar-icon"></i> <span class="sidebar-management-button" th:text="#{layout.empleados}">Empleados</span></a></li>
+                <li><a th:href="@{/sale}"><i class="fas fa-money-bill-wave sidebar-icon"></i> <span class="sidebar-management-button" th:text="#{layout.ventas}">Ventas</span></a></li>
+                <li><a th:href="@{/supplier}"><i class="fas fa-truck-loading sidebar-icon"></i> <span class="sidebar-management-button" th:text="#{layout.proveedores}">Proveedores</span></a></li>
             </ul>
         </nav>
     </aside>

@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head th:replace="~{layouts/head :: head}">
     <!-- Common Head -->
 </head>
-
 <body>
     <header th:replace="~{layouts/header :: header}"></header>
     <div class="container-body">
@@ -17,48 +15,113 @@
                 <h2 th:text="#{sale.details}">Sale Details</h2>
 
                 <!-- Sale summary in a table -->
-                <table>
-                    <tbody>
-                        <tr>
-                            <th th:text="#{sale.id}">ID</th>
-                            <td th:text="${sale.id}"></td>
-                        </tr>
-                        <tr th:if="${customerName}">
-                            <th th:text="#{customer.name}">Customer Name</th>
-                            <td th:text="${customerName}"></td>
-                        </tr>
-                        <tr>
-                            <th th:text="#{sale.quantity}">Quantity</th>
-                            <td th:text="${sale.quantity}"></td>
-                        </tr>
-                        <tr>
-                            <th th:text="#{sale.taxValue}">Tax Value</th>
-                            <td th:text="${sale.taxValue}"></td>
-                        </tr>
-                        <tr>
-                            <th th:text="#{sale.saleDate}">Sale Date</th>
-                            <td th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!-- List of associated employees -->
-                <h3 th:text="#{sale.employees}">Employees</h3>
-                <ul>
-                    <li th:each="employee : ${sale.employees}" th:text="${employee.name} + ' (' + ${employee.id} + ')'"></li>
-                </ul>
-
-                <!-- Display if it's an online sale or employee ID -->
-                <p th:if="${isOnlineSale}">Online</p>
-                <p th:unless="${isOnlineSale}" th:text="${sale.employeeId}"></p>
-                <br>
-                <div class="text-end">
-                    <!-- Link styled as a Bootstrap button -->
-                    <a th:href="@{/sale/generarpdf/{id}(id=${sale.id})}" class="btn-submit" role="button">Generar PDF</a>
+                <div class="sale-summary">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th th:text="#{sale.id}">ID</th>
+                                <td th:text="${sale.id}"></td>
+                            </tr>
+                            <tr th:if="${customerName}">
+                                <th th:text="#{customer.name}">Customer Name</th>
+                                <td th:text="${customerName}"></td>
+                            </tr>
+                            <tr>
+                                <th th:text="#{sale.quantity}">Quantity</th>
+                                <td th:text="${sale.quantity}"></td>
+                            </tr>
+                            <tr>
+                                <th th:text="#{sale.taxValue}">Tax Value</th>
+                                <td th:text="${sale.taxValue}"></td>
+                            </tr>
+                            <tr>
+                                <th th:text="#{sale.saleDate}">Sale Date</th>
+                                <td th:text="${#temporals.format(sale.saleDate, 'yyyy-MM-dd HH:mm')}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <!-- You can add more details about sold products here -->
+                <!-- List of associated employees -->
+                <div class="associated-employees">
+                    <h3 th:text="#{sale.employees}">Employees</h3>
+                    <ul>
+                        <li th:each="employee : ${sale.employees}" th:text="${employee.name} + ' (' + ${employee.id} + ')'"></li>
+                    </ul>
+                </div>
 
+                <!-- Display if it's an online sale or employee ID -->
+                <div class="sale-type">
+                    <p th:if="${isOnlineSale}">Online</p>
+                    <p th:unless="${isOnlineSale}" th:text="${sale.employeeId}"></p>
+                </div>
+
+                <!-- List of associated products -->
+                <div class="associated-products">
+                    <h3 th:text="#{sale.products}">Products</h3>
+                    <ul>
+                        <li th:each="product : ${products}" th:text="${product.name} + ' - Qty: ' + ${product.quantity} + ' - Price: ' + ${product.price}"></li>
+                    </ul>
+                </div>
+
+                <!-- List of associated events -->
+                <div class="associated-events">
+                    <h3 th:text="#{sale.events}">Events</h3>
+                    <ul>
+                        <li th:each="event : ${events}" th:text="${event.name} + ' - From: ' + ${#temporals.format(event.startTime, 'yyyy-MM-dd HH:mm')} + ' To: ' + ${#temporals.format(event.endTime, 'yyyy-MM-dd HH:mm')}"></li>
+                    </ul>
+                </div>
+<!-- Contenedores para mostrar los totales -->
+<div class="total-with-vat">
+    <p id="totalWithoutVAT">Total without VAT: </p>
+    <p id="totalVAT">Total VAT (21%): </p>
+    <p id="totalWithVAT">Total with VAT: </p>
+</div>
+
+<!-- JavaScript para calcular los totales -->
+<script th:inline="javascript">
+    window.onload = function() {
+        // Obtiene los productos y eventos del modelo Thymeleaf
+        var products = /*[[${products}]]*/ [];
+        var events = /*[[${events}]]*/ [];
+
+        console.log("Productos: ", products);
+        console.log("Eventos: ", events);
+
+        // Calcula el total de los productos
+        var totalProducts = 0;
+        if (products.length > 0) {
+            products.forEach(function(product) {
+                totalProducts += product.price * product.quantity;
+            });
+        }
+
+        // Calcula el total de los eventos
+        var totalEvents = 0;
+        if (events.length > 0) {
+            events.forEach(function(event) {
+                totalEvents += event.price; 
+            });
+        }
+
+        // Calcula el total sin IVA
+        var totalWithoutVAT = totalProducts + totalEvents;
+        var totalVAT = totalWithoutVAT * 0.21;
+        var totalWithVAT = totalWithoutVAT + totalVAT;
+
+        // Muestra los totales en la página
+        document.getElementById('totalWithoutVAT').textContent += totalWithoutVAT.toFixed(2);
+        document.getElementById('totalVAT').textContent += totalVAT.toFixed(2);
+        document.getElementById('totalWithVAT').textContent += totalWithVAT.toFixed(2);
+    };
+</script>
+
+                
+                <br>
+                <!-- Generar PDF Button -->
+                <div class="pdf-generation text-end">
+                    <a th:href="@{/sale/generarpdf/{id}(id=${sale.id})}" class="btn-submit" role="button">Generar PDF</a>
+                </div>
             </div>
         </main>
     </div>
@@ -67,5 +130,4 @@
         <!-- Common Footer -->
     </footer>
 </body>
-
 </html>

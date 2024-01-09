@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+        <main>
+            <div class="container-main-customer">
+                <h1 th:text="#{addSale.productsAndEvents.title}">Añadir Productos y Eventos a la Venta</h1>
+
+                <!-- Formulario para añadir productos -->
+                <form th:action="@{/sale/{saleId}/addProducts(saleId=${sale.id})}" method="post">
+                    <div class="form-group">
+                        <h2 th:text="#{addSale.selectProducts}">Seleccionar Productos</h2>
+                        <div class="select-events-products">
+                            <div th:each="product : ${availableProducts}" class="checkbox-div">
+                                <input type="checkbox" th:value="${product.id}" name="selectedProducts"
+                                    th:id="${'toggle' + product.id}" />
+                                <label th:for="${'toggle' + product.id}"><span th:text="${product.name}"></span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit" th:text="#{addSale.addProductsButton}">Añadir
+                        Productos</button>
+                </form>
+
+                <!-- Formulario para añadir eventos -->
+                <form th:action="@{/sale/{saleId}/addEvents(saleId=${sale.id})}" method="post">
+                    <div class="form-group">
+                        <h2 th:text="#{addSale.selectEvents}">Seleccionar Eventos</h2>
+                        <div th:each="event : ${availableEvents}" class="checkbox-div">
+                            <input type="checkbox" th:value="${event.id}" name="selectedEvents"
+                                th:id="${'toggleEvent' + event.id}" />
+                            <label th:for="${'toggleEvent' + event.id}"><span th:text="${event.name}"></span></label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit" th:text="#{addSale.addEventsButton}">Añadir
+                        Eventos</button>
+                </form>
+
+                <!-- Botón para regresar a la lista de ventas -->
+                <div class="form-group">
+                    <a th:href="@{/sale}" class="btn-submit" th:text="#{addSale.returnToSalesListButton}">Guardar y
+                        Volver a Lista de Ventas</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Common Footer -->
+    </footer>
+</body>
+
+</html>

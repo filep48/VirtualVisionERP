@@ -17,10 +17,6 @@ public class Event implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-
-
-
     @ManyToOne
     @JoinColumn(name = "customer_id") // Esta es la columna que se utilizará para la clave foránea.
     private Customer customer;

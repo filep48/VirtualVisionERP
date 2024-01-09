@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/head :: head}">
+    <!-- Common Head -->
+</head>
+<body>
+    <header th:replace="~{layouts/header :: header}"></header>
+    <div class="container-body">
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+        <main>
+            <div class="container-main">
+                <a class="btn btn-primary" th:href="@{/supplier/addSupplier}" th:text="#{'button.addSupplier'}">Agregar Proveedor</a>
+                <table>
+                    <thead>
+                        <tr>
+                            <th th:text="#{'table.header.id'}"></th>
+                            <th th:text="#{'table.header.name'}"></th>
+                            <th th:text="#{'table.header.actions'}"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="supplier : ${suppliers}">
+                            <td th:text="${supplier.id}"></td>
+                            <td th:text="${supplier.name}"></td>
+                            <td>
+                                <a class="btn" th:href="@{/supplier/detailSupplier/{id}(id=${supplier.id})}" th:text="#{'button.detail'}"></a>
+                                <a class="btn" th:href="@{/supplier/editSupplier/{id}(id=${supplier.id})}" th:text="#{'button.edit'}"></a>
+                                <a class="btn" th:href="@{/supplier/deleteSupplier/{id}(id=${supplier.id})}" onclick="return confirm('¿Está seguro de eliminar este proveedor?');" th:text="#{'button.delete'}">Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Common Footer -->
+    </footer>
+</body>
+</html>

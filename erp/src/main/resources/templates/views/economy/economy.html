@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <head th:replace="~{layouts/head :: head}"></head>
+</head>
+
+<body>
+    <!-- Header Layout Include -->
+    <header th:replace="~{layouts/header :: header}"></header>
+
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+
+        <main>
+            <!-- Esta pagina está en desarrollo  -->
+            <!-- This page is coming soon -->
+            <section>
+                <h1>Esta pagina está en desarrollo</h1>
+                <h1>This page is coming soon</h1>
+                <img src="https://i.imgur.com/ypaAoxk.jpeg" alt="Image Placeholder" width="800px" height="480px">
+            </section>
+
+        </main>
+    </div>
+    <!-- Sidebar Navigation Layout Include -->
+
+
+    <!-- Footer Layout Include -->
+    <footer th:replace="~{layouts/footer :: footer}"></footer>
+</body>
+
+</html>

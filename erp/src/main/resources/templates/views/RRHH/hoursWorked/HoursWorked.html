@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/head :: head}">
+    <!-- Head común  -->
+</head>
+
+<body>
+    <header th:replace="~{layouts/header :: header}">
+        <!-- Header común  -->
+    </header>
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+
+        <main>
+            <div class="container-main">
+                <!-- Aquí comienza tu contenido específico de Registro de Horas -->
+                <div class="container">
+                    <h1>Registro de Horas</h1>
+
+                    <form th:action="@{workedHours/addHours}" method="post">
+                        <div class="hours-input">
+                            <label for="hoursToday">Horas trabajadas hoy:</label>
+                            <input class="form-input" type="number" name="hours" id="hoursToday" min="0" step="0.1"
+                                required>
+                            <button class="btn-submit" type="submit">Añadir</button>
+                        </div>
+                    </form>
+
+                    <div class="hours-display">
+                        <span>Horas totales esta semana:</span>
+                        <span class="total-hours" th:text="${totalHours}">0</span>
+                    </div>
+                </div>
+                <!-- Aquí termina tu contenido específico -->
+            </div>
+        </main>
+    </div>
+
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Footer común  -->
+    </footer>
+</body>
+
+</html>

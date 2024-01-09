@@ -7,6 +7,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,22 +33,28 @@ public class Sale implements Serializable {
     @JoinTable(name = "sales_employees", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private Set<Employee> employees = new HashSet<>();
 
-    // Relación muchos a muchos con Product, se hace esta relacion n-n ya que si más adelante se implementa 
+    // Relación muchos a muchos con Product, se hace esta relacion n-n ya que si más
+    // adelante se implementa
     // comision individual para los empleados será más fácil escalar el código.
     @ManyToMany
     @JoinTable(name = "sale_product", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
     private Set<Product> products = new HashSet<>();
 
-    private static final long serialVersionUID = 1L;
+    // relacion con CompanyEvent ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "sale_event", joinColumns = @JoinColumn(name = "sale_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private Set<CompanyEvent> events = new HashSet<>();
 
+    
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer quantity;
-
+    @Column(name = "tax_value")
     private Double taxValue;
-
+    @Column(name = "sale_date")
     private LocalDateTime saleDate;
 
     @Column(name = "online_sale")

@@ -17,6 +17,8 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import com.virtualvision.erp.domain.Customer;
+import com.virtualvision.erp.domain.Employee;
+import com.virtualvision.erp.domain.Product;
 import com.virtualvision.erp.domain.Sale;
 
 @Service
@@ -39,7 +41,7 @@ public class PdfService {
             document.add(title);
         } catch (IOException e) {
             e.printStackTrace();
-            // Considera manejar esta excepción de manera más adecuada.
+            
         }
         // Estilo de fuente en negrita para la tabla
         PdfFont boldFont = null;
@@ -47,7 +49,7 @@ public class PdfService {
             boldFont = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
         } catch (IOException e) {
             e.printStackTrace();
-            // Considera manejar esta excepción de manera más adecuada.
+        
         }
 
         // Creación de la tabla para los detalles de la venta
@@ -60,12 +62,18 @@ public class PdfService {
         // Añadir filas con detalles de la venta
         saleTable.addCell("ID de Venta");
         saleTable.addCell(sale.getId().toString());
+        saleTable.addCell("Cliente");
+        saleTable.addCell(customer.getName());
         saleTable.addCell("Cantidad");
         saleTable.addCell(Integer.toString(sale.getQuantity()));
         saleTable.addCell("Valor de Impuesto");
         saleTable.addCell(Double.toString(sale.getTaxValue()));
         saleTable.addCell("Fecha de Venta");
         saleTable.addCell(sale.getSaleDate().toString());
+        saleTable.addCell("Producto");
+        saleTable.addCell(sale.getProducts().toString());
+        saleTable.addCell("Evento");
+        saleTable.addCell(sale.getEvents().toString());
 
         document.add(saleTable);
 
@@ -74,4 +82,5 @@ public class PdfService {
         document.close();
         return new ByteArrayInputStream(out.toByteArray());
     }
+    
 }
