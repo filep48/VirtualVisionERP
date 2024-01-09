@@ -50,4 +50,9 @@ public class Product implements Serializable {
     @Transient
     private int stockAvailable;
 
+    @Override
+    public String toString() {
+        return name+"\n"+description;
+    }
+
 }

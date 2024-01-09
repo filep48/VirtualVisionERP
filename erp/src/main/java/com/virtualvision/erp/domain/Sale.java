@@ -52,9 +52,9 @@ public class Sale implements Serializable {
     private Long id;
 
     private Integer quantity;
-
+    @Column(name = "tax_value")
     private Double taxValue;
-
+    @Column(name = "sale_date")
     private LocalDateTime saleDate;
 
     @Column(name = "online_sale")
