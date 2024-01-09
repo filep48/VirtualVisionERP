@@ -59,7 +59,8 @@ public class AuthConfig {
                         .requestMatchers("/supplier/**").permitAll()
                         .requestMatchers("/payroll/**").permitAll()
                         .requestMatchers("/RRHH/**").permitAll()
-                        .requestMatchers("/selectProductsAndEvents/**").permitAll()
+                        .requestMatchers("/store/**").permitAll()
+                        .requestMatchers("/selectProductsAndEvents/**").permitAll()                        
                         .requestMatchers("/economy/**").permitAll()
 )
                 .formLogin(form -> form
