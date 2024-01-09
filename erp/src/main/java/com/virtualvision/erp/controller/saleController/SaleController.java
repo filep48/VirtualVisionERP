@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 import com.virtualvision.erp.domain.CompanyEvent;
 import com.virtualvision.erp.domain.Employee;
 import com.virtualvision.erp.domain.Product;
@@ -25,8 +24,6 @@ import com.virtualvision.erp.service.companyEvent.ICompanyEventService;
 import com.virtualvision.erp.service.employee.IEmployeeService;
 import com.virtualvision.erp.service.product.IProductService;
 import com.virtualvision.erp.service.sale.ISaleService;
-
-import jakarta.transaction.Transactional;
 
 @Controller
 public class SaleController {
@@ -117,61 +114,60 @@ public class SaleController {
     // controlador para la vista saleDetail
     // @GetMapping("/sale/detail/{id}")
     // public String viewSaleDetail(@PathVariable Long id, Model model) {
-    //     Sale sale = saleService.findSaleById(id);
-    //     if (sale == null) {
-    //         // la venta no existe
-    //         return "redirect:/sale";
-    //     }
-    //     // Agrega el nombre del cliente si existe
-    //     if (sale.getCustomer() != null) {
-    //         model.addAttribute("customerName", sale.getCustomer().getName());
-    //     } else {
-    //         // variable `customerName` incluso si no hay cliente
-    //         model.addAttribute("customerName", "");
-    //     }
+    // Sale sale = saleService.findSaleById(id);
+    // if (sale == null) {
+    // // la venta no existe
+    // return "redirect:/sale";
+    // }
+    // // Agrega el nombre del cliente si existe
+    // if (sale.getCustomer() != null) {
+    // model.addAttribute("customerName", sale.getCustomer().getName());
+    // } else {
+    // // variable `customerName` incluso si no hay cliente
+    // model.addAttribute("customerName", "");
+    // }
 
-    //     // carga la relación con los empleados
-    //     sale.getEmployees().size();
-    //     model.addAttribute("sale", sale);
+    // // carga la relación con los empleados
+    // sale.getEmployees().size();
+    // model.addAttribute("sale", sale);
 
-    //     // verifica si es una venta en online y se lo pasa a la vista
-    //     boolean isOnlineSale = sale.isOnlineSale();
-    //     model.addAttribute("isOnlineSale", isOnlineSale);
-    //     return "views/sales/saleDetail";
+    // // verifica si es una venta en online y se lo pasa a la vista
+    // boolean isOnlineSale = sale.isOnlineSale();
+    // model.addAttribute("isOnlineSale", isOnlineSale);
+    // return "views/sales/saleDetail";
     // }
 
     @GetMapping("/sale/detail/{id}")
-public String viewSaleDetail(@PathVariable Long id, Model model) {
-    Sale sale = saleService.findSaleById(id);
-    if (sale == null) {
-        // la venta no existe
-        return "redirect:/sale";
+    public String viewSaleDetail(@PathVariable Long id, Model model) {
+        Sale sale = saleService.findSaleById(id);
+        if (sale == null) {
+            // la venta no existe
+            return "redirect:/sale";
+        }
+
+        // Agrega el nombre del cliente si existe
+        if (sale.getCustomer() != null) {
+            model.addAttribute("customerName", sale.getCustomer().getName());
+        } else {
+            // variable `customerName` incluso si no hay cliente
+            model.addAttribute("customerName", "");
+        }
+
+        // carga la relación con los empleados
+        sale.getEmployees().size();
+
+        // Agrega productos y eventos a la vista
+        model.addAttribute("products", sale.getProducts());
+        model.addAttribute("events", sale.getEvents());
+
+        // verifica si es una venta en online y se lo pasa a la vista
+        boolean isOnlineSale = sale.isOnlineSale();
+        model.addAttribute("isOnlineSale", isOnlineSale);
+
+        model.addAttribute("sale", sale);
+
+        return "views/sales/saleDetail";
     }
-
-    // Agrega el nombre del cliente si existe
-    if (sale.getCustomer() != null) {
-        model.addAttribute("customerName", sale.getCustomer().getName());
-    } else {
-        // variable `customerName` incluso si no hay cliente
-        model.addAttribute("customerName", "");
-    }
-
-    // carga la relación con los empleados
-    sale.getEmployees().size();
-
-    // Agrega productos y eventos a la vista
-    model.addAttribute("products", sale.getProducts());
-    model.addAttribute("events", sale.getEvents());
-
-    // verifica si es una venta en online y se lo pasa a la vista
-    boolean isOnlineSale = sale.isOnlineSale();
-    model.addAttribute("isOnlineSale", isOnlineSale);
-
-    model.addAttribute("sale", sale);
-
-    return "views/sales/saleDetail";
-}
-
 
     // añadir productos a la venta
     @PostMapping("/sale/{saleId}/addProducts")
@@ -204,16 +200,16 @@ public String viewSaleDetail(@PathVariable Long id, Model model) {
         return "views/sales/addProductsAndEvents";
     }
 
-
     // @GetMapping("/sale/statistics")
     // public String salesStatistics(Model model) {
-    //     double averageSaleAmount = saleService.calculateAverageSaleAmount();
-    //     Map<String, Integer> productSaleCount = saleService.calculateSalesByProduct();
-    
-    //     model.addAttribute("averageSaleAmount", averageSaleAmount);
-    //     model.addAttribute("productSaleCount", productSaleCount);
-    
-    //     return "views/sales/statistics"; 
+    // double averageSaleAmount = saleService.calculateAverageSaleAmount();
+    // Map<String, Integer> productSaleCount =
+    // saleService.calculateSalesByProduct();
+
+    // model.addAttribute("averageSaleAmount", averageSaleAmount);
+    // model.addAttribute("productSaleCount", productSaleCount);
+
+    // return "views/sales/statistics";
     // }
     // @GetMapping("/relationshipDetails/{id}")
     // public String viewSaleRelationshipDetails(@PathVariable Long id, Model model)
