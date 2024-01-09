@@ -11,21 +11,22 @@
 -- INSERT INTO Customer (name, surname, username, password, dni_nif, phone, email, address, role)
 -- VALUES ('Diego', 'López', 'diego_lopez', 'diego123', '98765432D', '654321987', 'diego.lopez@example.com', 'Calle Nueva 101, Sevilla', 'user');
 
--- -- Creacion de empleados
+-- -- -- Creacion de empleados
+
+-- -
+-- INSERT INTO Employee (name, surname, username, password, dni_nif, phone, email, address, role, position, num_ss, salary)
+-- VALUES ('admin', 'admin', 'admin', 'admin', '00000000A', '600000000', 'admin@example.com', 'Admin Address 1', 'admin', 'Administrator', 'SSN001', 3000.00);
 
 -- INSERT INTO Employee (name, surname, username, password, dni_nif, phone, email, address, role, position, num_ss, salary)
--- VALUES ('Admin', 'Admin', 'admin', 'admin', '00000000A', '600000000', 'admin@example.com', 'Admin Address 1', 'admin', 'Administrator', 'SSN001', 3000.00);
-
--- INSERT INTO Employee (name, surname, username, password, dni_nif, phone, email, address, role, position, num_ss, salary)
--- VALUES ('Gerard', 'Albesa', 'gerard_albesa', '1234', '11111111B', '601234567', 'gerard.albesa@example.com', 'Calle Albesa 2', 'employee', 'Developer', 'SSN002', 2000.00);
+-- VALUES ('Gerard', 'Albesa', 'gerard', '1234', '11111111B', '601234567', 'gerard.albesa@example.com', 'Calle Albesa 2', 'employee', 'Developer', 'SSN002', 2000.00);
 -- -- Kevin Vasquez
 -- INSERT INTO Employee (name, surname, username, password, dni_nif, phone, email, address, role, position, num_ss, salary)
--- VALUES ('Kevin', 'Vasquez', 'kevin_vasquez', '1234', '22222222C', '602345678', 'kevin.vasquez@example.com', 'Avenida Vasquez 3', 'employee', 'Designer', 'SSN003', 2000.00);
+-- VALUES ('Kevin', 'Vasquez', 'kevin', '1234', '22222222C', '602345678', 'kevin.vasquez@example.com', 'Avenida Vasquez 3', 'employee', 'Designer', 'SSN003', 2000.00);
 
 -- INSERT INTO Employee (name, surname, username, password, dni_nif, phone, email, address, role, position, num_ss, salary)
--- VALUES ('Vanessa', 'Pedrola', 'vanessa_pedrola', '1234', '33333333D', '603456789', 'vanessa.pedrola@example.com', 'Plaza Pedrola 4', 'employee', 'Analyst', 'SSN004', 2000.00);
+-- VALUES ('Vanessa', 'Pedrola', 'vane', '1234', '33333333D', '603456789', 'vanessa.pedrola@example.com', 'Plaza Pedrola 4', 'employee', 'Analyst', 'SSN004', 2000.00);
 
--- -- creacion de proveedores
+-- -- -- creacion de proveedores
 -- INSERT INTO Supplier (name, address, phone, email, contact, description, web, account_number)
 -- VALUES ('Meta', '1 Hacker Way, Menlo Park, CA 94025, USA', '650-543-4800', 'contact@meta.com', 'Mark Zuckerberg', 'Leading technology company focused on bringing the world closer together through virtual reality and other means.', 'https://www.meta.com', 'US1234567890');
 
@@ -38,21 +39,20 @@
 -- INSERT INTO Supplier (name, address, phone, email, contact, description, web, account_number)
 -- VALUES ('HTC Vive', '23 Xinghua Rd, Taoyuan District, Taoyuan City, Taiwan 330', '+886 3-375-3252', 'contact@htcvive.com', 'Cher Wang', 'A leading company in innovative smart mobile and virtual reality technology.', 'https://www.vive.com', 'TW123456789');
 
--- -- creacion de productos
+-- -- -- creacion de productos
+-- INSERT INTO Product (supplier_id, name, description, quantity, price, image)
+-- VALUES (1, 'Oculus Quest 2', 'Gafas de realidad virtual inalámbricas de Meta', 100, 299.99, 'https://deusens.com/uploads/blog/2021/01/oculusquest.webp');
 
--- INSERT INTO Product (supplier_id, name, description, quantity, price)
--- VALUES (1, 'Oculus Quest 2', 'Gafas de realidad virtual inalámbricas de Meta', 100, 299.99);
+-- INSERT INTO Product (supplier_id, name, description, quantity, price, image)
+-- VALUES (2, 'ASUS ROG Strix GeForce RTX 3080', 'Tarjeta gráfica para gaming y experiencias de realidad virtual', 50, 699.99, 'https://gmedia.playstation.com/is/image/SIEPDC/psvr-product-thumbnail-01-en-14sep21?$facebook$');
 
--- INSERT INTO Product (supplier_id, name, description, quantity, price)
--- VALUES (2, 'ASUS ROG Strix GeForce RTX 3080', 'Tarjeta gráfica para gaming y experiencias de realidad virtual', 50, 699.99);
+-- INSERT INTO Product (supplier_id, name, description, quantity, price, image)
+-- VALUES (3, 'PlayStation VR', 'Sistema de realidad virtual para la consola PlayStation', 150, 199.99, 'https://cdn.thewirecutter.com/wp-content/media/2023/10/vrheadsets-2048px-8267.jpg?auto=webp&quality=75&width=1024');
 
--- INSERT INTO Product (supplier_id, name, description, quantity, price)
--- VALUES (3, 'PlayStation VR', 'Sistema de realidad virtual para la consola PlayStation', 150, 199.99);
+-- INSERT INTO Product (supplier_id, name, description, quantity, price, image)
+-- VALUES (4, 'HTC Vive Cosmos Elite', 'Casco de realidad virtual con seguimiento de precisión', 80, 899.99, 'https://storage.googleapis.com/catalog-pictures-carrefour-es/catalog/pictures/hd_510x_/8435585729497_1.jpg');
 
--- INSERT INTO Product (supplier_id, name, description, quantity, price)
--- VALUES (4, 'HTC Vive Cosmos Elite', 'Casco de realidad virtual con seguimiento de precisión', 80, 899.99);
-
--- -- creacion de nominas
+-- -- -- creacion de nominas
 -- INSERT INTO Payroll (employee_id, pay_period_start, pay_period_end, gross_pay, net_pay, tax_amount) 
 -- VALUES (1, '2024-01-01', '2024-01-31', 3000.00, 2700.00, 300.00);
 
@@ -106,6 +106,14 @@
 -- -- clientes con el evento 2
 -- INSERT INTO event_customer (event_id, customer_id) VALUES (2, 3);
 -- INSERT INTO event_customer (event_id, customer_id) VALUES (2, 4);
+
+
+-- INSERT INTO Sales (customer_id, quantity, tax_value, sale_date, online_sale, employee_id)
+-- VALUES
+--     (1, 3, 9.99, '2024-03-10 12:30:00', true, 2),
+--     (2, 2, 6.99, '2024-03-12 14:45:00', true, 3),
+--     (3, 1, 3.99, '2024-03-15 16:20:00', true, 4),
+--     (4, 4, 12.99, '2024-03-18 10:15:00', true, 1);
 
 
 
