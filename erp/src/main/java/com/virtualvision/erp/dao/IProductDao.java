@@ -15,9 +15,13 @@ public interface IProductDao extends JpaRepository<Product, Long> {
 
     List<Product> findByNameContaining(String name);
 
-
-    //se usa JOIN FETCH para resolver el problema de la carga perezosa (lazy loading)
-    //FETCH indica que los datos de supplier deben cargarse inmediatamente junto con cada Product.
+    // se usa JOIN FETCH para resolver el problema de la carga perezosa (lazy
+    // loading)
+    // FETCH indica que los datos de supplier deben cargarse inmediatamente junto
+    // con cada Product.
     @Query("SELECT p FROM Product p JOIN FETCH p.supplier")
     List<Product> findAllWithSuppliers();
+
+    @Query("SELECT p FROM Product p WHERE p.quantity > 0")
+    List<Product> findAllWithOut0Stock();
 }

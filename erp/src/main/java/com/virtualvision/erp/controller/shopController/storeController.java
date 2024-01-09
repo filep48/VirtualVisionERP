@@ -18,7 +18,7 @@ public class storeController {
 
     @GetMapping("/store")
     public String listProducts(Model model) {
-        List<Product> products = productService.productList();
+        List<Product> products = productService.productListwithOut0Stock();
         model.addAttribute("products", products);
         return "/views/store/store";
     }

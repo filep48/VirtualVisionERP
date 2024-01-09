@@ -153,6 +153,11 @@ public void updateProductDetails(Product productData) {
             log.error("La cantidad vendida excede la cantidad disponible para el producto con ID: " + productId);
         }
     }
+
+    @Override
+    public List<Product> productListwithOut0Stock() {
+        return productDao.findAllWithOut0Stock();
+    }
     
 
 

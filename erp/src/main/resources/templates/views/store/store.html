@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{layouts/head :: head}">
@@ -8,7 +7,6 @@
 
 <body>
     <header th:replace="~{layouts/header :: header}">
-        <!-- Header común  -->
     </header>
     <div class="container-body">
         <input type="checkbox" id="menu-toggle" title="menu">
@@ -19,22 +17,28 @@
             <div class="container-main">
                 <!-- Aquí comienza el contenido específico de la tienda VisualVision -->
                 <div class="shop-header">
-                    VisualVision Shop
                 </div>
 
-                <div class="product-container">
-                    <!-- Iterar sobre cada producto -->
-                    <div class="product-card" th:each="product : ${products}">
-
-                        <img th:src="${product.image}" th:alt="${product.name}" class="product-image" width="400"
-                            height="300">
-                        <h3 th:text="${product.name}">Nombre del Producto</h3>
-                        <p th:text="${product.description}">Descripción del producto</p>
-                        <p class="product-price" th:text="${product.price} + '€'">Precio</p>
-                        <!-- Agrega más detalles según tu modelo de producto -->
+                <div>
+                    <div class="shop-head">
+                        <h2>VisualVision Shop</h2>
+                    <button type="button" class="btn">🛒 Cesta</button>
                     </div>
+                    
+                    <div class="product-container">
+                        <!-- Iterar sobre cada producto -->
+                        <div class="product-card" th:each="product : ${products}">
+                            <img th:src="${product.image}" th:alt="${product.name}" class="product-image" width="400"
+                                height="300">
+                            <h3 th:text="${product.name}">Nombre del Producto</h3>
+                            <p th:text="${product.description}">Descripción del producto</p>
+                            <p class="product-price" th:text="${product.price} + '€'">Precio</p>
+                            <!-- Botón Añadir al Carrito debajo de cada producto -->
+                            <button type="button" class="btn">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                    <!-- Aquí termina el contenido específico de la tienda VisualVision -->
                 </div>
-                <!-- Aquí termina el contenido específico de la tienda VisualVision -->
             </div>
         </main>
     </div>
