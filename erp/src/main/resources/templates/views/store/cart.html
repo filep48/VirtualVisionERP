@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/head :: head}">
+    <!-- Head común  -->
+</head>
+
+<body>
+    <header th:replace="~{layouts/header :: header}">
+        <!-- Header común  -->
+    </header>
+
+    <div class="container-body">
+        <input type="checkbox" id="menu-toggle" title="menu">
+        <label for="menu-toggle" id="menu-text"><i class="fas fa-bars"></i></label>
+        <aside th:replace="~{layouts/sidebarUsers :: sidebar}"></aside>
+
+        <main>
+            <div class="container-main">
+                <div class="shop-header">
+                    <!-- Contenido del encabezado de la tienda -->
+                </div>
+
+                <div>
+                    <div class="shop-head">
+                        <h2 class="virtual-vision-shop">Carrito de Compras - VisualVision</h2>
+                    </div>
+
+                    <div class="cart-container">
+                        <h3>Productos en tu Carrito</h3>
+                        <!-- Iterar sobre cada producto en el carrito -->
+                        <div th:each="cartItem : ${cart.items}" class="product-card">
+                            <!-- Asumiendo que puedes obtener los detalles del producto usando cartItem.key -->
+                            <div th:with="product=${products[__${cartItem.key}__]}">
+                                <img th:src="${product.image}" th:alt="${product.name}" class="product-image"
+                                    width="400" height="300">
+                                <h3 th:text="${product.name}">Nombre del Producto</h3>
+                                <p th:text="${product.description}">Descripción del producto</p>
+                                <p class="product-price" th:text="${product.price} + '€'">Precio</p>
+                                <p>Cantidad: <span th:text="${cartItem.value}"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer th:replace="~{layouts/footer :: footer}">
+        <!-- Footer común  -->
+    </footer>
+</body>
+
+</html>

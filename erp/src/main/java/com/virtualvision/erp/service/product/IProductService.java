@@ -32,6 +32,4 @@ public interface IProductService {
     void updateProductQuantityAfterSale(Long productId, int quantitySold);
 
     List<Product> productListwithOut0Stock();
-
-    
 }

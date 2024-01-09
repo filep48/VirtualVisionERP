@@ -20,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class ProductServiceImp implements IProductService {
-
     @Autowired
     private IProductDao productDao;
     @Autowired
@@ -158,7 +157,4 @@ public void updateProductDetails(Product productData) {
     public List<Product> productListwithOut0Stock() {
         return productDao.findAllWithOut0Stock();
     }
-    
-
-
 }

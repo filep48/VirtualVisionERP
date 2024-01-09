@@ -215,7 +215,7 @@ td {
     cursor: pointer;
 }
 
-.checkbox-div{
+.checkbox-div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -224,10 +224,13 @@ td {
     margin-bottom: 10px;
 
 }
+
 .checkbox-div input[type="checkbox"] {
-    display: none; /* Oculta el checkbox */
+    display: none;
+    /* Oculta el checkbox */
 }
-.select-events-products{
+
+.select-events-products {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -238,13 +241,13 @@ td {
 
 }
 
-.checkbox-div input[type="checkbox"]:checked + label {
+.checkbox-div input[type="checkbox"]:checked+label {
     /* Estilos para el estado marcado */
     background-color: var(--color-accent);
     color: black;
 }
 
-input[type="checkbox"] + label {
+input[type="checkbox"]+label {
     /* Estilos para el estado no marcado */
     background-color: #343434;
     border-radius: 5px;
@@ -297,6 +300,39 @@ input[type="checkbox"] + label {
     border-radius: 5px;
 }
 
+.shop-head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.virtual-vision-shop {
+    color: var(--color-accent);
+}
+
+.btn-cesta {
+    align-items: center;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    margin: 10px;
+    color: var(--color-text);
+    font-size: var(--text-size-S);
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    width: moz-fit-content;
+    transition: background-color 0.5s;
+
+}
+
+.btn-cesta:hover {
+    background-color: var(--color-accent);
+    cursor: pointer;
+}
+
 form {
     display: flex;
     justify-content: center;
@@ -339,6 +375,27 @@ form {
     transition: background-color 0.5s;
 }
 
+.quantity-input {
+    width: 60px;
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+
+    background-color: #f8f8f8;
+    color: #333;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    outline: none;
+    border-color: #007bff;
+}
+
+.quantity-input:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
 .input-chatbot {
     width: 100%;
     padding: 12px 20px;
@@ -374,10 +431,14 @@ main section a {
 }
 
 .dashboard-item i {
-    font-size: 50px; /* Tamaño de los íconos */
-    display: block; /* Para que el ícono esté en su propia línea */
-    margin: 0 auto 15px; /* Margen para separar del texto */
-    text-align: center; /* Alinear el ícono al centro */
+    font-size: 50px;
+    /* Tamaño de los íconos */
+    display: block;
+    /* Para que el ícono esté en su propia línea */
+    margin: 0 auto 15px;
+    /* Margen para separar del texto */
+    text-align: center;
+    /* Alinear el ícono al centro */
 }
 
 section a:hover {
@@ -405,16 +466,18 @@ div#chatBox {
     flex-direction: column;
 }
 
-.chat-line-bot i, .chat-line-user i {
+.chat-line-bot i,
+.chat-line-user i {
     margin: 0 5px;
 }
 
-.chat-line-bot, .chat-line-user {
+.chat-line-bot,
+.chat-line-user {
     margin: 10px;
     background-color: var(--color-primary);
     border-radius: var(--border-radius);
     padding: 10px;
-    
+
 
 }
 
@@ -427,11 +490,12 @@ div#chatBox {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    
+
 }
 
 .chat-line-user p {
-    order: -1; /* Coloca el texto antes del ícono */
+    order: -1;
+    /* Coloca el texto antes del ícono */
 }
 
 /* comingSoon */
