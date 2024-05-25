@@ -38,7 +38,7 @@ Virtual Vision ERP es un sistema de planificación de recursos empresariales (ER
 ## Instalación y Uso
 
 1. **Clonar el Repositorio**:
-   - `[https://github.com/filep48/VirtualVisionERP](https://github.com/filep48/VirtualVisionERP.git)`
+   - [https://github.com/filep48/VirtualVisionERP](https://github.com/filep48/VirtualVisionERP.git)
 2. **Importar el Proyecto en tu IDE**:
    - Abrir tu IDE preferido (IntelliJ IDEA, Eclipse, etc.).
    - Seleccionar "Import Project" y navegar hasta el directorio del repositorio clonado.
